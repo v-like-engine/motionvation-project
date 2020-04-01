@@ -1,4 +1,4 @@
-# PLANE planer
+# motiONvation
 
 The simple web-based time designer that can help in organising your own time
 
