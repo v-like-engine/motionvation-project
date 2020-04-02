@@ -25,3 +25,7 @@ body {
 .nav-text {
     color: #fff
 }
+
+.card-body {
+    background: url(../img/3.jpg);
+}
