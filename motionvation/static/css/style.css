@@ -2,6 +2,10 @@ h4 {
     color: #d00;
 }
 
+h3 {
+    padding-bottom: 50px
+}
+
 body {
     background: url(../img/7.jpg);
     color: #fff;

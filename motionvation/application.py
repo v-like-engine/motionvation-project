@@ -24,8 +24,8 @@ def index():
 
 
 @app.route('/mynotes')
-def note():
-    return "my notes!"
+def notes():
+    return render_template('notes.html')
 
 
 @app.route('/music')
