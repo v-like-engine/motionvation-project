@@ -1,4 +1,5 @@
 import os
+import random
 from datetime import timedelta
 
 from flask import Flask, render_template, redirect, url_for
@@ -39,7 +40,16 @@ def main():
 
 @app.route('/challenges')
 def challenge():
-    return "Challenge: make a project"
+    task = ['Do push-ups: ', 'Sleep (minutes): ']
+    challenges = []
+    for i in range(random.randint(1, 10)):
+        challenges.append(random.choice(task) + str(random.randint(5, 50)))
+    return render_template('challenges.html', title='Challenges', chs=challenges)
+
+
+@app.route('/nothing')
+def nothing():
+    return render_template('nothing.html', title='Nothing!')
 
 
 def run():

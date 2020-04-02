@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/cstyle.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/kstyle.css') }}">
     {% block head %}{% endblock %}
 </head>
 
@@ -33,7 +33,10 @@
 
     <h2 class="p-3 text-muted">Fight your procrastination!</h2>
 
-    <main class="container-fluid">{% block content %}{% endblock %}</div>
+    <main class="container-fluid">
+        {% block content %}
+        {% endblock %}
+        </div>
 </body>
 
 </html>
