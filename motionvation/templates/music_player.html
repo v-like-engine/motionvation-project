@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2 class="text-center">Music Player</h2>
+    <h3 class="text-center">. . .</h3>
+    <h4 class="font-italic text-center">{{text}}</h4>
+
+    <h5 class="text-center">. . .</h5>
+    <h5 class="text-center">Choose a music genre</h5>
+
+    <form class="text-center">
+    <p><input type="radio" name="genre" value="rad1"> Rock <Br>
+    <input type="radio" name="genre" value="rad2"> Indi <Br>
+    <input type="radio" name="genre" value="rad3"> Pop <Br>
+    <input type="radio" name="genre" value="rad3"> Classic <Br>
+    <input type="radio" name="genre" value="rad3"> Melody </p>
+    <p><label for="music">Choose an mp3 file...</label></p>
+    <p><input class="text-center" type="file" class="form-control-file" id="music"name="file"></p>
+    </form>
+
+{% endblock %}
