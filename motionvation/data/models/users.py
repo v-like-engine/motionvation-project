@@ -9,13 +9,13 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    surname = Column(String, nullable=False)
-    name = Column(String, nullable=False)
-    country = Column(String, nullable=False)
-    city = Column(String, nullable=False)
-    email = Column(String, index=True, unique=True, nullable=False)
-    age = Column(Integer, nullable=False)
-    hashed_password = Column(String, nullable=False)
+    surname = Column(String, nullable=True)
+    name = Column(String, nullable=True)
+    country = Column(String, nullable=True)
+    city = Column(String, nullable=True)
+    email = Column(String, index=True, unique=True, nullable=True)
+    age = Column(Integer, nullable=True)
+    hashed_password = Column(String, nullable=True)
 
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)

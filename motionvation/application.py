@@ -3,10 +3,11 @@ import random
 from datetime import timedelta
 
 from flask import Flask, render_template, redirect, url_for
-from flask_login import LoginManager, login_user
+from flask_login import LoginManager, login_user, login_required, logout_user
 
 from motionvation.data import db_session
 from motionvation.data.models.users import User
+from motionvation.forms import RegisterForm
 from motionvation.forms.login_form import LoginForm
 
 app = Flask(__name__)
@@ -78,11 +79,47 @@ def login():
         return render_template('login.html', form=login_form)
 
 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def reqister():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        if form.password.data != form.password_again.data:
+            return render_template('register.html', title='Register',
+                                   form=form,
+                                   message="Пароли не совпадают")
+        db = db_session.create_session()
+        if db.query(User).filter(User.email == form.email.data).first():
+            return render_template('register.html', title='Register',
+                                   form=form,
+                                   message="Такой пользователь уже есть")
+        user = User(
+            surname=form.surname.data,
+            name=form.name.data,
+            country=form.country.data,
+            city=form.city.data,
+            email=form.email.data
+        )
+        user.set_password(form.password.data)
+        db.add(user)
+        db.commit()
+        return redirect('/login')
+    print('кря')
+    return render_template('register.html', title='Register', form=form)
+
+
 @app.route('/nothing')
 def nothing():
     return render_template('nothing.html', title='Nothing!')
 
 
+db_session.global_init('db/motionvation.db')
 def run():
     # port = int(os.environ.get('PORT', 8080))
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=8080, debug=True)
