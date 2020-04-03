@@ -45,10 +45,19 @@ def main():
 
 @app.route('/challenges')
 def challenge():
-    task = ['Do push-ups: ', 'Sleep (minutes): ']
+    task = {'few': ['Do chin-ups: ', 'Learn new words in an another language: ', 'Read pages of book: '], 'medium': ['Do push-ups: ', 'Sleep (minutes): ', 'Walk (minutes): '], 'lot': ['Stay home (days): ', 'Eat cookies: ', 'Write code lines: ', 'Read pages of book: '], 'nocount': ['Rearrange things on your table', 'Wash up with cold water', 'Eat a cookie: ', 'Make a note', 'Do the third position thing in your tasktable', 'Draw something funny']}
     challenges = []
     for i in range(random.randint(1, 10)):
-        challenges.append(random.choice(task) + str(random.randint(5, 50)))
+        t = random.choice(list(task.keys()))
+        if t == 'nocount':
+            c = ''
+        elif t == 'few':
+            c = random.randint(1, 10)
+        elif t == 'medium':
+            c = random.randint(5, 50)
+        else:
+            c = random.randint(20, 100)
+        challenges.append(random.choice(task[t]) + str(c))
     return render_template('challenges.html', title='Challenges', chs=challenges)
 
 
@@ -59,12 +68,12 @@ def login():
         db = db_session.create_session()
         user = db.query(User).filter(User.email == login_form.email.data).first()
         if not user:
-            return render_template('login.html', form=login_form, message="Такого пользователя не существует")
+            return render_template('login.html', form=login_form, message="No such user")
         if user.check_password(login_form.password.data):
             login_user(user, remember=login_form.remember_me.data)
             return redirect(url_for('index'))
         else:
-            return render_template('login.html', form=login_form, message="Неверный пароль")
+            return render_template('login.html', form=login_form, message="Wrong password")
     else:
         return render_template('login.html', form=login_form)
 
