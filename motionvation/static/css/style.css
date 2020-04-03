@@ -29,3 +29,7 @@ body {
 .card-body {
     background: url(../img/3.jpg);
 }
+
+.challenge {
+    padding-left: 30px
+}

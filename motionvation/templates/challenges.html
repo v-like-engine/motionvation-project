@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <main class='text-center'>
+    <main>
         <h3 class="text-center">Current challenges</h3>
-        <section class="smart-line text-center">
+        <section class="smart-line challenge">
         {% for ch in chs %}
             <p><a href='/nothing'><img src="{{ url_for('static', filename='img/5.png') }}" alt="Image not found"></a></p>
             <p><a href='/nothing'>{{ ch }}</a></p>
