@@ -26,10 +26,14 @@ body {
     color: #fff
 }
 
-.card-body {
+.card {
     background: url(../img/3.jpg);
 }
 
 .challenge {
     padding-left: 30px
+}
+
+.card-header {
+    font-size: 30pt
 }

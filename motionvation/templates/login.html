@@ -4,8 +4,8 @@
 
 <div class="container">
     <div class="card">
-        <header class="card-header">Аутентификация</header>
-        <form class="card-body" action="" method="POST">
+        <header class="card-header">Authentication</header>
+        <form class="card-body" method="POST">
             {% if message %}
             <div class="alert alert-danger">{{ message }}</div>
             {% endif %}
@@ -28,7 +28,7 @@
                 {{ form.password(class="form-control") }}
             </div>
 
-            <div class="form-group  form-check">
+            <div class="form-group form-check">
                 <label>{{ form.remember_me(class="form-check-input") }} {{ form.remember_me.label }}</label>
             </div>
 
