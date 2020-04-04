@@ -17,6 +17,8 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     age = Column(Integer, nullable=True)
     hashed_password = Column(String, nullable=True)
 
+    notes = orm.relation('Note', back_populates='user')
+
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)
 
