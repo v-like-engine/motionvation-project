@@ -1,6 +1,5 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, orm
 from sqlalchemy_serializer import SerializerMixin
-from wtforms.ext.sqlalchemy import orm
 
 from motionvation.data.db_session import SqlAlchemyBase
 
