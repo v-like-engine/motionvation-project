@@ -84,7 +84,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -111,7 +111,6 @@ def reqister():
         db.add(user)
         db.commit()
         return redirect('/login')
-    print('кря')
     return render_template('register.html', title='Register', form=form)
 
 
@@ -126,7 +125,7 @@ def not_found(error):
 
 
 @app.errorhandler(401)
-def not_found(error):
+def unauth(error):
     return make_response(jsonify({ 'error': 'Unauthorized' }), 404)
 
 
