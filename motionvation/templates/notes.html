@@ -3,7 +3,15 @@
 {% block content %}
     <main class='text-center'>
         <h2>Notebook</h2>
+        <div class="container">
+        <ul class="list-group">
+            {% for note in notes %}
+            <li class="list-group-item list-group-item-dark">{{ note.title }}</li>
+            {% endfor %}
+        </ul>
+        <br>
         <button><a href="/add_note">Add new note</a></button>
+        </div>
     </main>
 
 {% endblock %}

@@ -2,12 +2,13 @@ import os
 import random
 from datetime import timedelta
 
-from flask import Flask, render_template, redirect, url_for, make_response, jsonify
-from flask_login import LoginManager, login_user, login_required, logout_user
+from flask import Flask, render_template, redirect, url_for, make_response, jsonify, session
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 from motionvation.data import db_session
+from motionvation.data.models import Note
 from motionvation.data.models.users import User
-from motionvation.forms import RegisterForm
+from motionvation.forms import RegisterForm, NotesForm
 from motionvation.forms.login_form import LoginForm
 
 app = Flask(__name__)
@@ -30,13 +31,27 @@ def index():
 
 
 @app.route('/mynotes')
+@login_required
 def notes():
-    return render_template('notes.html')
+    db = db_session.create_session()
+    notes = db.query(Note).filter(Note.user == current_user).all()
+    return render_template('notes.html', notes=notes)
 
 
-@app.route('/add_note')
+@app.route('/add_note', methods=['GET', 'POST'])
+@login_required
 def add_note():
-    return render_template('add_note.html')
+    notes_form = NotesForm()
+    if notes_form.validate_on_submit():
+        db = db_session.create_session()
+        note = Note()
+        note.title = notes_form.title.data
+        note.text = notes_form.text.data
+        current_user.notes.append(note)
+        db.merge(current_user)
+        db.commit()
+        return redirect('mynotes')
+    return render_template('add_note.html', form=notes_form)
 
 
 @app.route('/music')
@@ -77,7 +92,7 @@ def login():
         if not user:
             return render_template('login.html', form=login_form, message="No such user")
         if user.check_password(login_form.password.data):
-            login_user(user, remember=login_form.remember_me.data)
+            login_user(user, remember=True)
             return redirect(url_for('index'))
         else:
             return render_template('login.html', form=login_form, message="Wrong password")
