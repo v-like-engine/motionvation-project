@@ -34,6 +34,11 @@ def notes():
     return render_template('notes.html')
 
 
+@app.route('/add_note')
+def add_note():
+    return render_template('add_note.html')
+
+
 @app.route('/music')
 def music():
     return render_template('music_player.html', title='Add your music...', text="Param param pam pam")
