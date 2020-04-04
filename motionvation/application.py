@@ -119,7 +119,7 @@ def nothing():
     return render_template('nothing.html', title='Nothing!')
 
 
-db_session.global_init('db/motionvation.db')
+db_session.global_init('motionvation/db/motionvation.db')
 def run():
     # port = int(os.environ.get('PORT', 8080))
     app.run(host='0.0.0.0', port=8080, debug=True)
