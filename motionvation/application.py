@@ -2,7 +2,7 @@ import os
 import random
 from datetime import timedelta
 
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, make_response, jsonify
 from flask_login import LoginManager, login_user, login_required, logout_user
 
 from motionvation.data import db_session
@@ -45,6 +45,7 @@ def main():
 
 
 @app.route('/challenges')
+@login_required
 def challenge():
     task = {'few': ['Do chin-ups: ', 'Learn new words in an another language: ', 'Read pages of book: '], 'medium': ['Do push-ups: ', 'Sleep (minutes): ', 'Walk (minutes): '], 'lot': ['Stay home (days): ', 'Eat cookies: ', 'Write code lines: ', 'Read pages of book: '], 'nocount': ['Rearrange things on your table', 'Wash up with cold water', 'Eat a cookie: ', 'Make a note', 'Do the third position thing in your tasktable', 'Draw something funny']}
     challenges = []
@@ -117,6 +118,16 @@ def reqister():
 @app.route('/nothing')
 def nothing():
     return render_template('nothing.html', title='Nothing!')
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({ 'error': 'NOT FOUND' }), 404)
+
+
+@app.errorhandler(401)
+def not_found(error):
+    return make_response(jsonify({ 'error': 'Unauthorized' }), 404)
 
 
 db_session.global_init('motionvation/db/motionvation.db')
