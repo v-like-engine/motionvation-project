@@ -93,12 +93,12 @@ def reqister():
         if form.password.data != form.password_again.data:
             return render_template('register.html', title='Register',
                                    form=form,
-                                   message="Пароли не совпадают")
+                                   message="Passwords doesn`t match")
         db = db_session.create_session()
         if db.query(User).filter(User.email == form.email.data).first():
             return render_template('register.html', title='Register',
                                    form=form,
-                                   message="Такой пользователь уже есть")
+                                   message="User already exists")
         user = User(
             surname=form.surname.data,
             name=form.name.data,
