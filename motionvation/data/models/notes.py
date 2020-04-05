@@ -10,6 +10,6 @@ class Note(SqlAlchemyBase, SerializerMixin):
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String, nullable=True)
     user_id = Column(Integer, ForeignKey('users.id'))
-    text_path = Column(String, nullable=True)
+    text = Column(String, nullable=True)
 
     user = orm.relation('User')

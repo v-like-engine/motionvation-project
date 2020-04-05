@@ -38,6 +38,12 @@ def notes():
     return render_template('notes.html', notes=notes)
 
 
+@app.route('/mynotes/<title>/<text>')
+@login_required
+def notes_info(title, text):
+    return render_template('notes_info.html', title=title, text=text)
+
+
 @app.route('/add_note', methods=['GET', 'POST'])
 @login_required
 def add_note():
