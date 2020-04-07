@@ -1,0 +1,92 @@
+h4 {
+    color: #d00;
+}
+
+h3 {
+    margin-bottom: 50px;
+}
+
+body {
+    background: url(../img/7.jpg);
+    color: #fff;
+}
+
+.ssilka {
+    font-size: 40pt;
+}
+
+.smart-line p {
+    display: inline-block;
+    vertical-align: top;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold' sans-serif;
+    font-size: 24pt;
+}
+
+.nav-text {
+    color: #fff;
+}
+
+.card {
+    background: url(../img/3.jpg);
+}
+
+.challenge {
+    margin-left: 50px;
+    text-decoration: none;
+}
+
+.card-header {
+    font-size: 30pt;
+}
+
+.note-text {
+    font-size: 30pt;
+}
+
+.nav-link {
+    font-size: 15pt;
+    margin-top: 10px;
+}
+
+.note-manual {
+    color: #ccf;
+    font-size: 20pt;
+}
+
+.note-manual:hover {
+    color: #ccf;
+    font-size: 22pt;
+}
+
+.challenge-button {
+    text-decoration: none;
+    color: #ccf;
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+a:hover {
+    color: #aaf;
+    text-decoration: none;
+}
+
+.list-group-color {
+    background: url(../img/1.jpg);
+}
+
+.button-note-text {
+    color: #fff;
+    font-size: 14pt;
+    text-decoration: none;
+}
+
+.button-note-text:hover {
+    color: #ddf;
+    font-size: 16pt;
+    text-decoration: none;
+}
+
+.button-note {
+    background: url(../img/1.jpg);
+    border: none;
+}

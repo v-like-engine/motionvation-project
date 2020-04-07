@@ -120,7 +120,7 @@ def challenge():
         else:
             c = random.randint(20, 100)
         challenges.append(random.choice(task[t]) + str(c))
-    return render_template('challenges.html', title='Challenges', chs=challenges)
+    return render_template('challenge.html', title='Challenges', chs=challenges)
 
 
 @app.route('/login', methods=['GET', 'POST'])
