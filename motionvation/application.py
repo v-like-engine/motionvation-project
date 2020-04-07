@@ -34,14 +34,25 @@ def index():
 @login_required
 def notes():
     db = db_session.create_session()
-    notes = db.query(Note).filter(Note.user == current_user).all()
+    notes = db.query(Note).filter(Note.user == current_user).all().copy()
     return render_template('notes.html', notes=notes)
 
 
-@app.route('/mynotes/<title>/<text>')
+@app.route('/mynotes/<int:id>/<title>/<text>')
 @login_required
-def notes_info(title, text):
-    return render_template('notes_info.html', title=title, text=text)
+def notes_info(id, title, text):
+    return render_template('notes_info.html', id=id, title=title, text=text)
+
+
+@app.route('/mynotes/delete/<int:id>')
+@login_required
+def delete_note(id):
+    db = db_session.create_session()
+    notes = db.query(Note).filter(Note.user == current_user, Note.id == id).first()
+    db.delete(notes)
+    print(id, notes.id)
+    db.commit()
+    return redirect('/mynotes')
 
 
 @app.route('/add_note', methods=['GET', 'POST'])
