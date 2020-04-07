@@ -6,9 +6,9 @@ from flask import Flask, render_template, redirect, url_for, make_response, json
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 from motionvation.data import db_session
-from motionvation.data.models import Note
+from motionvation.data.models import Note, Category
 from motionvation.data.models.users import User
-from motionvation.forms import RegisterForm, NotesForm
+from motionvation.forms import RegisterForm, NotesForm, CategoryForm
 from motionvation.forms.login_form import LoginForm
 
 app = Flask(__name__)
@@ -69,6 +69,29 @@ def add_note():
         db.commit()
         return redirect('mynotes')
     return render_template('add_note.html', form=notes_form)
+
+
+@app.route('/add_category', methods=['GET', 'POST'])
+@login_required
+def add_category():
+    category_form = CategoryForm()
+    if category_form.validate_on_submit():
+        db = db_session.create_session()
+        category = Category()
+        category.title = category_form.title.data
+        current_user.categories.append(category)
+        db.merge(current_user)
+        db.commit()
+        return redirect('/categories')
+    return render_template('add_category.html', form=category_form)
+
+
+@app.route('/categories')
+@login_required
+def categories():
+    db = db_session.create_session()
+    categories = db.query(Category).filter(Category.user == current_user).all().copy()
+    return render_template('categories.html', categories=categories)
 
 
 @app.route('/music')

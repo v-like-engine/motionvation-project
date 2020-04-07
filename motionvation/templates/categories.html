@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class='text-center'>
+        <h2>Categories</h2>
+        <div class="container">
+        <ul class="list-group">
+            {% for category in categories %}
+            <li class="list-group-item list-group-item-dark">{{ category.title }}</li>
+            {% endfor %}
+        </ul>
+        <br>
+        <button><a href="/add_category">Add new category</a></button>
+        </div>
+    </main>
+
+
+{% endblock %}
