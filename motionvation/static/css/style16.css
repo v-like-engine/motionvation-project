@@ -40,7 +40,7 @@ body {
 }
 
 .note-text {
-    font-size: 30pt;
+    font-size: 14pt;
 }
 
 .nav-link {
@@ -89,4 +89,16 @@ a:hover {
 .button-note {
     background: url(../img/1.jpg);
     border: none;
+}
+
+.delete-text {
+    color: #fdd;
+    font-size: 14pt;
+    text-decoration: none;
+}
+
+.delete-text:hover {
+    color: #f66;
+    font-size: 14pt;
+    text-decoration: none;
 }
