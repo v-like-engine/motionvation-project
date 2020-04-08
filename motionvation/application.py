@@ -72,7 +72,7 @@ def add_note():
         return redirect('mynotes')
     return render_template('add_note.html', form=notes_form)
 
-1
+
 @app.route('/add_category', methods=['GET', 'POST'])
 @login_required
 def add_category():
