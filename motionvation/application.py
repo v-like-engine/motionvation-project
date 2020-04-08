@@ -17,6 +17,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=365)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+admin_id = 4
 
 
 @login_manager.user_loader
@@ -76,6 +77,8 @@ def add_note():
 @app.route('/add_category', methods=['GET', 'POST'])
 @login_required
 def add_category():
+    if current_user.id != admin_id:
+        return redirect('/')
     category_form = CategoryForm()
     if category_form.validate_on_submit():
         db = db_session.create_session()
