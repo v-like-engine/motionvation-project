@@ -38,10 +38,12 @@ def notes():
     return render_template('notes.html', notes=notes)
 
 
-@app.route('/mynotes/<int:id>/<title>/<text>')
+@app.route('/mynotes/<int:id>')
 @login_required
-def notes_info(id, title, text):
-    return render_template('notes_info.html', id=id, title=title, text=text)
+def notes_info(id):
+    db = db_session.create_session()
+    note = db.query(Note).filter(Note.user == current_user, Note.id == id).first()
+    return render_template('notes_info.html', note=note)
 
 
 @app.route('/mynotes/delete/<int:id>')
@@ -70,7 +72,7 @@ def add_note():
         return redirect('mynotes')
     return render_template('add_note.html', form=notes_form)
 
-
+1
 @app.route('/add_category', methods=['GET', 'POST'])
 @login_required
 def add_category():
