@@ -104,6 +104,11 @@ def main():
     return render_template('main.html', title='Home page')
 
 
+@app.route('/account_info')
+def account_main():
+    return render_template('account.html', title='My account')
+
+
 @app.route('/challenges')
 @login_required
 def challenge():

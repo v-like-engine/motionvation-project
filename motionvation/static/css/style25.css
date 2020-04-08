@@ -102,3 +102,27 @@ a:hover {
     font-size: 14pt;
     text-decoration: none;
 }
+
+nav.navbar .dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    background: url(../img/3.jpg);
+    border: none;
+}
+
+.dropdown-item:hover {
+    background: url(../img/3.jpg);
+}
+
+.dropdown-nav-text {
+    color: #ccf;
+    font-size: 14pt;
+    text-decoration: none;
+}
+
+.dropdown-nav-text:hover {
+    color: #99f;
+    text-decoration: none;
+}
