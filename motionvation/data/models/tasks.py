@@ -4,13 +4,16 @@ from sqlalchemy_serializer import SerializerMixin
 from motionvation.data.db_session import SqlAlchemyBase
 
 
-class Category(SqlAlchemyBase, SerializerMixin):
-    __tablename__ = 'categories'
+class Task(SqlAlchemyBase, SerializerMixin):
+    __tablename__ = 'tasks'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String, nullable=True)
+    description = Column(String, nullable=True)
+    priority = Column(String, nullable=True)
+    category_id = Column(Integer, ForeignKey('categories.id'))
     user_id = Column(Integer, ForeignKey('users.id'))
 
     user = orm.relation('User')
 
-    tasks = orm.relation('Task', back_populates='category')
+    category = orm.relation('Category')

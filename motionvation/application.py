@@ -27,8 +27,17 @@ def load_user(user_id):
 
 
 @app.route('/planger')
+@login_required
 def index():
     return render_template('planger.html', title='Your PLANger', text="Stand up and do something!!!")
+
+
+@app.route('/tasks')
+@login_required
+def tasks():
+    db = db_session.create_session()
+    tasks = db.query().filter(Note.user == current_user).all().copy()
+    return render_template('tasks.html')
 
 
 @app.route('/mynotes')
@@ -95,7 +104,7 @@ def add_category():
 @login_required
 def categories():
     db = db_session.create_session()
-    categories = db.query(Category).filter(Category.user == current_user).all().copy()
+    categories = db.query(Category).filter(Category.user.id == admin_id).all().copy()
     return render_template('categories.html', categories=categories)
 
 
@@ -143,7 +152,7 @@ def login():
             return render_template('login.html', form=login_form, message="No such user")
         if user.check_password(login_form.password.data):
             login_user(user, remember=True)
-            return redirect(url_for('index'))
+            return redirect('/')
         else:
             return render_template('login.html', form=login_form, message="Wrong password")
     else:
