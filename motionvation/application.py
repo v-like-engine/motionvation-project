@@ -6,7 +6,7 @@ from flask import Flask, render_template, redirect, url_for, make_response, json
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 from motionvation.data import db_session
-from motionvation.data.models import Note, Category
+from motionvation.data.models import Note, Category, Task
 from motionvation.data.models.users import User
 from motionvation.forms import RegisterForm, NotesForm, CategoryForm
 from motionvation.forms.login_form import LoginForm
@@ -17,7 +17,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=365)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-admin_id = 4
+admin_id = 1
 
 
 @login_manager.user_loader
@@ -36,8 +36,8 @@ def index():
 @login_required
 def tasks():
     db = db_session.create_session()
-    tasks = db.query().filter(Note.user == current_user).all().copy()
-    return render_template('tasks.html')
+    tasks = db.query(Task).filter(Task.user == current_user).all().copy()
+    return render_template('tasks.html', tasks=tasks)
 
 
 @app.route('/mynotes')
@@ -104,7 +104,7 @@ def add_category():
 @login_required
 def categories():
     db = db_session.create_session()
-    categories = db.query(Category).filter(Category.user.id == admin_id).all().copy()
+    categories = db.query(Category).filter(Category.user_id == admin_id).all().copy()
     return render_template('categories.html', categories=categories)
 
 

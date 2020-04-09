@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class='text-center'>
+        <h2>Tasks</h2>
+        <div class="container">
+        <ul class="list-group">
+            {% for tasks in tasks %}
+            <li class="list-group-item list-group-item-dark">{{ task.title }}</li>
+            {% endfor %}
+        </ul>
+            <button type="button" class="button button-light"><a href="#">Add new task</a></button>
+        </div>
+    </main>
+
+
+{% endblock %}
