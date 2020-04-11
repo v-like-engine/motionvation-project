@@ -86,6 +86,23 @@ a:hover {
     text-decoration: none;
 }
 
+.button-login-main {
+    color: #fff;
+    font-size: 20pt;
+    text-decoration: none;
+}
+
+.login-main-text {
+    color: #ddf;
+    font-size: 18pt;
+    text-decoration: none;
+}
+
+.button-login-main:hover {
+    color: #99f;
+    text-decoration: none;
+}
+
 .button-note {
     background: url(../img/1.jpg);
     border: none;
@@ -125,4 +142,18 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 .dropdown-nav-text:hover {
     color: #99f;
     text-decoration: none;
+}
+
+.nav-item-acc {
+    margin-right: 80px;
+}
+
+.main-log {
+    background-image: none;
+    background-color: transparent;
+    display: inline-block;
+}
+
+.clps {
+    display: block;
 }

@@ -2,8 +2,53 @@
 
 {% block content %}
     <main class='text-center'>
+        {% if current_user.is_authenticated %}
         <h2 class="text-center">What to do?</h2>
         <a href='/challenges'><img src="{{ url_for('static', filename='img/6.png') }}" alt="Image not found"></a>
+        {% else %}
+        <a class="btn challenge-button clps" data-toggle="collapse" href="#collapseWhat" role="button" aria-expanded="false" aria-controls="collapseWhat"><h2 class="text-center">What is this project?</h2></a>
+        <div class="collapse" id="collapseWhat">
+            <div class="card card-body main-log">
+                <section class="login-main-text"> 
+                    <h5>The simple web-based time designer that can help in organising your own time</h5>
+
+                    <p>There everyone will be able to:</p>
+                    <p><ul> Defeat procrastination:
+                        <li> Read some tips about time allocation </li>
+                        <li>Create a timetable
+                        Make a to-do list
+                        Take part in some exciting challenges
+                        Start respecting yourself:
+
+                        Register your own account
+                        See the statistic about things that you have done
+                        Beat your own records
+                        Earn some beautiful titles
+                        Relax and enjoy the work:
+
+                        Turn on the music
+                        Write the notes
+                        Arrange your job as comfortable as possible
+                        Enjoy the self-development!</li>
+                    </ul>
+                    </p>
+                </section>
+            </div>
+        </div>
+        <a class="btn challenge-button clps" data-toggle="collapse" href="#collapseDashik" role="button" aria-expanded="false" aria-controls="collapseExample"><h2 class="text-center">Who we are?</h2></a>
+        <div class="collapse" id="collapseDashik">
+            <div class="card card-body main-log">
+                <p class="login-main-text">We are young team</p>
+            </div>
+        </div>
+        <a class="btn challenge-button clps" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><h2 class="text-center">How to start?</h2></a>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body main-log">
+                <p class="login-main-text">You need to <a href='/login' class="button-login-main">Login</a> or <a href='/login' class="button-login-main">Register</a> to see the content!</p>
+            </div>
+        </div>
+        <a href='/login'><img src="{{ url_for('static', filename='img/6.png') }}" alt="Image not found"></a>
+        {% endif %}
     </main>
 
 {% endblock %}
