@@ -8,7 +8,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 from motionvation.data import db_session
 from motionvation.data.models import Note, Category, Task
 from motionvation.data.models.users import User
-from motionvation.forms import RegisterForm, NotesForm, CategoryForm
+from motionvation.forms import RegisterForm, NotesForm, CategoryForm, TaskForm
 from motionvation.forms.login_form import LoginForm
 
 app = Flask(__name__)
@@ -98,6 +98,36 @@ def add_category():
         db.commit()
         return redirect('/categories')
     return render_template('add_category.html', form=category_form)
+
+
+@app.route('/select_category')
+@login_required
+def select_category():
+    db = db_session.create_session()
+    categories = db.query(Category).filter(Category.user_id == admin_id).all().copy()
+    return render_template('select_category.html', categories=categories)
+
+
+@app.route('/add_task/<id>', methods=['GET', 'POST'])
+@login_required
+def add_task(id):
+    id = int(id)
+    task_form = TaskForm()
+    if task_form.validate_on_submit():
+        db = db_session.create_session()
+        task = Task()
+        print(task.title)
+        task.title = task_form.title.data
+        task.description = task_form.description.data
+        task.priority = task_form.priority.data
+        current_user.tasks.append(task)
+        current_category = db.query(Category).filter(Category.user_id == admin_id, Category.id == id).first()
+        current_category.tasks.append(task)
+        db.merge(current_category)
+        db.merge(current_user)
+        db.commit()
+        return redirect('/tasks')
+    return render_template('add_task.html', form=task_form)
 
 
 @app.route('/categories')

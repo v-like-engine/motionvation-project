@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class='text-center'>
+        <h2>Categories</h2>
+        <div class="container">
+        <ul class="list-group">
+            {% for category in categories %}
+            <li class="list-group-item list-group-item-dark"><a href="/add_task/{{ category.id }}">{{ category.title }}</a></li>
+            {% endfor %}
+        </ul>
+        </div>
+    </main>
+
+
+{% endblock %}
