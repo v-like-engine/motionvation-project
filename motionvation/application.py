@@ -116,15 +116,13 @@ def add_task(id):
     if task_form.validate_on_submit():
         db = db_session.create_session()
         task = Task()
-        print(task.title)
         task.title = task_form.title.data
         task.description = task_form.description.data
         task.priority = task_form.priority.data
-        current_user.tasks.append(task)
         current_category = db.query(Category).filter(Category.user_id == admin_id, Category.id == id).first()
-        current_category.tasks.append(task)
-        db.merge(current_category)
-        db.merge(current_user)
+        task.category = current_category
+        task.user = current_user
+        db.merge(task)
         db.commit()
         return redirect('/tasks')
     return render_template('add_task.html', form=task_form)
