@@ -29,7 +29,7 @@ def load_user(user_id):
 @app.route('/planger')
 @login_required
 def index():
-    return render_template('planger.html', title='Your PLANger', text="Stand up and do something!!!")
+    return render_template('planger.html', title='Your PLANger', text="Stand up and do something!!!", useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/tasks')
@@ -37,7 +37,7 @@ def index():
 def tasks():
     db = db_session.create_session()
     tasks = db.query(Task).filter(Task.user == current_user).all().copy()
-    return render_template('tasks.html', tasks=tasks)
+    return render_template('tasks.html', tasks=tasks, useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/mynotes')
@@ -45,7 +45,7 @@ def tasks():
 def notes():
     db = db_session.create_session()
     notes = db.query(Note).filter(Note.user == current_user).all().copy()
-    return render_template('notes.html', notes=notes)
+    return render_template('notes.html', notes=notes, useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/mynotes/<int:id>')
@@ -53,7 +53,7 @@ def notes():
 def notes_info(id):
     db = db_session.create_session()
     note = db.query(Note).filter(Note.user == current_user, Note.id == id).first()
-    return render_template('notes_info.html', note=note)
+    return render_template('notes_info.html', note=note, useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/mynotes/delete/<int:id>')
@@ -80,7 +80,7 @@ def add_note():
         db.merge(current_user)
         db.commit()
         return redirect('mynotes')
-    return render_template('add_note.html', form=notes_form)
+    return render_template('add_note.html', form=notes_form, useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/add_category', methods=['GET', 'POST'])
@@ -97,7 +97,7 @@ def add_category():
         db.merge(current_user)
         db.commit()
         return redirect('/categories')
-    return render_template('add_category.html', form=category_form)
+    return render_template('add_category.html', form=category_form, useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/select_category')
@@ -105,7 +105,7 @@ def add_category():
 def select_category():
     db = db_session.create_session()
     categories = db.query(Category).filter(Category.user_id == admin_id).all().copy()
-    return render_template('select_category.html', categories=categories)
+    return render_template('select_category.html', categories=categories, useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/add_task/<id>', methods=['GET', 'POST'])
@@ -125,7 +125,7 @@ def add_task(id):
         db.merge(task)
         db.commit()
         return redirect('/tasks')
-    return render_template('add_task.html', form=task_form)
+    return render_template('add_task.html', form=task_form, useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/categories')
@@ -133,28 +133,34 @@ def add_task(id):
 def categories():
     db = db_session.create_session()
     categories = db.query(Category).filter(Category.user_id == admin_id).all().copy()
-    return render_template('categories.html', categories=categories)
+    return render_template('categories.html', categories=categories, useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/music')
+@login_required
 def music():
-    return render_template('music_player.html', title='Add your music...', text="Param param pam pam")
+    return render_template('music_player.html', title='Add your music...', text="Param param pam pam", useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/')
 def main():
-    return render_template('main.html', title='Home page')
+    if current_user.is_authenticated:
+        info = (current_user.name + ' ' + current_user.surname)
+    else:
+        info = 'Anonymous'
+    return render_template('main.html', title='Home page', useracc=info)
 
 
 @app.route('/account_info')
+@login_required
 def account_main():
-    return render_template('account.html', title='My account')
+    return render_template('account.html', title='My account', useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/challenges')
 @login_required
 def challenge():
-    task = {'few': ['Do chin-ups: ', 'Learn new words in an another language: ', 'Read pages of book: '], 'medium': ['Do push-ups: ', 'Sleep (minutes): ', 'Walk (minutes): '], 'lot': ['Stay home (days): ', 'Eat cookies: ', 'Write code lines: ', 'Read pages of book: '], 'nocount': ['Rearrange things on your table', 'Wash up with cold water', 'Eat a cookie: ', 'Make a note', 'Do the third position thing in your tasktable', 'Draw something funny']}
+    task = {'few': ['Do chin-ups: ', 'Learn new words in an another language: ', 'Read pages of book: '], 'medium': ['Do push-ups: ', 'Sleep (minutes): ', 'Walk (minutes): '], 'lot': ['Stay home (days): ', 'Eat cookies: ', 'Write code lines: ', 'Read pages of book: '], 'nocount': ['Rearrange things on your table', 'Wash up with cold water', 'Eat a cookie', 'Make a note', 'Do the third position thing in your tasktable', 'Draw something funny']}
     challenges = []
     for i in range(random.randint(1, 10)):
         t = random.choice(list(task.keys()))
@@ -167,7 +173,7 @@ def challenge():
         else:
             c = random.randint(20, 100)
         challenges.append(random.choice(task[t]) + str(c))
-    return render_template('challenge.html', title='Challenges', chs=challenges)
+    return render_template('challenge.html', title='Challenges', chs=challenges, useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -223,7 +229,7 @@ def reqister():
 
 @app.route('/nothing')
 def nothing():
-    return render_template('nothing.html', title='Nothing!')
+    return render_template('nothing.html', title='Nothing!', useracc='Account')
 
 
 @app.errorhandler(404)
