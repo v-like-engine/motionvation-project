@@ -29,7 +29,14 @@ def load_user(user_id):
 @app.route('/planger')
 @login_required
 def index():
-    return render_template('planger.html', title='Your PLANger', text="Stand up and do something!!!", useracc=(current_user.name + ' ' + current_user.surname))
+    db = db_session.create_session()
+    tasks = db.query(Task).filter(Task.user == current_user, Task.priority == 10).all().copy()
+    for i in range(9, 0, -1):
+        if len(tasks) < 5:
+            tasks += db.query(Task).filter(Task.user == current_user, Task.priority == i).all().copy()
+    if len(tasks) > 5:
+        tasks = tasks[:5]
+    return render_template('planger.html', tasks=tasks, title='Your PLANger', text="Your most significant and urgent tasks!", useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/tasks')
@@ -62,9 +69,26 @@ def delete_note(id):
     db = db_session.create_session()
     notes = db.query(Note).filter(Note.user == current_user, Note.id == id).first()
     db.delete(notes)
-    print(id, notes.id)
     db.commit()
     return redirect('/mynotes')
+
+
+@app.route('/tasks/delete/<int:id>')
+@login_required
+def delete_task(id):
+    db = db_session.create_session()
+    tasks = db.query(Task).filter(Task.user == current_user, Task.id == id).first()
+    db.delete(tasks)
+    db.commit()
+    return redirect('/tasks')
+
+
+@app.route('/tasks/<int:id>')
+@login_required
+def tasks_info(id):
+    db = db_session.create_session()
+    task = db.query(Task).filter(Task.user == current_user, Task.id == id).first()
+    return render_template('task_info.html', task=task, useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/add_note', methods=['GET', 'POST'])
@@ -234,15 +258,23 @@ def nothing():
 
 @app.errorhandler(404)
 def not_found(error):
-    return make_response(jsonify({ 'error': 'NOT FOUND' }), 404)
+    if current_user.is_authenticated:
+        info = (current_user.name + ' ' + current_user.surname)
+    else:
+        info = 'Anonymous'
+    er_txt = '404 not found: Wrong request: no such web-address!'
+    return render_template(error.html, title='Error',
+    text=er_txt, useracc=info)
 
 
 @app.errorhandler(401)
 def unauth(error):
-    return make_response(jsonify({ 'error': 'Unauthorized' }), 404)
+    er_txt = '401 not authorized: Please log in or register!!!'
+    return render_template(error.html, title='Error',
+    text=er_txt)
 
 
 db_session.global_init('motionvation/db/motionvation.db')
 def run():
-    # port = int(os.environ.get('PORT', 8080))
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host='0.0.0.0', port=port, debug=True)

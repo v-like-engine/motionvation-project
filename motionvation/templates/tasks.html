@@ -6,12 +6,11 @@
         <div class="container">
         <ul class="list-group">
             {% for task in tasks %}
-            <li class="list-group-item list-group-flush list-group-color">{{ task.title }}</li>
+            <li class="list-group-item list-group-flush list-group-color"><a href="tasks/{{ task.id }}"  class="note-manual">{{ task.title }}</a></li>
             {% endfor %}
         </ul>
             <button class="button-note"><a href="/select_category" class='button-note-text'>Add new task</a></button>
         </div>
     </main>
-
 
 {% endblock %}

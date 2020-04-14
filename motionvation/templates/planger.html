@@ -2,8 +2,15 @@
 
 {% block content %}
     <h3 class="text-center">PLANger</h3>
-    <h3 class="text-center">. . .</h3>
     <h4 class="font-italic text-center">{{text}}</h4>
-    <button type="button" class="button button-note"><a href="/tasks" class='button-note-text'>All tasks</a></button>
+    <div class="container">
+        <ul class="list-group">
+            {% for task in tasks %}
+            <li class="list-group-item list-group-flush list-group-color"><a href="tasks/{{ task.id }}"  class="note-manual">{{ task.title }}</a></li>
+            {% endfor %}
+        </ul>
+        <br>
+        <button type="button" class="button button-note"><a href="/tasks" class='button-note-text'>All tasks</a></button>
+    </div>
 
 {% endblock %}
