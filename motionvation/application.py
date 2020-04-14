@@ -44,7 +44,14 @@ def index():
 def tasks():
     db = db_session.create_session()
     tasks = db.query(Task).filter(Task.user == current_user).all().copy()
-    return render_template('tasks.html', tasks=tasks, useracc=(current_user.name + ' ' + current_user.surname))
+    new_tasks = []
+    priority_now = 10
+    while priority_now != -1:
+        for task in tasks:
+            if task.priority == str(priority_now):
+                new_tasks.append(task)
+        priority_now -= 1
+    return render_template('tasks.html', tasks=new_tasks, useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/mynotes')
