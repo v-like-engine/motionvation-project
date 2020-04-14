@@ -263,14 +263,14 @@ def not_found(error):
     else:
         info = 'Anonymous'
     er_txt = '404 not found: Wrong request: no such web-address!'
-    return render_template(error.html, title='Error',
+    return render_template('error.html', title='Error',
     text=er_txt, useracc=info)
 
 
 @app.errorhandler(401)
 def unauth(error):
     er_txt = '401 not authorized: Please log in or register!!!'
-    return render_template(error.html, title='Error',
+    return render_template('error.html', title='Error',
     text=er_txt)
 
 
