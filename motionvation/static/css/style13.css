@@ -43,7 +43,7 @@ body {
     font-size: 14pt;
 }
 
-.note-content p{
+.note-content {
     font-size: 16pt;
     white-space: pre-line;
 }
@@ -87,8 +87,11 @@ a:hover {
 
 .button-note-text:hover {
     color: #ddf;
-    font-size: 16pt;
     text-decoration: none;
+}
+
+.transform-two:hover {
+    transform: scale(2)
 }
 
 .button-login-main {
