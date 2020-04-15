@@ -3,6 +3,9 @@
 {% block content %}
     <main>
         <h2 class="text-center">Hello, Not procrastinator {{useracc}}!</h2>
+        <a href='/challenges'><img src="{{ url_for('static', filename='img/king.jpg') }}" width="200" height="210" align='left' alt="Image not found" style="border: 20px transparent"></a>
+        <p class='button-note-text'>{{useracc}}</p>
+
     </main>
 
 {% endblock %}
