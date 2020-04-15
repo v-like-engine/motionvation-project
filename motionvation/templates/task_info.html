@@ -5,7 +5,7 @@
 <h2>{{ task.title }}</h2>
 <h3>Priority: {{ task.priority }}</h3>
 <h3>Category: {{ task.category.title }}</h3>
-<p>{{ task.description }}</p>
+<p class='note-content'>{{ task.description }}</p>
 <button type="button" class="button btn-dark button-note"><a href="/tasks/delete/{{ task.id }}" class='delete-text'>Delete the task</a></button>
 <button type="button" class="button btn-light button-note"><a href="/tasks" class='button-note-text'>Return to tasks</a></button>
 

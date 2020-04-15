@@ -43,6 +43,11 @@ body {
     font-size: 14pt;
 }
 
+.note-content p{
+    font-size: 16pt;
+    white-space: pre-line;
+}
+
 .nav-link {
     font-size: 15pt;
     margin-top: 10px;
