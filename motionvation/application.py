@@ -185,15 +185,15 @@ def main():
 @app.route('/account_info')
 @login_required
 def account_main():
-    expr = str(20)
-    expm = str(100)
-    return render_template('account.html', title='My account', useracc=(current_user.name + ' ' + current_user.surname), rank='Not procrastinator', exp=(expr + '/' + expm), expcur=expr, expmax=expm)
+    expr = 20
+    expm = 100
+    return render_template('account.html', title='My account', useracc=(current_user.name + ' ' + current_user.surname), rank='Not procrastinator', exp=(str(expr) + '/' + str(expm)), expcur=expr, expmax=expm)
 
 
 @app.route('/challenges')
 @login_required
 def challenge():
-    task = {'few': ['Do chin-ups: ', 'Learn new words in an another language: ', 'Read pages of book: '], 'medium': ['Do push-ups: ', 'Sleep (minutes): ', 'Walk (minutes): '], 'lot': ['Stay home (days): ', 'Eat cookies: ', 'Write code lines: ', 'Read pages of book: '], 'nocount': ['Rearrange things on your table', 'Wash up with cold water', 'Eat a cookie', 'Make a note', 'Do the third position thing in your tasktable', 'Draw something funny']}
+    task = {'few': ['Do tasks: ', 'Add tasks: ', 'Complete challenges: '], 'medium': ['Add tasks with totally priority sum: ', 'Get experience: ', 'Check pages: '], 'lot': ['Stay home (days): ',], 'nocount': ['Reach new level', 'Complete a task with high priority (>8)', 'Delete a note', 'Make a note', 'Add a task with sport category', 'Get 100 experience']}
     challenges = []
     for i in range(random.randint(1, 10)):
         t = random.choice(list(task.keys()))

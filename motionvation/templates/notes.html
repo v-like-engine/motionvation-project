@@ -6,7 +6,7 @@
         <div class="container">
         <ul class="list-group">
             {% for note in notes %}
-            <li class="list-group-item list-group-flush list-group-color"><a href="mynotes/{{ note.id }}"  class="note-manual">{{ note.title }}</a></li>
+            <a href="mynotes/{{ note.id }}"  class="note-manual transform-two"><li class="list-group-item list-group-flush list-group-color">{{ note.title }}</li></a>
             {% endfor %}
         </ul>
         <br>

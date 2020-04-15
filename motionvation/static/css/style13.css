@@ -43,6 +43,11 @@ body {
     font-size: 14pt;
 }
 
+.note-content {
+    font-size: 16pt;
+    white-space: pre-line;
+}
+
 .nav-link {
     font-size: 15pt;
     margin-top: 10px;
@@ -82,8 +87,11 @@ a:hover {
 
 .button-note-text:hover {
     color: #ddf;
-    font-size: 16pt;
     text-decoration: none;
+}
+
+.transform-two:hover {
+    transform: scale(2)
 }
 
 .button-login-main {

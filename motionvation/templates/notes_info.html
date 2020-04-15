@@ -3,7 +3,7 @@
 {% block content %}
 
 <h2>{{ note.title }}</h2>
-<p>{{ note.text }}</p>
+<p class='note-content'>{{ note.text }}</p>
 <button type="button" class="button btn-dark button-note"><a href="/mynotes/delete/{{ note.id }}" class='delete-text'>Delete the note</a></button>
 <button type="button" class="button btn-light button-note"><a href="/mynotes" class='button-note-text'>Return to notes</a></button>
 
