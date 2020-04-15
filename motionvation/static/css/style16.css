@@ -91,7 +91,8 @@ a:hover {
 }
 
 .transform-two:hover {
-    transform: scale(2)
+    display: block;
+    transform: scale(1.05)
 }
 
 .button-login-main {
@@ -112,6 +113,7 @@ a:hover {
 }
 
 .button-note {
+    color: #fff;
     background: url(../img/1.jpg);
     border: none;
 }
