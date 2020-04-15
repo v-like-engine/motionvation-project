@@ -157,3 +157,26 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 .clps {
     display: block;
 }
+
+.acc-head-name {
+    margin-left: 30px;
+    font-size: 32px;
+}
+
+.acc-head-rank {
+    margin-left: 50px;
+    font-size: 25px;
+}
+
+.acc-head-exp {
+    margin-left: 50px;
+    font-size: 20px;
+}
+
+.acc-avatar {
+    float: left;
+    border: 20px;
+    border-color: blue;
+    margin-right: 40px;
+    margin-left: 30px;
+}

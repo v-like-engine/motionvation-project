@@ -185,7 +185,9 @@ def main():
 @app.route('/account_info')
 @login_required
 def account_main():
-    return render_template('account.html', title='My account', useracc=(current_user.name + ' ' + current_user.surname))
+    expr = str(20)
+    expm = str(100)
+    return render_template('account.html', title='My account', useracc=(current_user.name + ' ' + current_user.surname), rank='Not procrastinator', exp=(expr + '/' + expm), expcur=expr, expmax=expm)
 
 
 @app.route('/challenges')
