@@ -8,7 +8,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 from motionvation.data import db_session
 from motionvation.data.models import Note, Category, Task
 from motionvation.data.models.users import User
-from motionvation.forms import RegisterForm, NotesForm, CategoryForm, TaskForm
+from motionvation.forms import RegisterForm, NotesForm, CategoryForm, TaskForm, ChangePasswordForm
 from motionvation.forms.login_form import LoginForm
 
 app = Flask(__name__)
@@ -258,6 +258,31 @@ def reqister():
         db.commit()
         return redirect('/login')
     return render_template('register.html', title='Register', form=form)
+
+'''
+@app.route('/change_password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        db = db_session.create_session()
+        if form.new_password.data != form.new_password_again.data:
+            return render_template('change_password.html',
+                                   form=form,
+                                   message="Passwords doesn`t match")
+        old_password_hashed = current_user.hashed_password
+        current_user.set_password(form.old_password.data)
+        print(current_user.hashed_password)
+        print(old_password_hashed)
+        if current_user.hashed_password != old_password_hashed:
+            current_user.set_password(old_password_hashed)
+            print('efef')
+            return render_template('change_password.html', form=form, message='Incorrect old password')
+        current_user.set_password(form.new_password.data)
+        db.commit()
+        return redirect('/account_info')
+    return render_template('change_password.html', form=form)
+'''
 
 
 @app.route('/nothing')

@@ -9,12 +9,13 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    surname = Column(String, nullable=True)
-    name = Column(String, nullable=True)
-    country = Column(String, nullable=True)
-    city = Column(String, nullable=True)
-    email = Column(String, index=True, unique=True, nullable=True)
-    age = Column(Integer, nullable=True)
+    surname = Column(String)
+    name = Column(String)
+    country = Column(String)
+    city = Column(String)
+    email = Column(String, index=True, unique=True)
+    age = Column(Integer)
+    rank = Column(String, default='New')
     hashed_password = Column(String, nullable=True)
 
     notes = orm.relation('Note', back_populates='user')
