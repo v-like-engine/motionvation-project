@@ -8,7 +8,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 from motionvation.data import db_session
 from motionvation.data.models import Note, Category, Task
 from motionvation.data.models.users import User
-from motionvation.forms import RegisterForm, NotesForm, CategoryForm, TaskForm, ChangePasswordForm
+from motionvation.forms import RegisterForm, NotesForm, CategoryForm, TaskForm, ChangePasswordForm, ChangeInfoForm
 from motionvation.forms.login_form import LoginForm
 
 app = Flask(__name__)
@@ -283,6 +283,33 @@ def change_password():
         return redirect('/account_info')
     return render_template('change_password.html', form=form)
 '''
+
+
+@app.route('/change_info', methods=['GET', 'POST'])
+@login_required
+def change_info():
+    form = ChangeInfoForm()
+    if form.validate_on_submit():
+        db = db_session.create_session()
+        user_now = db.query(User).filter(User.id == current_user.id).first()
+        if form.name.data:
+            user_now.name = form.name.data
+        if form.surname.data:
+            user_now.surname = form.surname.data
+        if form.country.data:
+            user_now.country = form.country.data
+        if form.city.data:
+            user_now.city = form.city.data
+        if form.email.data:
+            email = db.query(User).filter(User.email == form.email.data).first()
+            print(email)
+            if not email:
+                user_now.email = form.email.data
+            else:
+                return render_template('change_info.html', form=form, message='This email is already exists')
+        db.commit()
+        return redirect('/account_info')
+    return render_template('change_info.html', form=form)
 
 
 @app.route('/nothing')
