@@ -51,7 +51,8 @@ def tasks():
             if task.priority == str(priority_now):
                 new_tasks.append(task)
         priority_now -= 1
-    return render_template('tasks.html', tasks=new_tasks, useracc=(current_user.name + ' ' + current_user.surname))
+    return render_template('tasks.html', tasks=new_tasks, useracc=(current_user.name + ' ' + current_user.surname),
+                           title='Tasks')
 
 
 @app.route('/mynotes')
@@ -59,7 +60,8 @@ def tasks():
 def notes():
     db = db_session.create_session()
     notes = db.query(Note).filter(Note.user == current_user).all().copy()
-    return render_template('notes.html', notes=notes, useracc=(current_user.name + ' ' + current_user.surname))
+    return render_template('notes.html', notes=notes, useracc=(current_user.name + ' ' + current_user.surname),
+                           title='Notes')
 
 
 @app.route('/mynotes/<int:id>')
@@ -67,7 +69,8 @@ def notes():
 def notes_info(id):
     db = db_session.create_session()
     note = db.query(Note).filter(Note.user == current_user, Note.id == id).first()
-    return render_template('notes_info.html', note=note, useracc=(current_user.name + ' ' + current_user.surname))
+    return render_template('notes_info.html', note=note, useracc=(current_user.name + ' ' + current_user.surname),
+                           title='Notes info')
 
 
 @app.route('/mynotes/delete/<int:id>')
@@ -95,7 +98,8 @@ def delete_task(id):
 def tasks_info(id):
     db = db_session.create_session()
     task = db.query(Task).filter(Task.user == current_user, Task.id == id).first()
-    return render_template('task_info.html', task=task, useracc=(current_user.name + ' ' + current_user.surname))
+    return render_template('task_info.html', task=task, useracc=(current_user.name + ' ' + current_user.surname),
+                           title='Task info')
 
 
 @app.route('/add_note', methods=['GET', 'POST'])
@@ -111,7 +115,8 @@ def add_note():
         db.merge(current_user)
         db.commit()
         return redirect('mynotes')
-    return render_template('add_note.html', form=notes_form, useracc=(current_user.name + ' ' + current_user.surname))
+    return render_template('add_note.html', form=notes_form, useracc=(current_user.name + ' ' + current_user.surname),
+                           title='Add note')
 
 
 @app.route('/add_category', methods=['GET', 'POST'])
@@ -128,7 +133,8 @@ def add_category():
         db.merge(current_user)
         db.commit()
         return redirect('/categories')
-    return render_template('add_category.html', form=category_form, useracc=(current_user.name + ' ' + current_user.surname))
+    return render_template('add_category.html', form=category_form, useracc=(current_user.name + ' ' + current_user.surname),
+                           title='Add category')
 
 
 @app.route('/select_category')
@@ -136,7 +142,8 @@ def add_category():
 def select_category():
     db = db_session.create_session()
     categories = db.query(Category).filter(Category.user_id == admin_id).all().copy()
-    return render_template('select_category.html', categories=categories, useracc=(current_user.name + ' ' + current_user.surname))
+    return render_template('select_category.html', categories=categories, useracc=(current_user.name + ' ' + current_user.surname),
+                           title='Select category')
 
 
 @app.route('/add_task/<id>', methods=['GET', 'POST'])
@@ -156,7 +163,8 @@ def add_task(id):
         db.merge(task)
         db.commit()
         return redirect('/tasks')
-    return render_template('add_task.html', form=task_form, useracc=(current_user.name + ' ' + current_user.surname))
+    return render_template('add_task.html', form=task_form, useracc=(current_user.name + ' ' + current_user.surname),
+                           title='Add task')
 
 
 @app.route('/categories')
@@ -164,13 +172,15 @@ def add_task(id):
 def categories():
     db = db_session.create_session()
     categories = db.query(Category).filter(Category.user_id == admin_id).all().copy()
-    return render_template('categories.html', categories=categories, useracc=(current_user.name + ' ' + current_user.surname))
+    return render_template('categories.html', categories=categories, useracc=(current_user.name + ' ' + current_user.surname),
+                           title='Categories')
 
 
 @app.route('/music')
 @login_required
 def music():
-    return render_template('music_player.html', title='Add your music...', text="Param param pam pam", useracc=(current_user.name + ' ' + current_user.surname))
+    return render_template('music_player.html', title='Add your music...', text="Param param pam pam",
+                           useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/')
@@ -216,14 +226,14 @@ def login():
         db = db_session.create_session()
         user = db.query(User).filter(User.email == login_form.email.data).first()
         if not user:
-            return render_template('login.html', form=login_form, message="No such user")
+            return render_template('login.html', form=login_form, message="No such user", title='Login')
         if user.check_password(login_form.password.data):
             login_user(user, remember=True)
             return redirect('/')
         else:
-            return render_template('login.html', form=login_form, message="Wrong password")
+            return render_template('login.html', form=login_form, message="Wrong password", title='Login')
     else:
-        return render_template('login.html', form=login_form)
+        return render_template('login.html', form=login_form, title='Login')
 
 
 @app.route('/logout')
@@ -287,10 +297,11 @@ def change_info():
             if not email or user_now == email:
                 user_now.email = form.email.data
             else:
-                return render_template('change_info.html', form=form, message='This email is already exists')
+                return render_template('change_info.html', form=form, message='This email is already exists',
+                                       title='Change info')
         db.commit()
         return redirect('/account_info')
-    return render_template('change_info.html', form=form)
+    return render_template('change_info.html', form=form, title='Change info')
 
 
 @app.route('/change_password', methods=['GET', 'POST'])
@@ -301,13 +312,15 @@ def change_password():
         db = db_session.create_session()
         user_now = db.query(User).filter(User.id == current_user.id).first()
         if not user_now.check_password(form.old_password.data):
-            return render_template('change_password.html', form=form, message='Old password is incorrect')
+            return render_template('change_password.html', form=form, message='Old password is incorrect',
+                                   title='Change password')
         if form.new_password.data != form.new_password_again.data:
-            return render_template('change_password.html', form=form, message='Passwords do not match')
+            return render_template('change_password.html', form=form, message='Passwords do not match',
+                                   title='Change password')
         user_now.set_password(form.new_password.data)
         db.commit()
         return redirect('/account_info')
-    return render_template('change_password.html', form=form)
+    return render_template('change_password.html', form=form, title='Change password')
 
 
 @app.route('/nothing')
