@@ -284,18 +284,30 @@ def change_info():
             user_now.city = form.city.data
         if form.email.data:
             email = db.query(User).filter(User.email == form.email.data).first()
-            print(email)
-            if not email:
+            if not email or user_now == email:
                 user_now.email = form.email.data
             else:
                 return render_template('change_info.html', form=form, message='This email is already exists')
-        if form.password.data and form.password_again.data:
-            if not form.old_password.data:
-                return render_template('change_info.html', form=form, message='No old password')
-
         db.commit()
         return redirect('/account_info')
     return render_template('change_info.html', form=form)
+
+
+@app.route('/change_password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        db = db_session.create_session()
+        user_now = db.query(User).filter(User.id == current_user.id).first()
+        if not user_now.check_password(form.old_password.data):
+            return render_template('change_password.html', form=form, message='Old password is incorrect')
+        if form.new_password.data != form.new_password_again.data:
+            return render_template('change_password.html', form=form, message='Passwords do not match')
+        user_now.set_password(form.new_password.data)
+        db.commit()
+        return redirect('/account_info')
+    return render_template('change_password.html', form=form)
 
 
 @app.route('/nothing')
