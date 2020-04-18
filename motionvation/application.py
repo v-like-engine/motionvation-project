@@ -263,7 +263,14 @@ def reqister():
 @app.route('/change_info', methods=['GET', 'POST'])
 @login_required
 def change_info():
-    form = ChangeInfoForm()
+    all_data = {
+        'name': current_user.name,
+        'surname': current_user.surname,
+        'country': current_user.country,
+        'city': current_user.city,
+        'email': current_user.email
+    }
+    form = ChangeInfoForm(data=all_data)
     if form.validate_on_submit():
         db = db_session.create_session()
         user_now = db.query(User).filter(User.id == current_user.id).first()
@@ -282,6 +289,10 @@ def change_info():
                 user_now.email = form.email.data
             else:
                 return render_template('change_info.html', form=form, message='This email is already exists')
+        if form.password.data and form.password_again.data:
+            if not form.old_password.data:
+                return render_template('change_info.html', form=form, message='No old password')
+
         db.commit()
         return redirect('/account_info')
     return render_template('change_info.html', form=form)
