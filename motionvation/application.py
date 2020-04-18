@@ -259,31 +259,6 @@ def reqister():
         return redirect('/login')
     return render_template('register.html', title='Register', form=form)
 
-'''
-@app.route('/change_password', methods=['GET', 'POST'])
-@login_required
-def change_password():
-    form = ChangePasswordForm()
-    if form.validate_on_submit():
-        db = db_session.create_session()
-        if form.new_password.data != form.new_password_again.data:
-            return render_template('change_password.html',
-                                   form=form,
-                                   message="Passwords doesn`t match")
-        old_password_hashed = current_user.hashed_password
-        current_user.set_password(form.old_password.data)
-        print(current_user.hashed_password)
-        print(old_password_hashed)
-        if current_user.hashed_password != old_password_hashed:
-            current_user.set_password(old_password_hashed)
-            print('efef')
-            return render_template('change_password.html', form=form, message='Incorrect old password')
-        current_user.set_password(form.new_password.data)
-        db.commit()
-        return redirect('/account_info')
-    return render_template('change_password.html', form=form)
-'''
-
 
 @app.route('/change_info', methods=['GET', 'POST'])
 @login_required
@@ -335,7 +310,10 @@ def unauth(error):
     text=er_txt)
 
 
-db_session.global_init('motionvation/db/motionvation.db')
+
+from os import path
+db_session.global_init(path.join(path.dirname(__file__), './db/motionvation.db'))
+
 def run():
     port = int(os.environ.get('PORT', 8080))
     app.run(host='0.0.0.0', port=port, debug=True)
