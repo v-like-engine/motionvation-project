@@ -1,1 +1,1 @@
-web: gunicorn mars.__main__:app
+web: gunicorn motionvation.__main__:app
