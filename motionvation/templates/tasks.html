@@ -2,15 +2,25 @@
 
 {% block content %}
 <main class='text-center'>
-        <h2>Tasks</h2>
-        <div class="container">
+    <h2>Tasks</h2>
+    <a class="btn challenge-button clps" data-toggle="collapse" href="#collapseDone" role="button"><h2 class="text-center">Show done tasks</h2></a>
+        <div class="collapse" id="collapseDone">
+            <div class="card card-body main-log">
+                    <ul class="list-group">
+                        {% for task in done %}
+                        <a href="tasks/{{ task.id }}"  class="note-manual"><li class="list-group-item list-group-flush list-group-color transform-two">{{ task.title }}</li></a>
+                        {% endfor %}
+                    </ul>
+            </div>
+        </div>
+    <div class="container">
         <ul class="list-group">
             {% for task in tasks %}
             <a href="tasks/{{ task.id }}"  class="note-manual"><li class="list-group-item list-group-flush list-group-color transform-two">{{ task.title }}</li></a>
             {% endfor %}
         </ul>
             <button class="button-note"><a href="/select_category" class="button-note-text">Add new task</a></button>
-        </div>
+    </div>
     </main>
 
 {% endblock %}

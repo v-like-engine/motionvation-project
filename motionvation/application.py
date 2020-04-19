@@ -30,20 +30,18 @@ def load_user(user_id):
 @login_required
 def index():
     db = db_session.create_session()
-    tasks = db.query(Task).filter(Task.user == current_user, Task.priority == 10).all().copy()
-    for i in range(9, 0, -1):
-        if len(tasks) < 5:
-            tasks += db.query(Task).filter(Task.user == current_user, Task.priority == i).all().copy()
-    if len(tasks) > 5:
-        tasks = tasks[:5]
-    return render_template('planger.html', tasks=tasks, title='Your PLANger', text="Your most significant and urgent tasks!", useracc=(current_user.name + ' ' + current_user.surname))
+    tasks = db.query(Task).filter(Task.user == current_user, Task.priority == 10).order_by(Task.priority.desc())[:5]
+    return render_template('planger.html', tasks=tasks, title='Your PLANger', 
+    text="Your most significant and urgent tasks!", 
+    useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/tasks')
 @login_required
 def tasks():
     db = db_session.create_session()
-    tasks = db.query(Task).filter(Task.user == current_user).all().copy()
+    tasks = db.query(Task).filter(Task.user == current_user, Task.is_performed == False).all().copy()
+    done = db.query(Task).filter(Task.user == current_user, Task.is_performed == True).all().copy()
     new_tasks = []
     priority_now = 10
     while priority_now != -1:
@@ -51,8 +49,8 @@ def tasks():
             if task.priority == str(priority_now):
                 new_tasks.append(task)
         priority_now -= 1
-    return render_template('tasks.html', tasks=new_tasks, useracc=(current_user.name + ' ' + current_user.surname),
-                           title='Tasks')
+    return render_template('tasks.html', tasks=new_tasks, done=done, 
+    useracc=(current_user.name + ' ' + current_user.surname), title='Tasks')
 
 
 @app.route('/mynotes')
@@ -146,10 +144,9 @@ def select_category():
                            title='Select category')
 
 
-@app.route('/add_task/<id>', methods=['GET', 'POST'])
+@app.route('/add_task/<int:id>', methods=['GET', 'POST'])
 @login_required
 def add_task(id):
-    id = int(id)
     task_form = TaskForm()
     if task_form.validate_on_submit():
         db = db_session.create_session()
