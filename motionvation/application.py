@@ -164,6 +164,27 @@ def add_task(id):
                            title='Add task')
 
 
+@app.route('/done_task/<id>')
+@login_required
+def done_task(id):
+    id = int(id)
+    db = db_session.create_session()
+    task = db.query(Task).filter(Task.user == current_user, Task.id == id).first()
+    task.is_performed = True
+    db.commit()
+    return redirect('/tasks')
+
+
+@app.route('/undone_task/<id>')
+@login_required
+def undone_task(id):
+    id = int(id)
+    db = db_session.create_session()
+    task = db.query(Task).filter(Task.user == current_user, Task.id == id).first()
+    task.is_performed = False
+    db.commit()
+    return redirect('/tasks')
+
 @app.route('/categories')
 @login_required
 def categories():
