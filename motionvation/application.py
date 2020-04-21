@@ -9,6 +9,7 @@ from motionvation.data import db_session
 from motionvation.data.models import Note, Category, Task
 from motionvation.data.models.users import User
 from motionvation.forms import RegisterForm, NotesForm, CategoryForm, TaskForm, ChangePasswordForm, ChangeInfoForm
+from motionvation.forms.change_note_form import ChangeNoteForm
 from motionvation.forms.login_form import LoginForm
 
 app = Flask(__name__)
@@ -115,6 +116,25 @@ def add_note():
         return redirect('mynotes')
     return render_template('add_note.html', form=notes_form, useracc=(current_user.name + ' ' + current_user.surname),
                            title='Add note')
+
+
+@app.route('/change_note/<id>', methods=['GET', 'POST'])
+@login_required
+def change_note(id):
+    id = int(id)
+    db = db_session.create_session()
+    note = db.query(Note).filter(Note.id == id).first()
+    all_data = {
+        'title': note.title,
+        'text': note.text
+    }
+    form = ChangeNoteForm(data=all_data)
+    if form.validate_on_submit():
+        note.title = form.title.data
+        note.text = form.text.data
+        db.commit()
+        return redirect('/mynotes')
+    return render_template('change_note.html', form=form, title='Change note')
 
 
 @app.route('/add_category', methods=['GET', 'POST'])
