@@ -430,6 +430,13 @@ def news_main():
     return render_template('news.html', title='News', news=tasks, t_page_id=0, useracc=(current_user.name + ' ' + current_user.surname))
 
 
+@app.route('/all_news')
+def a_news_main():
+    db = db_session.create_session()
+    tasks = db.query(Task).all().copy()
+    return render_template('news.html', title='News', news=tasks, t_page_id=2, useracc=(current_user.name + ' ' + current_user.surname))
+
+
 @app.route('/nothing')
 def nothing():
     return render_template('nothing.html', title='Nothing!', useracc='Account')
