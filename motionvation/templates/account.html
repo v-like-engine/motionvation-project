@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<main class='container'>
     <div style="height:20px; border-top:2px solid #9EC1D4; padding-left:10px; border-color:grey;"></div>
     <a href='/challenges'><img src="{{ url_for('static', filename='img/king.jpg') }}" width="200" height="210" alt="Image not found" class='acc-avatar'></a>
     <h1 class='acc-head-name'>{{useracc}}</h1>
@@ -18,5 +20,6 @@
     <br>
     <p><a href='/change_info' class='button-note-text'>Change information</a></p><br>
     <p><a href='/change_password' class='button-note-text'>Change password</a></p>
+</main>
 
 {% endblock %}

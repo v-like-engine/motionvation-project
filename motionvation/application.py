@@ -32,7 +32,7 @@ def load_user(user_id):
 @login_required
 def index():
     db = db_session.create_session()
-    tasks = db.query(Task).filter(Task.user == current_user, Task.priority == 10).order_by(Task.priority.desc())[:5]
+    tasks = db.query(Task).filter(Task.user == current_user).order_by(Task.priority.desc())[:5]
     return render_template('planger.html', tasks=tasks, title='Your PLANger', 
     text="Your most significant and urgent tasks!", 
     useracc=(current_user.name + ' ' + current_user.surname))
@@ -43,7 +43,6 @@ def index():
 def tasks():
     db = db_session.create_session()
     tasks = db.query(Task).filter(Task.user == current_user, Task.is_performed == False).all().copy()
-    done = db.query(Task).filter(Task.user == current_user, Task.is_performed == True).all().copy()
     new_tasks = []
     priority_now = 10
     while priority_now != -1:
@@ -51,7 +50,25 @@ def tasks():
             if task.priority == str(priority_now):
                 new_tasks.append(task)
         priority_now -= 1
-    return render_template('tasks.html', tasks=new_tasks, done=done, 
+    return render_template('tasks.html', tasks=new_tasks, t_page_id=0, 
+    useracc=(current_user.name + ' ' + current_user.surname), title='Tasks')
+
+
+@app.route('/done_tasks')
+@login_required
+def d_tasks():
+    db = db_session.create_session()
+    done = db.query(Task).filter(Task.user == current_user, Task.is_performed == True).order_by(Task.priority.desc()).all().copy()
+    return render_template('tasks.html', tasks=done, t_page_id=1,  
+    useracc=(current_user.name + ' ' + current_user.surname), title='Tasks')
+
+
+@app.route('/all_tasks')
+@login_required
+def all_tasks():
+    db = db_session.create_session()
+    done = db.query(Task).filter(Task.user == current_user).order_by(Task.is_performed.desc(), Task.priority.desc()).all().copy()
+    return render_template('tasks.html', tasks=done, t_page_id=2,  
     useracc=(current_user.name + ' ' + current_user.surname), title='Tasks')
 
 

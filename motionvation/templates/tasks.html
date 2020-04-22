@@ -1,22 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<main class='text-center'>
+<main class='text-center container'>
+    <nav aria-label="breadcrumb">
+    {% if t_page_id == 0 %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active">Relative tasks</li>
+        <li class="breadcrumb-item"><a href="/done_tasks">Done tasks</a></li>
+        <li class="breadcrumb-item"><a href="/all_tasks">All tasks</a></li>
+    </ol>
+    {% elif t_page_id == 1 %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/tasks">Relative tasks</a></li>
+        <li class="breadcrumb-item active">Done tasks</li>
+        <li class="breadcrumb-item"><a href="/all_tasks">All tasks</a></li>
+    </ol>
+    {% elif t_page_id == 2 %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/tasks">Relative tasks</a></li>
+        <li class="breadcrumb-item"><a href="/done_tasks">Done tasks</a></li>
+        <li class="breadcrumb-item active">All tasks</li>
+    </ol>
+    {% endif %}
+    </nav>
     <h2>Tasks</h2>
-    <a class="btn challenge-button clps" data-toggle="collapse" href="#collapseDone" role="button"><h2 class="text-center">Show done tasks</h2></a>
-        <div class="collapse" id="collapseDone">
-            <div class="card card-body main-log">
-                    <ul class="list-group">
-                        {% for task in done %}
-                        <a href="tasks/{{ task.id }}"  class="note-manual"><li class="list-group-item list-group-flush list-group-color transform-two">{{ task.title }}</li></a>
-                        {% endfor %}
-                    </ul>
-            </div>
-        </div>
     <div class="container">
         <ul class="list-group">
             {% for task in tasks %}
-            <a href="tasks/{{ task.id }}"  class="note-manual"><li class="list-group-item list-group-flush list-group-color transform-two">{{ task.title }}</li></a>
+            <li class="list-group-item list-group-flush list-group-color position-relative transform-two"><a href="tasks/{{ task.id }}" class="note-manual stretched-link">{{ task.title }}</a></li>
             {% endfor %}
         </ul>
             <button class="button-note"><a href="/select_category" class="button-note-text">Add new task</a></button>

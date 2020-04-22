@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<main class='container'>
     <h3 class="text-center">PLANger</h3>
     <h4 class="font-italic text-center">{{text}}</h4>
     <div class="container">
-        <ul class="list-group">
+        <ul class="list-group text-center">
             {% for task in tasks %}
-            <li class="list-group-item list-group-flush list-group-color"><a href="tasks/{{ task.id }}"  class="note-manual">{{ task.title }}</a></li>
+            <li class="list-group-item list-group-flush position-relative list-group-color"><a href="tasks/{{ task.id }}" class="button-note-text stretched-link d-block">{{ task.title }}</a></li>
             {% endfor %}
         </ul>
         <br>
         <button type="button" class="button button-note"><a href="/tasks" class='button-note-text'>All tasks</a></button>
     </div>
+</main>
 
 {% endblock %}
