@@ -8,7 +8,8 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 from motionvation.data import db_session
 from motionvation.data.models import Note, Category, Task
 from motionvation.data.models.users import User
-from motionvation.forms import RegisterForm, NotesForm, CategoryForm, TaskForm, ChangePasswordForm, ChangeInfoForm
+from motionvation.forms import RegisterForm, NotesForm, CategoryForm, TaskForm, ChangePasswordForm, ChangeInfoForm, \
+    ChangeTaskForm
 from motionvation.forms.change_note_form import ChangeNoteForm
 from motionvation.forms.login_form import LoginForm
 
@@ -99,6 +100,27 @@ def tasks_info(id):
     task = db.query(Task).filter(Task.user == current_user, Task.id == id).first()
     return render_template('task_info.html', task=task, useracc=(current_user.name + ' ' + current_user.surname),
                            title='Task info')
+
+
+@app.route('/change_task/<id>', methods=['GET', 'POST'])
+@login_required
+def change_task(id):
+    id = int(id)
+    db = db_session.create_session()
+    task = db.query(Task).filter(Task.id == id).first()
+    all_data = {
+        'title': task.title,
+        'description': task.description,
+        'priority': task.priority,
+    }
+    form = ChangeTaskForm(data=all_data)
+    if form.validate_on_submit():
+        task.title = form.title.data
+        task.description = form.description.data
+        task.priority = form.priority.data
+        db.commit()
+        return redirect('/tasks')
+    return render_template('change_task.html', form=form, title='Change task')
 
 
 @app.route('/add_note', methods=['GET', 'POST'])
