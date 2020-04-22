@@ -423,6 +423,13 @@ def change_password():
     return render_template('change_password.html', form=form, title='Change password')
 
 
+@app.route('/news')
+def news_main():
+    db = db_session.create_session()
+    tasks = db.query(Task).filter(Task.user == current_user, Task.is_performed == False).all().copy()
+    return render_template('news.html', title='News', news=tasks, t_page_id=0, useracc=(current_user.name + ' ' + current_user.surname))
+
+
 @app.route('/nothing')
 def nothing():
     return render_template('nothing.html', title='Nothing!', useracc='Account')
