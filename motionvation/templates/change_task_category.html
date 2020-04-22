@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class='text-center'>
+    <button type="button" class="button btn-light button-note"><a href="/tasks" class='button-note-text'>Return to tasks</a></button>
+        <h2>Categories</h2>
+        <div class="container">
+        <ul class="list-group">
+            {% for category in categories %}
+            <li class="list-group-item list-group-flush list-group-color"><a href="/change_task_category/save/{{ category.id }}/{{ task_id }}" class='button-note-text'>{{ category.title }}</a></li>
+            {% endfor %}
+        </ul>
+        </div>
+</main>
+
+
+{% endblock %}

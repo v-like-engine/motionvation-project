@@ -184,6 +184,28 @@ def add_task(id):
                            title='Add task')
 
 
+@app.route('/change_task_category/<id>')
+@login_required
+def change_task_category(id):
+    id = int(id)
+    db = db_session.create_session()
+    categories = db.query(Category).all()
+    return render_template('change_task_category.html', title='Change category', task_id=id, categories=categories)
+
+
+@app.route('/change_task_category/save/<category_id>/<task_id>', methods=['GET', 'POST'])
+@login_required
+def change_task_category_save(category_id, task_id):
+    category_id = int(category_id)
+    task_id = int(task_id)
+    db = db_session.create_session()
+    task = db.query(Task).filter(Task.id == task_id).first()
+    task.category_id = category_id
+    db.merge(task)
+    db.commit()
+    return redirect('/tasks')
+
+
 @app.route('/done_task/<id>')
 @login_required
 def done_task(id):
@@ -204,6 +226,7 @@ def undone_task(id):
     task.is_performed = False
     db.commit()
     return redirect('/tasks')
+
 
 @app.route('/categories')
 @login_required
