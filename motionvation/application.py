@@ -6,10 +6,10 @@ from flask import Flask, render_template, redirect, url_for, make_response, json
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 from motionvation.data import db_session
-from motionvation.data.models import Note, Category, Task
+from motionvation.data.models import Note, Category, Task, News
 from motionvation.data.models.users import User
 from motionvation.forms import RegisterForm, NotesForm, CategoryForm, TaskForm, ChangePasswordForm, ChangeInfoForm, \
-    ChangeTaskForm
+    ChangeTaskForm, NewsForm
 from motionvation.forms.change_note_form import ChangeNoteForm
 from motionvation.forms.login_form import LoginForm
 
@@ -424,17 +424,45 @@ def change_password():
 
 
 @app.route('/news')
+@login_required
 def news_main():
     db = db_session.create_session()
-    tasks = db.query(Task).filter(Task.user == current_user, Task.is_performed == False).all().copy()
-    return render_template('news.html', title='News', news=tasks, t_page_id=0, useracc=(current_user.name + ' ' + current_user.surname))
+    news = db.query(News).filter(News.user_id == admin_id).all().copy()
+    return render_template('news.html', title='News', news=news, t_page_id=0, useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/all_news')
+@login_required
 def a_news_main():
     db = db_session.create_session()
-    tasks = db.query(Task).all().copy()
-    return render_template('news.html', title='News', news=tasks, t_page_id=2, useracc=(current_user.name + ' ' + current_user.surname))
+    news = db.query(News).all().copy()
+    return render_template('news.html', title='News', news=news, t_page_id=2, useracc=(current_user.name + ' ' + current_user.surname))
+
+
+@app.route('/informal_news')
+@login_required
+def informal_news():
+    db = db_session.create_session()
+    news = db.query(News).filter(News.user_id != admin_id).all().copy()
+    return render_template('news.html', title='News', news=news, t_page_id=1,
+                           useracc=(current_user.name + ' ' + current_user.surname))
+
+
+@app.route('/add_news', methods=['GET', 'POST'])
+@login_required
+def add_news():
+    form = NewsForm()
+    if form.validate_on_submit():
+        db = db_session.create_session()
+        news = News()
+        news.title = form.title.data
+        news.text = form.text.data
+        current_user.news.append(news)
+        db.merge(current_user)
+        db.commit()
+        return redirect('/news')
+    return render_template('add_news.html', form=form, useracc=(current_user.name + ' ' + current_user.surname),
+                           title='Add news')
 
 
 @app.route('/nothing')

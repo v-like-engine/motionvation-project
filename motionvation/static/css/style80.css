@@ -22,10 +22,6 @@ body {
     font-size: 24pt;
 }
 
-.simple-line {
-    display: inline-block;
-}
-
 .nav-text {
     color: #fff;
 }
@@ -217,8 +213,4 @@ nav.navbar .dropdown:hover > .dropdown-menu {
 
 .done-button:hover {
     padding: 10px;
-}
-
-.task-note-li {
-    margin-right: 40px;
 }
