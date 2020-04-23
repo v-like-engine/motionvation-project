@@ -4,19 +4,19 @@
 <main class='text-center container'>
     <nav aria-label="breadcrumb">
     {% if t_page_id == 0 %}
-    <ol class="breadcrumb">
+    <ol class="breadcrumb crumb-ds">
         <li class="breadcrumb-item active">Relative tasks</li>
         <li class="breadcrumb-item"><a href="/done_tasks">Done tasks</a></li>
         <li class="breadcrumb-item"><a href="/all_tasks">All tasks</a></li>
     </ol>
     {% elif t_page_id == 1 %}
-    <ol class="breadcrumb">
+    <ol class="breadcrumb crumb-ds">
         <li class="breadcrumb-item"><a href="/tasks">Relative tasks</a></li>
         <li class="breadcrumb-item active">Done tasks</li>
         <li class="breadcrumb-item"><a href="/all_tasks">All tasks</a></li>
     </ol>
     {% elif t_page_id == 2 %}
-    <ol class="breadcrumb">
+    <ol class="breadcrumb crumb-ds">
         <li class="breadcrumb-item"><a href="/tasks">Relative tasks</a></li>
         <li class="breadcrumb-item"><a href="/done_tasks">Done tasks</a></li>
         <li class="breadcrumb-item active">All tasks</li>

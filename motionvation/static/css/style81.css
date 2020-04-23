@@ -190,3 +190,27 @@ nav.navbar .dropdown:hover > .dropdown-menu {
     margin-right: 40px;
     margin-left: 30px;
 }
+
+.crumb-ds {
+    background-image: none;
+    background-color: transparent;
+    color: #fff;
+}
+
+.done-button-text {
+    font-size: 16pt;
+}
+
+.done-button-text:hover {
+    font-size: 18pt;
+    text-decoration: none;
+}
+
+.done-button {
+    padding: 12px;
+    border: none;
+}
+
+.done-button:hover {
+    padding: 10px;
+}
