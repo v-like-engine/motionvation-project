@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<h2>{{ task.title }}</h2>
-<h3>Priority: {{ task.priority }}</h3>
-<h3>Category: {{ task.category.title }}</h3>
-<p class='note-content'>{{ task.description }}</p>
-{% if task.is_performed %}
-<button type="button" class="button btn-danger done-button position-relative"><a href="/undone_task/{{ task.id }}" class='button-note-text stretched-link done-button-text'>Undone</a></button>
-{% else %}
-<button type="button" class="button btn-success done-button position-relative"><a href="/done_task/{{ task.id }}" class='button-note-text stretched-link done-button-text'>Done</a></button>
-{% endif %}
-<button type="button" class="button btn-light button-note"><a href="/tasks" class='button-note-text'>Return to tasks</a></button>
-<br>
-<button type="button" class="button btn-dark button-note"><a href="/change_task_category/{{ task.id }}" class='button-note-text'>Change category</a></button>
-<button type="button" class="button btn-dark button-note"><a href="/tasks/delete/{{ task.id }}" class='delete-text'>Delete the task</a></button>
-<button type="button" class="button btn-dark button-note"><a href="/change_task/{{ task.id }}" class='button-note-text'>Change task</a></button>
+<main class='container'>
+    <h2>{{ task.title }}</h2>
+    <h3>Priority: {{ task.priority }}</h3>
+    <h3>Category: {{ task.category.title }}</h3>
+    <p class='note-content'>{{ task.description }}</p>
+    {% if task.is_performed %}
+    <button type="button" class="button btn-danger done-button position-relative"><a href="/undone_task/{{ task.id }}" class='button-note-text stretched-link done-button-text'>Undone</a></button>
+    {% else %}
+    <button type="button" class="button btn-success done-button position-relative"><a href="/done_task/{{ task.id }}" class='button-note-text stretched-link done-button-text'>Done</a></button>
+    {% endif %}
+    <button type="button" class="button btn-light button-note"><a href="/tasks" class='button-note-text'>Return to tasks</a></button>
+    <br>
+    <button type="button" class="button btn-dark button-note"><a href="/change_task_category/{{ task.id }}" class='button-note-text'>Change category</a></button>
+    <button type="button" class="button btn-dark button-note"><a href="/tasks/delete/{{ task.id }}" class='delete-text'>Delete the task</a></button>
+    <button type="button" class="button btn-dark button-note"><a href="/change_task/{{ task.id }}" class='button-note-text'>Change task</a></button>
+</main>
 
 {% endblock %}

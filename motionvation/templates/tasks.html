@@ -27,7 +27,31 @@
     <div class="container">
         <ul class="list-group">
             {% for task in tasks %}
-            <li class="list-group-item list-group-flush list-group-color position-relative transform-two"><a href="tasks/{{ task.id }}" class="note-manual stretched-link">{{ task.title }}</a></li>
+            <li class="list-group-item list-group-flush list-group-color position-relative transform-two task-note-li simple-inline">
+                    <a href="tasks/{{ task.id }}" class="note-manual stretched-link">{{ task.title }}</a>
+            </li>
+            <button type="button" class="btn btn-note" data-toggle="modal" data-target="#taskSettings"><i class="fas fa-cog" style="color: #ccf"></i></button>
+            <div class="modal" id="taskSettings" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Task settings</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>What do you want?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="button btn-dark button-note"><a href="/change_task_category/{{ task.id }}" class='button-note-text'>Change category</a></button>
+                            <button type="button" class="button btn-dark button-note"><a href="/tasks/delete/{{ task.id }}" class='delete-text'>Delete the task</a></button>
+                            <button type="button" class="button btn-dark button-note"><a href="/change_task/{{ task.id }}" class='button-note-text'>Change task</a></button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             {% endfor %}
         </ul>
             <button class="button-note"><a href="/select_category" class="button-note-text">Add new task</a></button>
