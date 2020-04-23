@@ -430,6 +430,13 @@ def news_main():
     return render_template('news.html', title='News', news=tasks, t_page_id=0, useracc=(current_user.name + ' ' + current_user.surname))
 
 
+@app.route('/info_news')
+def info_news_main():
+    db = db_session.create_session()
+    tasks = db.query(Task).filter(Task.is_performed == False).all().copy()
+    return render_template('news.html', title='News', news=tasks, t_page_id=1, useracc=(current_user.name + ' ' + current_user.surname))
+
+
 @app.route('/all_news')
 def a_news_main():
     db = db_session.create_session()
@@ -458,7 +465,6 @@ def unauth(error):
     er_txt = '401 not authorized: Please log in or register!!!'
     return render_template('error.html', title='Error',
     text=er_txt)
-
 
 
 from os import path
