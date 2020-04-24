@@ -4,7 +4,9 @@
 <main class='container'>
     <h2>{{ news.title }}</h2>
     <p class='note-content'>By {{ news.user.name }} {{ news.user.surname }}</p>
+    {% if not news.user.hide_email %}
     <p>Email: {{ news.user.email }}</p>
+    {% endif %}
     <p class='note-content'>{{ news.text }}</p>
     <button type="button" class="button btn-light button-note"><a href="/news" class='button-note-text'>Return to news</a></button>
 </main>

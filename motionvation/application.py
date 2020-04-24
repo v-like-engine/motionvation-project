@@ -427,7 +427,7 @@ def change_password():
 @login_required
 def news_main():
     db = db_session.create_session()
-    news = db.query(News).filter(News.user_id == admin_id).all().copy()
+    news = db.query(News).filter(News.user_id == admin_id).all().copy()[::-1]
     return render_template('news.html', title='News', news=news, t_page_id=0, useracc=(current_user.name + ' ' + current_user.surname))
 
 
@@ -435,7 +435,7 @@ def news_main():
 @login_required
 def a_news_main():
     db = db_session.create_session()
-    news = db.query(News).all().copy()
+    news = db.query(News).all().copy()[::-1]
     return render_template('news.html', title='All news', news=news, t_page_id=2, useracc=(current_user.name + ' ' + current_user.surname))
 
 
@@ -443,7 +443,7 @@ def a_news_main():
 @login_required
 def informal_news():
     db = db_session.create_session()
-    news = db.query(News).filter(News.user_id != admin_id).all().copy()
+    news = db.query(News).filter(News.user_id != admin_id).all().copy()[::-1]
     return render_template('news.html', title='Informal news', news=news, t_page_id=1,
                            useracc=(current_user.name + ' ' + current_user.surname))
 
@@ -452,7 +452,7 @@ def informal_news():
 @login_required
 def my_news():
     db = db_session.create_session()
-    news = db.query(News).filter(News.user == current_user).all().copy()
+    news = db.query(News).filter(News.user == current_user).all().copy()[::-1]
     return render_template('news.html', title='My news', news=news, t_page_id=3,
                            useracc=(current_user.name + ' ' + current_user.surname))
 
@@ -482,6 +482,9 @@ def news_info(id):
     news = db.query(News).filter(News.id == id).first()
     return render_template('news_info.html', news=news, useracc=(current_user.name + ' ' + current_user.surname),
                            title='News info')
+
+
+
 
 
 @app.route('/hide_email/<hide_or_show>', methods=['GET', 'POST'])
