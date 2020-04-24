@@ -8,18 +8,28 @@
         <li class="breadcrumb-item active">Official newsline</li>
         <li class="breadcrumb-item"><a href="/informal_news">Informal news</a></li>
         <li class="breadcrumb-item"><a href="/all_news">All news</a></li>
+        <li class="breadcrumb-item"><a href="/my_news">My news</a></li>
     </ol>
     {% elif t_page_id == 1 %}
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/news">Official newsline</a></li>
         <li class="breadcrumb-item active">Informal news</li>
         <li class="breadcrumb-item"><a href="/all_news">All news</a></li>
+        <li class="breadcrumb-item"><a href="/my_news">My news</a></li>
     </ol>
     {% elif t_page_id == 2 %}
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/news">Official newsline</a></li>
         <li class="breadcrumb-item"><a href="/informal_news">Informal news</a></li>
         <li class="breadcrumb-item active">All news</li>
+        <li class="breadcrumb-item"><a href="/my_news">My news</a></li>
+    </ol>
+    {% elif t_page_id == 3 %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/news">Official newsline</a></li>
+        <li class="breadcrumb-item"><a href="/informal_news">Informal news</a></li>
+        <li class="breadcrumb-item active"><a href="/all_news">All news</a></li>
+        <li class="breadcrumb-item active">My news</li>
     </ol>
     {% endif %}
     </nav>
@@ -27,9 +37,10 @@
     <div class="container">
         <ul class="list-group">
             {% for new in news %}
-            <li class="list-group-item list-group-flush list-group-color position-relative transform-two"><a href="#" class="note-manual stretched-link">{{ new.title }} - {{ new.user.name }}</a></li>
+            <li class="list-group-item list-group-flush list-group-color position-relative transform-two"><a href="/news_info/{{ new.id }}" class="note-manual stretched-link">{{ new.title }} - {{ new.user.name }}</a></li>
             {% endfor %}
         </ul>
+        <button type="button" class="btn btn-light"><a href="/add_news">Add news</a></button>
     </div>
     </main>
 

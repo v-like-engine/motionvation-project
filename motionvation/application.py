@@ -436,7 +436,7 @@ def news_main():
 def a_news_main():
     db = db_session.create_session()
     news = db.query(News).all().copy()
-    return render_template('news.html', title='News', news=news, t_page_id=2, useracc=(current_user.name + ' ' + current_user.surname))
+    return render_template('news.html', title='All news', news=news, t_page_id=2, useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/informal_news')
@@ -444,7 +444,16 @@ def a_news_main():
 def informal_news():
     db = db_session.create_session()
     news = db.query(News).filter(News.user_id != admin_id).all().copy()
-    return render_template('news.html', title='News', news=news, t_page_id=1,
+    return render_template('news.html', title='Informal news', news=news, t_page_id=1,
+                           useracc=(current_user.name + ' ' + current_user.surname))
+
+
+@app.route('/my_news')
+@login_required
+def my_news():
+    db = db_session.create_session()
+    news = db.query(News).filter(News.user == current_user).all().copy()
+    return render_template('news.html', title='My news', news=news, t_page_id=3,
                            useracc=(current_user.name + ' ' + current_user.surname))
 
 
@@ -463,6 +472,16 @@ def add_news():
         return redirect('/news')
     return render_template('add_news.html', form=form, useracc=(current_user.name + ' ' + current_user.surname),
                            title='Add news')
+
+
+@app.route('/news_info/<id>')
+@login_required
+def news_info(id):
+    id = int(id)
+    db = db_session.create_session()
+    news = db.query(News).filter(News.id == id).first()
+    return render_template('news_info.html', news=news, useracc=(current_user.name + ' ' + current_user.surname),
+                           title='News info')
 
 
 @app.route('/nothing')
