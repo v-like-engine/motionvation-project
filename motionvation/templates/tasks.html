@@ -27,13 +27,25 @@
     <div class="container">
         <ul class="list-group">
             {% for task in tasks %}
-            <li class="list-group-item list-group-flush list-group-color position-relative transform-two task-note-li simple-inline">
-                    <a href="tasks/{{ task.id }}" class="note-manual stretched-link">{{ task.title }}</a>
+            <li>
+                <div class="card" style="width: 1040px; border: none; margin: 0px;">
+                    <div class="card-body">
+                        <section class='simple-inline'>
+                            <p style='margin-left: 30px;'>{{ task.title }}</p>
+                            <a href="tasks/{{ task.id }}" class="btn btn-note button-note-text card-link"><i class="fas fa-eye" style="color: #ccf"></i></a>
+                            <a href="#" class="btn btn-note" data-toggle="modal" data-target="#taskSettings" style='color: #ccf;'><i class="fas fa-cog" style="color: #ccf"></i></a>
+                            {% if task.is_performed %}
+                            <a class="btn btn-note" href="/done_task/{{ task.id }}" style='color: #ccf;'><i class="fas fa-times" style="color: #d22"></i></a>
+                            {% else %}
+                            <a class="btn btn-note" href="/done_task/{{ task.id }}" style='color: #ccf;'><i class="fas fa-check" style="color: #9f9"></i></a>
+                            {% endif %}
+                        </section>
+                    </div>
+                </div>
             </li>
-            <button type="button" class="btn btn-note" data-toggle="modal" data-target="#taskSettings"><i class="fas fa-cog" style="color: #ccf"></i></button>
-            <div class="modal" id="taskSettings" tabindex="-1" role="dialog">
+            <div class="modal" id="taskSettings" data-backdrop="static" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
+                    <div class="modal-content cosmodal">
                         <div class="modal-header">
                             <h5 class="modal-title">Task settings</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -54,8 +66,10 @@
             </div>
             {% endfor %}
         </ul>
-        {% if t_page_id != 1 %}
+        {% if t_page_id == 0 %}
             <button class="button-note"><a href="/select_category" class="button-note-text">Add new task</a></button>
+        {% elif t_page_id == 2 %}
+            <button class="button-note"><a href="/select_category" class="button-note-text">Add new relevant task</a></button>
         {% endif %}
     </div>
     </main>

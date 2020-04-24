@@ -19,9 +19,15 @@
     </div>
     <br>
     <div style="height:20px; border-top:2px solid #9EC1D4; padding-left:10px; border-color:grey;"></div>
-    <p>Content</p>
+    <h5 class='button-note-text' style='font-size:24pt;'>Account info</h5>
+    <p class='button-note-text' style='margin-left:80px;'>E-mail: {{ user.email }}</p>
+    <p class='button-note-text' style='margin-left:80px;'>City: {{ user.city }}</p>
+    <p class='button-note-text' style='margin-left:80px;'>Country: {{ user.country }}</p>
     <br>
-    <p><a href='/change_info' class='button-note-text'>Change information</a></p><br>
+    <button class='btn button-note'><a href='/change_info' class='button-note-text'>Change information</a></button>
+    <br>
+    <div style="height:20px; border-top:2px solid #9EC1D4; padding-left:10px; border-color:grey;"></div>
+    <br>
     <p><a href='/change_password' class='button-note-text'>Change password</a></p>
 </main>
 
