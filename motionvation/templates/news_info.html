@@ -8,6 +8,9 @@
     <p>Email: {{ news.user.email }}</p>
     {% endif %}
     <p class='note-content'>{{ news.text }}</p>
+    {% if news.user == current_user %}
+    <button type="button" class="button btn-dark button-note"><a href="/news/delete/{{ news.id }}" class='delete-text'>Delete news</a></button>
+    {% endif %}
     <button type="button" class="button btn-light button-note"><a href="/news" class='button-note-text'>Return to news</a></button>
 </main>
 

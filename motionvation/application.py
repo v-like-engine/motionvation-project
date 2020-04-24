@@ -480,11 +480,18 @@ def news_info(id):
     id = int(id)
     db = db_session.create_session()
     news = db.query(News).filter(News.id == id).first()
-    return render_template('news_info.html', news=news, useracc=(current_user.name + ' ' + current_user.surname),
+    return render_template('news_info.html', current_user=current_user, news=news, useracc=(current_user.name + ' ' + current_user.surname),
                            title='News info')
 
 
-
+@app.route('/news/delete/<int:id>')
+@login_required
+def delete_news(id):
+    db = db_session.create_session()
+    news = db.query(News).filter(News.user == current_user, News.id == id).first()
+    db.delete(news)
+    db.commit()
+    return redirect('/news')
 
 
 @app.route('/hide_email/<hide_or_show>', methods=['GET', 'POST'])
