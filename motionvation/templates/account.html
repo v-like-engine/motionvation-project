@@ -6,9 +6,8 @@
     <div style="height:20px; border-top:2px solid #9EC1D4; padding-left:10px; border-color:grey;"></div>
     <a href='/challenges'><img src="{{ url_for('static', filename='img/king.jpg') }}" width="200" height="210" alt="Image not found" class='acc-avatar'></a>
     <h1 class='acc-head-name'>{{useracc}}</h1>
-    <br>
     <h3 class='acc-head-rank'>Rank: {{rank}}</h3>
-    <br>
+    <h5 class='acc-head-rank'><a href="/hide_email">Hide my email for other users</a></h5>
     <h4 class='acc-head-exp'>Experience: {{exp}}</h4>
     <div class="progress">
         <div class="progress-bar bg-warning progress-bar-striped" role="progressbar" aria-valuenow="{{expcur}}" aria-valuemin="0" aria-valuemax="{{expmax}}">

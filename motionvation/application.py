@@ -484,6 +484,17 @@ def news_info(id):
                            title='News info')
 
 
+@app.route('/hide_email', methods=['GET', 'POST'])
+@login_required
+def hide_email():
+    db = db_session.create_session()
+    user_now = db.query(User).filter(User.id == current_user.id).first()
+    user_now.hide_email = True
+    db.commit()
+    return redirect('account_info')
+
+
+
 @app.route('/nothing')
 def nothing():
     return render_template('nothing.html', title='Nothing!', useracc='Account')

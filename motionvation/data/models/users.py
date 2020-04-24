@@ -1,4 +1,4 @@
-from sqlalchemy import orm, Column, Integer, String, DateTime
+from sqlalchemy import orm, Column, Integer, String, DateTime, Boolean
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from sqlalchemy_serializer import SerializerMixin
@@ -16,6 +16,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     email = Column(String, index=True, unique=True)
     age = Column(Integer)
     rank = Column(String, default='New')
+    hide_email = Column(Boolean, default=False)
     hashed_password = Column(String, nullable=True)
 
     notes = orm.relation('Note', back_populates='user')
