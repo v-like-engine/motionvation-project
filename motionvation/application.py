@@ -9,7 +9,7 @@ from motionvation.data import db_session
 from motionvation.data.models import Note, Category, Task, News
 from motionvation.data.models.users import User
 from motionvation.forms import RegisterForm, NotesForm, CategoryForm, TaskForm, ChangePasswordForm, ChangeInfoForm, \
-    ChangeTaskForm, NewsForm
+    ChangeTaskForm, NewsForm, ChangeNewsForm
 from motionvation.forms.change_note_form import ChangeNoteForm
 from motionvation.forms.login_form import LoginForm
 
@@ -492,6 +492,25 @@ def delete_news(id):
     db.delete(news)
     db.commit()
     return redirect('/news')
+
+
+@app.route('/change_news/<id>', methods=['GET', 'POST'])
+@login_required
+def change_news(id):
+    id = int(id)
+    db = db_session.create_session()
+    news = db.query(News).filter(News.id == id).first()
+    all_data = {
+        'title': news.title,
+        'text': news.text
+    }
+    form = ChangeNewsForm(data=all_data)
+    if form.validate_on_submit():
+        news.title = form.title.data
+        news.text = form.text.data
+        db.commit()
+        return redirect('/news')
+    return render_template('change_news.html', form=form, title='Change news')
 
 
 @app.route('/hide_email/<hide_or_show>', methods=['GET', 'POST'])
