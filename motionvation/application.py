@@ -297,7 +297,7 @@ def main():
 def account_main():
     expr = 20
     expm = 100
-    return render_template('account.html', title='My account', useracc=(current_user.name + ' ' + current_user.surname), rank='Not procrastinator', exp=(str(expr) + '/' + str(expm)), expcur=expr, expmax=expm)
+    return render_template('account.html', title='My account', user=current_user, useracc=(current_user.name + ' ' + current_user.surname), rank='Not procrastinator', exp=(str(expr) + '/' + str(expm)), expcur=expr, expmax=expm)
 
 
 @app.route('/challenges')
@@ -484,14 +484,17 @@ def news_info(id):
                            title='News info')
 
 
-@app.route('/hide_email', methods=['GET', 'POST'])
+@app.route('/hide_email/<hide_or_show>', methods=['GET', 'POST'])
 @login_required
-def hide_email():
+def hide_email(hide_or_show):
     db = db_session.create_session()
     user_now = db.query(User).filter(User.id == current_user.id).first()
-    user_now.hide_email = True
+    if hide_or_show == 'hide':
+        user_now.hide_email = True
+    else:
+        user_now.hide_email = False
     db.commit()
-    return redirect('account_info')
+    return redirect('/account_info')
 
 
 
