@@ -35,7 +35,7 @@
                             <a href="tasks/{{ task.id }}" class="btn btn-note button-note-text card-link"><i class="fas fa-eye" style="color: #ccf"></i></a>
                             <a href="#" class="btn btn-note" data-toggle="modal" data-target="#taskSettings" style='color: #ccf;'><i class="fas fa-cog" style="color: #ccf"></i></a>
                             {% if task.is_performed %}
-                            <a class="btn btn-note" href="/done_task/{{ task.id }}" style='color: #ccf;'><i class="fas fa-times" style="color: #d22"></i></a>
+                            <a class="btn btn-note" href="/undone_task/{{ task.id }}" style='color: #ccf;'><i class="fas fa-times" style="color: #d22"></i></a>
                             {% else %}
                             <a class="btn btn-note" href="/done_task/{{ task.id }}" style='color: #ccf;'><i class="fas fa-check" style="color: #9f9"></i></a>
                             {% endif %}
