@@ -228,3 +228,8 @@ nav.navbar .dropdown:hover > .dropdown-menu {
     border: 10px;
     border-image: url(../img/4.jpg);
 }
+
+.tooltip {
+    background-color: #003;
+    color: #ccf;
+}
