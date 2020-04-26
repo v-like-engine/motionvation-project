@@ -242,3 +242,20 @@ nav.navbar .dropdown:hover > .dropdown-menu {
     max-width: 720px;
     margin-left: 100px;
 }
+
+audio::-webkit-media-controls-panel,
+audio::-webkit-media-controls-mute-button,
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-time-remaining-display,
+audio::-webkit-media-controls-current-time-display {
+  color: #99f;
+  background: url(../img/3.jpg);
+}
+audio::-webkit-media-controls-volume-slider,
+audio::-webkit-media-controls-timeline {
+    color: #fff;
+}
+
+audio {
+    min-width: 800px;
+}
