@@ -1,22 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<main class='container'>
     <h2 class="text-center">Music Player</h2>
     <h3 class="text-center">. . .</h3>
-    <h4 class="font-italic text-center">{{text}}</h4>
+    <h5 class="text-center button-note-text">Listen to music in one tab, work in an another</h5>
 
-    <h5 class="text-center">. . .</h5>
-    <h5 class="text-center">Choose a music genre</h5>
+    <br>
+    <h5 class="text-center">Choose a music</h5>
 
-    <form class="text-center">
-    <p><input type="radio" name="genre" value="rad1"> Rock <Br>
-    <input type="radio" name="genre" value="rad2"> Indi <Br>
-    <input type="radio" name="genre" value="rad3"> Pop <Br>
-    <input type="radio" name="genre" value="rad3"> Classic <Br>
-    <input type="radio" name="genre" value="rad3"> Melody </p>
-    <p><label for="music">Choose an mp3 file...</label></p>
-    <p><input class="text-center" type="file" class="form-control-file" id="music"name="file"></p>
-    </form>
+    <a class="btn challenge-button clps" data-toggle="collapse" href="#collapseSect" role="button"><h3 class="text-center">Featured: Arti-Fix - Cybernetic Sect</h3></a>
+        <div class="collapse" id="collapseSect">
+            <div class="card card-body main-log">
+                <form class="text-center" style:'margin-left: 160px;'>
+                    <audio src="{{ url_for('static', filename='music/Arti-Fix - Cybernetic Sect.mp3') }}" autostart='false' type="audio/mpeg" controls='true'></audio>
+                </form>
+            </div>
+        </div>
+    <a class="btn challenge-button clps" data-toggle="collapse" href="#collapseDuality" role="button"><h3 class="text-center">MISSIO - Duality</h3></a>
+        <div class="collapse" id="collapseDuality">
+            <div class="card card-body main-log">
+                <form class="text-center" style:'margin-left: 160px;'>
+                    <audio src="{{ url_for('static', filename='music/MISSIO - Duality.mp3') }}" autostart='false' type="audio/mpeg" controls='true'></audio>
+                </form> 
+            </div>
+        </div>
+    <a class="btn challenge-button clps" data-toggle="collapse" href="#collapseOther" role="button"><h3 class="text-center">Other tracks</h3></a>
+        <div class="collapse" id="collapseOther">
+            <div class="card card-body main-log">
+                <form class="text-center" style:'margin-left: 160px;'>
+                    <audio src="{{ url_for('static', filename='music/MISSIO - Pressure.mp3') }}" autostart='false' type="audio/mpeg" controls='true'></audio>
+                </form>
+                <form class="text-center">
+                    <audio src="{{ url_for('static', filename='music/Harmonix College - Gulfstream.mp3') }}" autostart='false' type="audio/mpeg" controls='true'></audio>
+                </form>
+            </div>
+        </div>
+</main>
 
 {% endblock %}
