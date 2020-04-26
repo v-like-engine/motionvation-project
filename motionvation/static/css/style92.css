@@ -233,3 +233,12 @@ nav.navbar .dropdown:hover > .dropdown-menu {
     background-color: #003;
     color: #ccf;
 }
+
+.container-sm {
+    min-width: 1280px;
+}
+
+.form-w {
+    max-width: 720px;
+    margin-left: 100px;
+}

@@ -3,9 +3,9 @@
 
 {% block content %}
 <div class="container">
-    <div class="card">
-        <header class="card-header">Registration</header>
-        <form action="" method="post">
+    <div class="card" style="max-width: 920px; margin-left: 120px;">
+        <header class="card-header" style='margin-left: 80px;'>Registration</header>
+        <form action="" method="post" class="form-w">
             {{ form.hidden_tag() }}
             {{ form.csrf_token }}
             {% if message %}
