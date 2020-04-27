@@ -17,6 +17,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     age = Column(Integer)
     rank = Column(String, default='New')
     hide_email = Column(Boolean, default=False)
+    xp = Column(Integer, default=0)
     hashed_password = Column(String, nullable=True)
 
     notes = orm.relation('Note', back_populates='user')

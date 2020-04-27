@@ -13,6 +13,9 @@ from motionvation.forms import RegisterForm, NotesForm, CategoryForm, TaskForm, 
 from motionvation.forms.change_note_form import ChangeNoteForm
 from motionvation.forms.login_form import LoginForm
 
+from motionvation.xp import *
+
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key_Denis_and_VLADiSLav___'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=365)
@@ -59,7 +62,7 @@ def tasks():
 def d_tasks():
     db = db_session.create_session()
     done = db.query(Task).filter(Task.user == current_user, Task.is_performed == True).order_by(Task.priority.desc()).all().copy()
-    return render_template('tasks.html', tasks=done, t_page_id=1,  
+    return render_template('tasks.html', tasks=done, t_page_id=1,
     useracc=(current_user.name + ' ' + current_user.surname), title='Tasks')
 
 
@@ -150,6 +153,7 @@ def add_note():
         note.title = notes_form.title.data
         note.text = notes_form.text.data
         current_user.notes.append(note)
+        current_user.xp += adding_note_xp
         db.merge(current_user)
         db.commit()
         return redirect('mynotes')
@@ -216,6 +220,7 @@ def add_task(id):
         current_category = db.query(Category).filter(Category.user_id == admin_id, Category.id == id).first()
         task.category = current_category
         task.user = current_user
+        current_user.xp += adding_task_xp
         db.merge(task)
         db.commit()
         return redirect('/tasks')
@@ -252,6 +257,8 @@ def done_task(id):
     db = db_session.create_session()
     task = db.query(Task).filter(Task.user == current_user, Task.id == id).first()
     task.is_performed = True
+    user_now = db.query(User).filter(User.id == current_user.id).first()
+    user_now.xp += done_task_xp
     db.commit()
     return redirect('/tasks')
 
