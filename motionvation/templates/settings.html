@@ -3,10 +3,9 @@
 {% block content %}
 
 <main class='container'>
-    <div style="height:20px; border-top:2px solid #9EC1D4; padding-left:10px; border-color:grey;"></div>
-    <a href='/challenges'><img src="{{ url_for('static', filename='img/king.jpg') }}" width="200" height="210" alt="Image not found" class='acc-avatar'></a>
-    <h1 class='acc-head-name'>{{useracc}}</h1>
-    <h3 class='acc-head-rank'>Rank: {{rank}}</h3>
+    <h1 class='text-center'>Settings</h1>
+    <div style="height:20px; border-top:1px solid #9EC1D4; padding-left:10px; border-color:grey;"></div>
+    <h3 class='text-center'>Rank: {{rank}}</h3>
     {% if user.hide_email %}
     <h5 class='acc-head-rank'><a href="/hide_email/show">Show my email for other users</a></h5>
     {% else %}
