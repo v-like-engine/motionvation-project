@@ -22,7 +22,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=365)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-admin_id = 1
+admin_id = 2
 
 
 @login_manager.user_loader
