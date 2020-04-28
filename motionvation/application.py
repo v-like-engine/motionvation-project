@@ -533,10 +533,15 @@ def hide_email(hide_or_show):
     return redirect('/account_info')
 
 
-
 @app.route('/nothing')
 def nothing():
     return render_template('nothing.html', title='Nothing!', useracc='Account')
+
+
+@app.route('/settings')
+@login_required
+def settings():
+    return render_template('settings.html', current_user=current_user, useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.errorhandler(404)

@@ -7,11 +7,7 @@
     <a href='/challenges'><img src="{{ url_for('static', filename='img/king.jpg') }}" width="200" height="210" alt="Image not found" class='acc-avatar'></a>
     <h1 class='acc-head-name'>{{useracc}}</h1>
     <h3 class='acc-head-rank'>Rank: {{rank}}</h3>
-    {% if user.hide_email %}
-    <h5 class='acc-head-rank'><a href="/hide_email/show">Show my email for other users</a></h5>
-    {% else %}
-    <h5 class='acc-head-rank'><a href="/hide_email/hide">Hide my email for other users</a></h5>
-    {% endif %}
+    <h5 class='button-note-text'><a href="/settings">Settings <i class="fas fa-cog" style="color: #ccf"></i></a></h5>
     <h4 class='acc-head-exp'>Experience: {{exp}}</h4>
     <div class="progress">
         <div class="progress-bar bg-warning progress-bar-striped" role="progressbar" aria-valuenow="{{expcur}}" aria-valuemin="0" aria-valuemax="{{expmax}}">

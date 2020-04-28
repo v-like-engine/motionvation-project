@@ -4,30 +4,23 @@
 
 <main class='container'>
     <h1 class='text-center'>Settings</h1>
-    <div style="height:20px; border-top:1px solid #9EC1D4; padding-left:10px; border-color:grey;"></div>
-    <h3 class='text-center'>Rank: {{rank}}</h3>
-    {% if user.hide_email %}
+    <div style="height:20px; border-top:1px solid #9EC1D4; padding-left:10px; border-color:#aaf;"></div>
+    <h3 class='text-center'>Account settings</h3>
+    <br>
+    <br>
+    <p><a href='/change_info' class='button-note-text'>Change account information</a></p>
+    <br>
+    {% if current_user.hide_email %}
     <h5 class='acc-head-rank'><a href="/hide_email/show">Show my email for other users</a></h5>
     {% else %}
     <h5 class='acc-head-rank'><a href="/hide_email/hide">Hide my email for other users</a></h5>
     {% endif %}
-    <h4 class='acc-head-exp'>Experience: {{exp}}</h4>
-    <div class="progress">
-        <div class="progress-bar bg-warning progress-bar-striped" role="progressbar" aria-valuenow="{{expcur}}" aria-valuemin="0" aria-valuemax="{{expmax}}">
-        </div>
-    </div>
-    <br>
-    <div style="height:20px; border-top:2px solid #9EC1D4; padding-left:10px; border-color:grey;"></div>
-    <h5 class='button-note-text' style='font-size:24pt;'>Account info</h5>
-    <p class='button-note-text' style='margin-left:80px;'>E-mail: {{ user.email }}</p>
-    <p class='button-note-text' style='margin-left:80px;'>City: {{ user.city }}</p>
-    <p class='button-note-text' style='margin-left:80px;'>Country: {{ user.country }}</p>
-    <br>
-    <button class='btn button-note'><a href='/change_info' class='button-note-text'>Change information</a></button>
-    <br>
-    <div style="height:20px; border-top:2px solid #9EC1D4; padding-left:10px; border-color:grey;"></div>
     <br>
     <p><a href='/change_password' class='button-note-text'>Change password</a></p>
+    <div style="height:20px; border-top:1px solid #9EC1D4; padding-left:10px; border-color:#aaf;"></div>
+    <h3 class='text-center'>Appearance settings</h4>
+    <a href='/change_style' class='button-note-text'>Change design of site</a>
+    <div style="height:20px; border-top:2px solid #9EC1D4; padding-left:10px; border-color:grey;"></div>
 </main>
 
 {% endblock %}
