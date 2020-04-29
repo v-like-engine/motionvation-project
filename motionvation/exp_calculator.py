@@ -1,6 +1,8 @@
 def calculatexp(exp):
     lvl = 0
     i = 0
+    mx = LVLS[0]
+    cur = exp
     while exp > 0:
         i += 1
         si = str(i)
@@ -13,14 +15,17 @@ def calculatexp(exp):
         else:
             d = si[:-1]
         exp -= LVLS[int(d)]
+        if exp >= 0:
+            mx = LVLS[int(d)]
+            cur = exp
         lvl += 1
     if exp < 0:
         lvl -= 1
-    return lvl
+    return lvl, mx, cur
 
 
 def ranculate(exp):
-    lvl = calculatexp(exp)
+    lvl = calculatexp(exp)[0]
     rank = 0
     for i in range(len(RANKS)):
         lvl -= 10 + 5 * i
@@ -31,14 +36,9 @@ def ranculate(exp):
     return RANKS[-1]
 
 
-RANKS = ['Novice', 'Private', 'Interested', 'Motivated', 'Inspired', 'Experienced', 'Enlightened',
+RANKS = ['Novice', 'Private', 'Interested', 'Motivated', 'Motioned', 'Inspired', 'Experienced', 'Enlightened',
          'Master', 'Almightly']
-LVLS = {0: 100, 1: 250, 2: 500, 3: 800, 4: 1200, 5: 1500, 6: 1600, 7: 1700, 8: 1800, 9: 1900,
+LVLS = {0: 100, 1: 250, 2: 500, 3: 750, 4: 1000, 5: 1100, 6: 1200, 7: 1400, 8: 1600, 9: 1800,
         10: 2000, 11: 2050, 12: 2100, 13: 2150, 14: 2200, 15: 2250, 16: 2300, 17: 2350, 18: 2400,
-        19: 2450, 20: 2500, 21: 2600, 22: 2700, 23: 2800, 24: 2900, 25: 3000, 26: 3200, 27: 3330,
-        28: 3500, 29: 4000, 30: 5000}
-
-print(ranculate(277999))
-print(ranculate(278000))
-print(ranculate(389599))
-print(ranculate(389600))
+        19: 2450, 20: 2500, 21: 2600, 22: 2700, 23: 2800, 24: 2900, 25: 3000, 26: 3300, 27: 3500,
+        28: 3800, 29: 4000, 30: 5000}

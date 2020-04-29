@@ -7,18 +7,22 @@
     <a href='/challenges'><img src="{{ url_for('static', filename='img/king.jpg') }}" width="200" height="210" alt="Image not found" class='acc-avatar'></a>
     <h1 class='acc-head-name'>{{useracc}}</h1>
     <h3 class='acc-head-rank'>Rank: {{rank}}</h3>
-    <h5 class='button-note-text'><a href="/settings">Settings <i class="fas fa-cog" style="color: #ccf"></i></a></h5>
-    <h4 class='acc-head-exp'>Experience: {{user.xp}} / {{maxp}}</h4>
-    <div class="progress">
-        <div class="progress-bar bg-warning progress-bar-striped" role="progressbar" style='width: {{percentxp}}%;'">
+    <h4 class='acc-head-exp'>Experience: {{currexp}} / {{maxp}}</h4>
+    <section class="simple-inline">
+        <h5>LVL: {{lvl}} </h5>
+        <div class="progress">
+            <div class="progress-bar bg-warning progress-bar-striped" role="progressbar" style="width: {{percentxp}}%;">
+            </div>
         </div>
-    </div>
+    </section>
     <br>
     <div style="height:20px; border-top:2px solid #9EC1D4; padding-left:10px; border-color:grey;"></div>
     <h5 class='button-note-text' style='font-size:24pt;'>Account info</h5>
     <p class='button-note-text' style='margin-left:80px;'>E-mail: {{ user.email }}</p>
     <p class='button-note-text' style='margin-left:80px;'>City: {{ user.city }}</p>
     <p class='button-note-text' style='margin-left:80px;'>Country: {{ user.country }}</p>
+    <div style="height:20px; border-top:2px solid #9EC1D4; padding-left:10px; border-color:grey;"></div>
+    <h3 class='button-note-text text-center' style="font-size: 20pt;"><a href="/settings">Settings <i class="fas fa-cog" style="color: #ccf"></i></a></h3>
 </main>
 
 {% endblock %}

@@ -14,6 +14,7 @@ from motionvation.forms.change_note_form import ChangeNoteForm
 from motionvation.forms.login_form import LoginForm
 
 from motionvation.xp import *
+from motionvation.exp_calculator import calculatexp, ranculate
 
 
 app = Flask(__name__)
@@ -302,10 +303,11 @@ def main():
 @app.route('/account_info')
 @login_required
 def account_main():
-    expr = 20
-    expm = 100
-    rank = 0
-    return render_template('account.html', title='My account', user=current_user, useracc=(current_user.name + ' ' + current_user.surname), rank=rank, percentxp=(current_user.xp / maxp), maxp=maxp)
+    lvl, maxp, currexp = calculatexp(current_user.xp)
+    rank = ranculate(current_user.xp)
+    return render_template('account.html', title='My account', user=current_user,
+                           useracc=(current_user.name + ' ' + current_user.surname), rank=rank,
+                           percentxp=int(currexp * 100 / maxp), currexp=currexp, maxp=maxp, lvl=lvl)
 
 
 @app.route('/challenges')
