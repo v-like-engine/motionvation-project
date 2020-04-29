@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <main class='text-center container-xl'>
+    <main class='text-center container'>
         {% if current_user.is_authenticated %}
         <h2 class="text-center">What to do?</h2>
         <a href='/challenges'><img src="{{ url_for('static', filename='img/6.png') }}" alt="Image not found"></a>

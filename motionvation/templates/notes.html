@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <main class='text-center'>
-        <h2>Notebook</h2>
-        <div class="container">
-        <ul class="list-group">
-            {% for note in notes %}
-            <a href="mynotes/{{ note.id }}"  class="note-manual"><li class="list-group-item list-group-flush list-group-color transform-two">{{ note.title }}</li></a>
-            {% endfor %}
-        </ul>
-        <br>
-        <button class="button-note"><a href="/add_note" class="button-note-text">Add new note</a></button>
-        </div>
-    </main>
+<main class='text-center container'>
+    <h2>Notebook</h2>
+    <div class="container">
+    <ul class="list-group">
+        {% for note in notes %}
+        <a href="mynotes/{{ note.id }}"  class="note-manual"><li class="list-group-item list-group-flush list-group-color transform-two">{{ note.title }}</li></a>
+        {% endfor %}
+    </ul>
+    <br>
+    <button class="button-note"><a href="/add_note" class="button-note-text">Add new note</a></button>
+    </div>
+</main>
 
 {% endblock %}
