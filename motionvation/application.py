@@ -286,7 +286,7 @@ def categories():
 @app.route('/music')
 @login_required
 def music():
-    return render_template('music_player.html', title='Add your music...', text="Param param pam pam",
+    return render_template('music_player.html', title='Add your music...',
                            useracc=(current_user.name + ' ' + current_user.surname))
 
 
@@ -304,7 +304,8 @@ def main():
 def account_main():
     expr = 20
     expm = 100
-    return render_template('account.html', title='My account', user=current_user, useracc=(current_user.name + ' ' + current_user.surname), rank='Not procrastinator', exp=(str(expr) + '/' + str(expm)), expcur=expr, expmax=expm)
+    rank = 0
+    return render_template('account.html', title='My account', user=current_user, useracc=(current_user.name + ' ' + current_user.surname), rank=rank, percentxp=(current_user.xp / maxp), maxp=maxp)
 
 
 @app.route('/challenges')
@@ -404,7 +405,7 @@ def change_info():
             if not email or user_now == email:
                 user_now.email = form.email.data
             else:
-                return render_template('change_info.html', form=form, message='This email is already exists',
+                return render_template('change_info.html', form=form, message='This email already exists',
                                        title='Change info')
         db.commit()
         return redirect('/account_info')

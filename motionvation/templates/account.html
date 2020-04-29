@@ -8,9 +8,9 @@
     <h1 class='acc-head-name'>{{useracc}}</h1>
     <h3 class='acc-head-rank'>Rank: {{rank}}</h3>
     <h5 class='button-note-text'><a href="/settings">Settings <i class="fas fa-cog" style="color: #ccf"></i></a></h5>
-    <h4 class='acc-head-exp'>Experience: {{exp}}</h4>
+    <h4 class='acc-head-exp'>Experience: {{user.xp}} / {{maxp}}</h4>
     <div class="progress">
-        <div class="progress-bar bg-warning progress-bar-striped" role="progressbar" aria-valuenow="{{expcur}}" aria-valuemin="0" aria-valuemax="{{expmax}}">
+        <div class="progress-bar bg-warning progress-bar-striped" role="progressbar" style='width: {{percentxp}}%;'">
         </div>
     </div>
     <br>
