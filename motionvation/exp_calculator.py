@@ -5,23 +5,30 @@ def calculatexp(exp):
     cur = exp
     while exp > 0:
         i += 1
-        si = str(i)
-        if len(si) == 1:
-            d = '0'
-        elif len(si) == 2:
-            d = si[-2]
-        elif i >= list(LVLS.keys())[-1] * 10:
-            d = '30'
-        else:
-            d = si[:-1]
+        d = find_det(i)
         exp -= LVLS[int(d)]
         if exp >= 0:
             mx = LVLS[int(d)]
             cur = exp
+        else:
+            mx = LVLS[int(find_det(i + 1))]
         lvl += 1
     if exp < 0:
         lvl -= 1
     return lvl, mx, cur
+
+
+def find_det(i):
+    si = str(i)
+    if len(si) == 1:
+        d = '0'
+    elif len(si) == 2:
+        d = si[-2]
+    elif i >= list(LVLS.keys())[-1] * 10:
+        d = '30'
+    else:
+        d = si[:-1]
+    return d
 
 
 def ranculate(exp):

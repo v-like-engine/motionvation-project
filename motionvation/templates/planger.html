@@ -7,7 +7,9 @@
     <div class="container">
         <ul class="list-group text-center">
             {% for task in tasks %}
-            <li class="list-group-item list-group-flush position-relative list-group-color"><a href="tasks/{{ task.id }}" class="button-note-text stretched-link d-block">{{ task.title }}</a></li>
+            <li class="list-group-item list-group-flush position-relative list-group-color">
+                <a href="tasks/{{ task.id }}" class="button-note-text stretched-link d-block">{{ task.title }}</a>
+            </li>
             {% endfor %}
         </ul>
         <br>

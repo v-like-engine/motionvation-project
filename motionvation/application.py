@@ -36,7 +36,7 @@ def load_user(user_id):
 @login_required
 def index():
     db = db_session.create_session()
-    tasks = db.query(Task).filter(Task.user == current_user).order_by(Task.priority.desc())[:5]
+    tasks = db.query(Task).filter(Task.user == current_user, Task.is_performed == False).order_by(Task.priority.desc())[:5]
     return render_template('planger.html', tasks=tasks, title='Your PLANger', 
     text="Your most significant and urgent tasks!", 
     useracc=(current_user.name + ' ' + current_user.surname))
