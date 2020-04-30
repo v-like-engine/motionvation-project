@@ -331,6 +331,8 @@ def challenge():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect('/')
     login_form = LoginForm()
     if login_form.validate_on_submit():
         db = db_session.create_session()
@@ -355,6 +357,8 @@ def logout():
 
 @app.route('/register', methods=['GET', 'POST'])
 def reqister():
+    if current_user.is_authenticated:
+        return redirect('/')
     form = RegisterForm()
     if form.validate_on_submit():
         if form.password.data != form.password_again.data:
