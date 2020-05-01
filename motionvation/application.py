@@ -37,7 +37,8 @@ def load_user(user_id):
 @login_required
 def index():
     db = db_session.create_session()
-    tasks = db.query(Task).filter(Task.user == current_user, Task.is_performed == False).order_by(Task.priority.desc())[:5]
+    tasks = db.query(Task).filter(Task.user == current_user,
+                                  Task.is_performed == False).order_by(Task.priority.desc())[:5]
     return render_template('planger.html', tasks=tasks, title='Your PLANger', 
     text="Your most significant and urgent tasks!", 
     useracc=(current_user.name + ' ' + current_user.surname))
@@ -196,7 +197,8 @@ def add_category():
         db.merge(current_user)
         db.commit()
         return redirect('/categories')
-    return render_template('add_category.html', form=category_form, useracc=(current_user.name + ' ' + current_user.surname),
+    return render_template('add_category.html', form=category_form,
+                           useracc=(current_user.name + ' ' + current_user.surname),
                            title='Add category')
 
 
@@ -205,7 +207,8 @@ def add_category():
 def select_category():
     db = db_session.create_session()
     categories = db.query(Category).filter(Category.user_id == admin_id).all().copy()
-    return render_template('select_category.html', categories=categories, useracc=(current_user.name + ' ' + current_user.surname),
+    return render_template('select_category.html', categories=categories,
+                           useracc=(current_user.name + ' ' + current_user.surname),
                            title='Select category')
 
 
@@ -314,21 +317,12 @@ def account_main():
 @app.route('/challenges')
 @login_required
 def challenge():
-    task = {'few': ['Do tasks: ', 'Add tasks: ', 'Complete challenges: '],
-            'medium': ['Add tasks with totally priority sum: ', 'Get experience: ', 'Check pages: '], 'lot': ['Stay home (days): ',], 'nocount': ['Reach new level', 'Complete a task with high priority (>8)', 'Delete a note', 'Make a note', 'Add a task with sport category', 'Get 100 experience']}
-    challenges = []
-    for i in range(random.randint(1, 10)):
-        t = random.choice(list(task.keys()))
-        if t == 'nocount':
-            c = ''
-        elif t == 'few':
-            c = random.randint(1, 10)
-        elif t == 'medium':
-            c = random.randint(5, 50)
-        else:
-            c = random.randint(20, 100)
-        challenges.append(random.choice(task[t]) + str(c))
-    return render_template('challenge.html', title='Challenges', chs=challenges,
+    db = db_session.create_session()
+    challenges_to_check = db.query(Challenge).filter(Challenge.user == current_user,
+                                                     Challenge.is_won == False).all().copy()
+    if len(challenges_to_check) == 0:
+        return redirect('/refresh_challenges')
+    return render_template('challenge.html', title='Challenges', chs=challenges_to_check,
                            useracc=(current_user.name + ' ' + current_user.surname))
 
 
@@ -356,8 +350,19 @@ def refresh():
         current_user.challenges.append(chall)
         db.merge(current_user)
         db.commit()
-    return render_template('add_news.html', useracc=(current_user.name + ' ' + current_user.surname),
-                           title='Add news')
+    return redirect('/challenges')
+
+
+@app.route('/refresh_manually', methods=['GET', 'POST'])
+@login_required
+def refresh_manually():
+    db = db_session.create_session()
+    user_now = db.query(User).filter(User.id == current_user.id).first()
+    user_now.xp = int(user_now.xp) - refresh_challenge_xp
+    if int(user_now.xp) < 0:
+        user_now.xp = 0
+    db.commit()
+    return redirect('/refresh_challenges')
 
 
 @app.route('/login', methods=['GET', 'POST'])
