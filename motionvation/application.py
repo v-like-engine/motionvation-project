@@ -314,7 +314,8 @@ def account_main():
 @app.route('/challenges')
 @login_required
 def challenge():
-    task = {'few': ['Do tasks: ', 'Add tasks: ', 'Complete challenges: '], 'medium': ['Add tasks with totally priority sum: ', 'Get experience: ', 'Check pages: '], 'lot': ['Stay home (days): ',], 'nocount': ['Reach new level', 'Complete a task with high priority (>8)', 'Delete a note', 'Make a note', 'Add a task with sport category', 'Get 100 experience']}
+    task = {'few': ['Do tasks: ', 'Add tasks: ', 'Complete challenges: '],
+            'medium': ['Add tasks with totally priority sum: ', 'Get experience: ', 'Check pages: '], 'lot': ['Stay home (days): ',], 'nocount': ['Reach new level', 'Complete a task with high priority (>8)', 'Delete a note', 'Make a note', 'Add a task with sport category', 'Get 100 experience']}
     challenges = []
     for i in range(random.randint(1, 10)):
         t = random.choice(list(task.keys()))
@@ -329,6 +330,34 @@ def challenge():
         challenges.append(random.choice(task[t]) + str(c))
     return render_template('challenge.html', title='Challenges', chs=challenges,
                            useracc=(current_user.name + ' ' + current_user.surname))
+
+
+@app.route('/refresh_challenges', methods=['GET', 'POST'])
+@login_required
+def refresh():
+    db = db_session.create_session()
+    challenges_to_del = db.query(Challenge).filter(Challenge.user == current_user, Challenge.is_won == False).all()
+    db.delete(challenges_to_del)
+    for i in range(5):
+        challenge_dict = generate_challenge()
+        chall = Challenge()
+        chall.title = challenge_dict['text']
+        chall.current = 0
+        chall.required = challenge_dict['required']
+        chall.add_task = 1 in challenge_dict['plot']
+        chall.add_note = 2 in challenge_dict['plot']
+        chall.delete_task = 3 in challenge_dict['plot']
+        chall.delete_note = 4 in challenge_dict['plot']
+        chall.do_task = 5 in challenge_dict['plot']
+        chall.do_challenge = 6 in challenge_dict['plot']
+        chall.get_level = 7 in challenge_dict['plot']
+        chall.get_xp = 8 in challenge_dict['plot']
+        chall.difficulty = challenge_dict['difficulty']
+        current_user.challenges.append(chall)
+        db.merge(current_user)
+        db.commit()
+    return render_template('add_news.html', useracc=(current_user.name + ' ' + current_user.surname),
+                           title='Add news')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -440,7 +469,8 @@ def change_password():
 def news_main():
     db = db_session.create_session()
     news = db.query(News).filter(News.user_id == admin_id).all().copy()[::-1]
-    return render_template('news.html', title='News', news=news, t_page_id=0, useracc=(current_user.name + ' ' + current_user.surname))
+    return render_template('news.html', title='News', news=news, t_page_id=0,
+                           useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/all_news')
@@ -448,7 +478,8 @@ def news_main():
 def a_news_main():
     db = db_session.create_session()
     news = db.query(News).all().copy()[::-1]
-    return render_template('news.html', title='All news', news=news, t_page_id=2, useracc=(current_user.name + ' ' + current_user.surname))
+    return render_template('news.html', title='All news', news=news, t_page_id=2,
+                           useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/informal_news')
