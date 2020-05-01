@@ -80,7 +80,7 @@ def all_tasks():
 @login_required
 def notes():
     db = db_session.create_session()
-    notes = db.query(Note).filter(Note.user == current_user).all().copy()
+    notes = db.query(Note).filter(Note.user == current_user).all().copy()[::-1]
     return render_template('notes.html', notes=notes, useracc=(current_user.name + ' ' + current_user.surname),
                            title='Notes')
 
