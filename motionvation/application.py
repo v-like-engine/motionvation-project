@@ -5,8 +5,9 @@ from datetime import timedelta
 from flask import Flask, render_template, redirect, url_for, make_response, jsonify, session
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
+from motionvation.challenge_generator import generate_challenge
 from motionvation.data import db_session
-from motionvation.data.models import Note, Category, Task, News
+from motionvation.data.models import Note, Category, Task, News, Challenge
 from motionvation.data.models.users import User
 from motionvation.forms import RegisterForm, NotesForm, CategoryForm, TaskForm, ChangePasswordForm, ChangeInfoForm, \
     ChangeTaskForm, NewsForm, ChangeNewsForm
@@ -326,7 +327,8 @@ def challenge():
         else:
             c = random.randint(20, 100)
         challenges.append(random.choice(task[t]) + str(c))
-    return render_template('challenge.html', title='Challenges', chs=challenges, useracc=(current_user.name + ' ' + current_user.surname))
+    return render_template('challenge.html', title='Challenges', chs=challenges,
+                           useracc=(current_user.name + ' ' + current_user.surname))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -563,7 +565,6 @@ def unauth(error):
     er_txt = '401 not authorized: Please log in or register!!!'
     return render_template('error.html', title='Error',
     text=er_txt)
-
 
 
 from os import path

@@ -21,5 +21,6 @@ class Challenge(SqlAlchemyBase, SerializerMixin):
     get_level = Column(Boolean)
     get_xp = Column(Boolean)
     difficulty = Column(Integer)
+    is_won = Column(Boolean)
 
     user = orm.relation('User')
