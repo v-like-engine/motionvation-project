@@ -34,7 +34,7 @@
                             <p>{{ task.title }}</p>
                             <a href="tasks/{{ task.id }}" class="btn btn-note button-note-text card-link" data-toggle="tooltip" data-placement="bottom" data-delay: '{ "show": 0, "hide": 0 }' title="View task"><i class="fas fa-eye" style="color: #ccf"></i></a>
                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Settings">
-                                <a href="#" class="btn btn-note" data-toggle="modal" data-target="#taskSettings" style='color: #ccf;'><i class="fas fa-cog" style="color: #ccf"></i></a>
+                                <a href="#" class="btn btn-note" data-toggle="modal" data-target="#taskSettings-{{task.id}}" style='color: #ccf;'><i class="fas fa-cog" style="color: #ccf"></i></a>
                             </span>
                             {% if task.is_performed %}
                             <a class="btn btn-note" href="/undone_task/{{ task.id }}" style='color: #ccf;' data-toggle="tooltip" title="Undone"><i class="fas fa-times" style="color: #d22"></i></a>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </li>
-            <div class="modal" id="taskSettings" data-backdrop="static" tabindex="-1" role="dialog">
+            <div class="modal" id="taskSettings-{{task.id}}" data-backdrop="static" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content cosmodal">
                         <div class="modal-header">
