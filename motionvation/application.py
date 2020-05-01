@@ -331,7 +331,8 @@ def challenge():
 def refresh():
     db = db_session.create_session()
     challenges_to_del = db.query(Challenge).filter(Challenge.user == current_user, Challenge.is_won == False).all()
-    db.delete(challenges_to_del)
+    for el in challenges_to_del:
+        db.delete(el)
     for i in range(5):
         challenge_dict = generate_challenge()
         chall = Challenge()
@@ -347,6 +348,7 @@ def refresh():
         chall.get_level = 7 in challenge_dict['plot']
         chall.get_xp = 8 in challenge_dict['plot']
         chall.difficulty = challenge_dict['difficulty']
+        chall.is_won = False
         current_user.challenges.append(chall)
         db.merge(current_user)
         db.commit()
