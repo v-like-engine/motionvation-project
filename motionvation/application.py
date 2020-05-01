@@ -338,6 +338,7 @@ def refresh():
         chall = Challenge()
         chall.title = challenge_dict['text']
         chall.current = 0
+        chall.user = current_user
         chall.required = challenge_dict['required']
         chall.add_task = 1 in challenge_dict['plot']
         chall.add_note = 2 in challenge_dict['plot']
@@ -349,8 +350,7 @@ def refresh():
         chall.get_xp = 8 in challenge_dict['plot']
         chall.difficulty = challenge_dict['difficulty']
         chall.is_won = False
-        current_user.challenges.append(chall)
-        db.merge(current_user)
+        db.merge(chall)
         db.commit()
     return redirect('/challenges')
 

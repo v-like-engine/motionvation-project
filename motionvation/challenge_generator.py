@@ -7,7 +7,7 @@ def choose_challenge_plot():
     elif n < 80:
         plot = random.choice([VARIANTS[:2], VARIANTS[2:4], VARIANTS[4:6]])
     elif n < 95:
-        plot = random.choice(VARIANTS[-2:])
+        plot = [random.choice(VARIANTS[-2:])]
     else:
         plot = VARIANTS[:7]
     return plot
@@ -15,6 +15,8 @@ def choose_challenge_plot():
 
 def count_plot(plot):
     c, diff, step2, step1 = 0, 0, 0, 0
+    if not isinstance(plot, list):
+        plot = [plot]
     if len(plot) == 1:
         if plot[0] < 6:
             c = random.randint(1, 10)
