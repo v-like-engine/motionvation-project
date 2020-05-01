@@ -365,6 +365,14 @@ def reqister():
             return render_template('register.html', title='Register',
                                    form=form,
                                    message="Passwords doesn`t match")
+        if len(form.password.data) < 6:
+            return render_template('register.html', title='Register',
+                                   form=form,
+                                   message="Password is too short")
+        if not form.password.data.isdigit() or not form.password.data.isalpha():
+            return render_template('register.html', title='Register',
+                                   form=form,
+                                   message="Password must contain letters and digits")
         db = db_session.create_session()
         if db.query(User).filter(User.email == form.email.data).first():
             return render_template('register.html', title='Register',
@@ -431,6 +439,14 @@ def change_password():
         if form.new_password.data != form.new_password_again.data:
             return render_template('change_password.html', form=form, message='Passwords do not match',
                                    title='Change password')
+        if len(form.new_password.data) < 6:
+            return render_template('change_password.html', title='Change password',
+                                   form=form,
+                                   message="Password is too short")
+        if not form.new_password.data.isdigit() or not form.new_password.data.isalpha():
+            return render_template('change_password.html', title='Change password',
+                                   form=form,
+                                   message="Password must contain letters and digits")
         user_now.set_password(form.new_password.data)
         db.commit()
         return redirect('/account_info')
