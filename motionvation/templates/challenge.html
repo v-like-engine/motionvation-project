@@ -3,17 +3,22 @@
 {% block content %}
 <main class='text-center container'>
     <h3 class="text-center">Current challenges</h3>
-    <a class="btn btn-note" href="/refresh_challenges" style='color: #9f9;' data-toggle="tooltip" title="Refresh">Refresh <i class="fas fa-sync-alt" style="color: #2d2; font-size: 20pt;"></i></a>
+    <a class="btn btn-note" href="/refresh_manually" style='color: #9f9;' data-toggle="tooltip" title="Refresh">Refresh <i class="fas fa-sync-alt" style="color: #2d2; font-size: 20pt;"></i></a>
     <div class="container">
         <ul class="list-group">
             {% for ch in chs %}
             <li>
-                <div class="card" style="width: 1080px; height: 110px; border: none;">
+                <div class="card" style="width: 1080px; height: 140px; border: none;">
                     <div class="card-body">
                         <section class='simple-inline'>
                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="View info">
                                 <a href="#" class="btn btn-note" data-toggle="modal" data-target="#chInfo-{{ch.title}}" style='color: #ccf; font-size: 23pt;'>{{ ch.title }} <i class="fas fa-info-circle" style="color: #ccf"></i></a>
                             </span>
+                            <div class="progress" style="color: black;">
+                                <div class="progress-bar bg-warning progress-bar-striped" role="progressbar" style="width: {{ch.current / ch.required * 100 // 1}}%; color: #000;">
+                                    {{ch.current}} / {{ch.required}}
+                                </div>
+                            </div>
                         </section>
                     </div>
                 </div>
@@ -27,7 +32,13 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <p style="font-size: 20pt;">Task: {{ch.title}}</p>>
+                                <p style="font-size: 20pt;">{{ch.title}}</p>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ch.current / ch.required * 100 // 1}}%; color: #000;">
+                                        {{ch.current}} / {{ch.required}}
+                                    </div>
+                                </div>
+                                <br>
                                 {% if ch.difficulty == 0 %}
                                     <p style="font-size: 20pt;">Difficulty: Easy</p>
                                 {% elif ch.difficulty == 1 %}

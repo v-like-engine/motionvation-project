@@ -342,7 +342,11 @@ def challenge():
                                                      Challenge.is_won == False).all().copy()
     if len(challenges_to_check) == 0:
         return redirect('/refresh_challenges')
-    return render_template('challenge.html', title='Challenges', chs=challenges_to_check,
+    percents = {}
+    for i in range(len(challenges_to_check)):
+        percents[challenges_to_check[i].title] = int(challenges_to_check[i].current /
+                                                     challenges_to_check[i].required * 100)
+    return render_template('challenge.html', title='Challenges', chs=challenges_to_check, prc=percents,
                            useracc=(current_user.name + ' ' + current_user.surname))
 
 
