@@ -13,6 +13,7 @@ from motionvation.forms import RegisterForm, NotesForm, CategoryForm, TaskForm, 
     ChangeTaskForm, NewsForm, ChangeNewsForm
 from motionvation.forms.change_note_form import ChangeNoteForm
 from motionvation.forms.login_form import LoginForm
+from motionvation.perform_challenge import performing_challenge
 
 from motionvation.xp import *
 from motionvation.exp_calculator import calculatexp, ranculate
@@ -102,6 +103,8 @@ def delete_note(id):
     db = db_session.create_session()
     notes = db.query(Note).filter(Note.user == current_user, Note.id == id).first()
     db.delete(notes)
+    challenges = db.query(Challenge).filter(Challenge.user == current_user, Challenge.delete_note == True).all()
+    performing_challenge(challenges)
     db.commit()
     return redirect('/mynotes')
 
@@ -112,6 +115,8 @@ def delete_task(id):
     db = db_session.create_session()
     tasks = db.query(Task).filter(Task.user == current_user, Task.id == id).first()
     db.delete(tasks)
+    challenges = db.query(Challenge).filter(Challenge.user == current_user, Challenge.delete_task == True).all()
+    performing_challenge(challenges)
     db.commit()
     return redirect('/tasks')
 
@@ -158,6 +163,8 @@ def add_note():
         current_user.notes.append(note)
         current_user.xp += adding_note_xp
         db.merge(current_user)
+        challenges = db.query(Challenge).filter(Challenge.user == current_user, Challenge.add_note == True).all()
+        performing_challenge(challenges)
         db.commit()
         return redirect('mynotes')
     return render_template('add_note.html', form=notes_form, useracc=(current_user.name + ' ' + current_user.surname),
@@ -227,6 +234,8 @@ def add_task(id):
         task.user = current_user
         current_user.xp += adding_task_xp
         db.merge(task)
+        challenges = db.query(Challenge).filter(Challenge.user == current_user, Challenge.add_task == True).all()
+        performing_challenge(challenges)
         db.commit()
         return redirect('/tasks')
     return render_template('add_task.html', form=task_form, useracc=(current_user.name + ' ' + current_user.surname),
@@ -264,6 +273,8 @@ def done_task(id):
     task.is_performed = True
     user_now = db.query(User).filter(User.id == current_user.id).first()
     user_now.xp += done_task_xp
+    challenges = db.query(Challenge).filter(Challenge.user == current_user, Challenge.do_task == True).all()
+    performing_challenge(challenges)
     db.commit()
     return redirect('/tasks')
 
@@ -318,6 +329,14 @@ def account_main():
 @login_required
 def challenge():
     db = db_session.create_session()
+    challenges_can_be_performed = db.query(Challenge).filter(Challenge.user == current_user,
+                                                             Challenge.required == 0).all().copy()
+    for challenge in challenges_can_be_performed:
+        challenge.is_won = True
+    challenges_to_won_challenges = db.query(Challenge).filter(Challenge.user == current_user,
+                                                             Challenge.do_challenge == True).all().copy()
+    for challenge in challenges_to_won_challenges:
+        challenge.required -= 1
     challenges_to_check = db.query(Challenge).filter(Challenge.user == current_user,
                                                      Challenge.is_won == False).all().copy()
     if len(challenges_to_check) == 0:
