@@ -330,16 +330,16 @@ def account_main():
 def challenge():
     db = db_session.create_session()
     challenges_can_be_performed = db.query(Challenge).filter(Challenge.user == current_user,
-                                                             Challenge.required == 0).all().copy()
+                                                             Challenge.required <= Challenge.current).all().copy()
     for challenge in challenges_can_be_performed:
         challenge.is_won = True
     challenges_to_won_challenges = db.query(Challenge).filter(Challenge.user == current_user,
                                                              Challenge.do_challenge == True).all().copy()
     for challenge in challenges_to_won_challenges:
-        challenge.required -= 1
+        challenge.current += 1
+    db.commit()
     challenges_to_check = db.query(Challenge).filter(Challenge.user == current_user,
                                                      Challenge.is_won == False).all().copy()
-    db.commit()
     if len(challenges_to_check) == 0:
         return redirect('/refresh_challenges')
     return render_template('challenge.html', title='Challenges', chs=challenges_to_check,
