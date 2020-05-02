@@ -339,6 +339,7 @@ def challenge():
         challenge.required -= 1
     challenges_to_check = db.query(Challenge).filter(Challenge.user == current_user,
                                                      Challenge.is_won == False).all().copy()
+    db.commit()
     if len(challenges_to_check) == 0:
         return redirect('/refresh_challenges')
     return render_template('challenge.html', title='Challenges', chs=challenges_to_check,
@@ -374,13 +375,14 @@ def refresh():
     return redirect('/challenges')
 
 
-@app.route('/refresh_manually')
+@app.route('/refresh_manually', methods=['GET', 'POST'])
 @login_required
 def refresh_manually():
-    if int(current_user.xp) - refresh_challenge_xp < 0:
-        current_user.xp = 0
-    else:
-        current_user.xp = int(current_user.xp) - refresh_challenge_xp
+    db = db_session.create_session()
+    user_now = db.query(User).filter(User.id == current_user.id).first()
+    user_now.xp = int(user_now.xp) - refresh_challenge_xp
+    if int(user_now.xp) < 0:
+        user_now.xp = 0
     db.commit()
     return redirect('/refresh_challenges')
 
