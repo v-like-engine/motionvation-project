@@ -330,13 +330,21 @@ def account_main():
 def challenge():
     db = db_session.create_session()
     challenges_can_be_performed = db.query(Challenge).filter(Challenge.user == current_user,
-                                                             Challenge.required <= Challenge.current).all().copy()
+                                                             Challenge.required <= Challenge.current,
+                                                             Challenge.is_won == False).all().copy()
     for challenge in challenges_can_be_performed:
         challenge.is_won = True
-    challenges_to_won_challenges = db.query(Challenge).filter(Challenge.user == current_user,
-                                                             Challenge.do_challenge == True).all().copy()
-    for challenge in challenges_to_won_challenges:
-        challenge.current += 1
+        if challenge.difficulty == 0:
+            current_user.xp += easy_challenge
+        elif challenge.difficulty == 2:
+            current_user.xp += hard_challenge
+        else:
+            current_user.xp += medium_challenge
+        challenges_to_won_challenges = db.query(Challenge).filter(Challenge.user == current_user,
+                                                                  Challenge.do_challenge == True,
+                                                                  Challenge.is_won == False).all().copy()
+        for challenge in challenges_to_won_challenges:
+            challenge.current += 1
     db.commit()
     challenges_to_check = db.query(Challenge).filter(Challenge.user == current_user,
                                                      Challenge.is_won == False).all().copy()
@@ -346,7 +354,8 @@ def challenge():
     for i in range(len(challenges_to_check)):
         percents[challenges_to_check[i].title] = int(challenges_to_check[i].current /
                                                      challenges_to_check[i].required * 100)
-    return render_template('challenge.html', title='Challenges', chs=challenges_to_check, prc=percents,
+    return render_template('challenge.html', title='Challenges', won=challenges_can_be_performed,
+                           chs=challenges_to_check, prc=percents,
                            useracc=(current_user.name + ' ' + current_user.surname))
 
 

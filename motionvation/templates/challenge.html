@@ -55,6 +55,20 @@
                 </div>
             </li>
             {% endfor %}
+            {% for ch in won %}
+            <li>
+                <div class="card" style="width: 1080px; height: 140px; border: none;">
+                    <div class="card-body">
+                        <section class='simple-inline'>
+                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Won challenge">
+                                <a href="#" class="btn btn-note" data-toggle="modal" data-target="#chInfo-{{ch.title}}" style='color: #ccf; font-size: 23pt;'>{{ ch.title }} - won!</a>
+                            </span><br>
+                            <button type="button" class="btn btn-success"><a href="/challenges" style="text-decoration: none; color: #000">OK <i class="fas fa-check" style="color: #000"></i></a></button>
+                        </section>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
         </ul>
     </div>
     </main>
