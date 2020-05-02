@@ -374,14 +374,13 @@ def refresh():
     return redirect('/challenges')
 
 
-@app.route('/refresh_manually', methods=['GET', 'POST'])
+@app.route('/refresh_manually')
 @login_required
 def refresh_manually():
-    db = db_session.create_session()
-    user_now = db.query(User).filter(User.id == current_user.id).first()
-    user_now.xp = int(user_now.xp) - refresh_challenge_xp
-    if int(user_now.xp) < 0:
-        user_now.xp = 0
+    if int(current_user.xp) - refresh_challenge_xp < 0:
+        current_user.xp = 0
+    else:
+        current_user.xp = int(current_user.xp) - refresh_challenge_xp
     db.commit()
     return redirect('/refresh_challenges')
 
