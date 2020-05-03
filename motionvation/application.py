@@ -397,8 +397,8 @@ def refresh():
         chall.delete_note = 4 in challenge_dict['plot']
         chall.do_task = 5 in challenge_dict['plot']
         chall.do_challenge = 6 in challenge_dict['plot']
-        chall.get_level = 7 in challenge_dict['plot']
-        chall.get_xp = 8 in challenge_dict['plot']
+        chall.get_xp = 7 in challenge_dict['plot']
+        chall.get_level = 8 in challenge_dict['plot']
         chall.difficulty = challenge_dict['difficulty']
         chall.is_won = False
         db.merge(chall)
@@ -411,7 +411,7 @@ def refresh():
 def refresh_manually():
     db = db_session.create_session()
     user_now = db.query(User).filter(User.id == current_user.id).first()
-    user_now.xp = int(user_now.xp) - refresh_challenge_xp
+    user_now.xp = int(user_now.xp) + refresh_challenge_xp
     if int(user_now.xp) < 0:
         user_now.xp = 0
     db.commit()
@@ -661,4 +661,4 @@ db_session.global_init(path.join(path.dirname(__file__), './db/motionvation.db')
 
 def run():
     port = int(os.environ.get('PORT', 8080))
-    app.run(host='127.0.0.1', port=port, debug=True)
+    app.run(host='0.0.0.0', port=port, debug=True)
