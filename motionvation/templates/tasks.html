@@ -55,12 +55,12 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>What do you want?</p>
+                            <p>You can choose the action to perform</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="button btn-dark button-note"><a href="/change_task_category/{{ task.id }}" class='button-note-text'>Change category</a></button>
-                            <button type="button" class="button btn-dark button-note"><a href="/tasks/delete/{{ task.id }}" class='delete-text'>Delete the task</a></button>
-                            <button type="button" class="button btn-dark button-note"><a href="/change_task/{{ task.id }}" class='button-note-text'>Change task</a></button>
+                            <button type="button" class="button btn-secondary"><a href="/change_task_category/{{ task.id }}" class='button-note-text'>Change category</a></button>
+                            <button type="button" class="button btn-danger"><a href="/tasks/delete/{{ task.id }}" class='delete-text'>Delete the task</a></button>
+                            <button type="button" class="button btn-info"><a href="/change_task/{{ task.id }}" class='button-note-text'>Change task</a></button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>

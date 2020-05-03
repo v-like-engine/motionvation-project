@@ -373,7 +373,7 @@ def challenge():
         percents[challenges_to_check[i].title] = int(challenges_to_check[i].current /
                                                      challenges_to_check[i].required * 100)
     return render_template('challenge.html', title='Challenges', won=challenges_can_be_performed,
-                           chs=challenges_to_check, prc=percents,
+                           chs=challenges_to_check, prc=percents, xplost=refresh_challenge_xp * (-1),
                            useracc=(current_user.name + ' ' + current_user.surname))
 
 
