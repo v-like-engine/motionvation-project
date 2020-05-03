@@ -25,6 +25,11 @@
     </nav>
     <h2>Tasks</h2>
     <div class="container">
+        {% if t_page_id == 0 %}
+            <button class="button-note"><a href="/select_category" class="button-note-text">Add new task</a></button>
+        {% elif t_page_id == 2 %}
+            <button class="button-note"><a href="/select_category" class="button-note-text">Add new relevant task</a></button>
+        {% endif %}
         <ul class="list-group">
             {% for task in tasks %}
             <li>
@@ -68,11 +73,6 @@
             </div>
             {% endfor %}
         </ul>
-        {% if t_page_id == 0 %}
-            <button class="button-note"><a href="/select_category" class="button-note-text">Add new task</a></button>
-        {% elif t_page_id == 2 %}
-            <button class="button-note"><a href="/select_category" class="button-note-text">Add new relevant task</a></button>
-        {% endif %}
     </div>
     </main>
 

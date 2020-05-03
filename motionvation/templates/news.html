@@ -35,12 +35,12 @@
     </nav>
     <h2>News</h2>
     <div class="container">
+        <button type="button" class="btn btn-light"><a href="/add_news">Add news</a></button>
         <ul class="list-group">
             {% for new in news %}
             <li class="list-group-item list-group-flush list-group-color position-relative transform-two"><a href="/news_info/{{ new.id }}" class="note-manual stretched-link">{{ new.title }} - {{ new.user.name }}</a></li>
             {% endfor %}
         </ul>
-        <button type="button" class="btn btn-light"><a href="/add_news">Add news</a></button>
     </div>
     </main>
 

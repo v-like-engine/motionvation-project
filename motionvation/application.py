@@ -83,7 +83,7 @@ def all_tasks():
 @login_required
 def notes():
     db = db_session.create_session()
-    notes = db.query(Note).filter(Note.user == current_user).all().copy()
+    notes = db.query(Note).filter(Note.user == current_user).all().copy()[::-1]
     return render_template('notes.html', notes=notes, useracc=(current_user.name + ' ' + current_user.surname),
                            title='Notes')
 
@@ -420,6 +420,8 @@ def refresh_manually():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect('/')
     login_form = LoginForm()
     if login_form.validate_on_submit():
         db = db_session.create_session()
@@ -444,12 +446,22 @@ def logout():
 
 @app.route('/register', methods=['GET', 'POST'])
 def reqister():
+    if current_user.is_authenticated:
+        return redirect('/')
     form = RegisterForm()
     if form.validate_on_submit():
         if form.password.data != form.password_again.data:
             return render_template('register.html', title='Register',
                                    form=form,
                                    message="Passwords doesn`t match")
+        if len(form.password.data) < 6:
+            return render_template('register.html', title='Register',
+                                   form=form,
+                                   message="Password is too short")
+        if not form.password.data.isdigit() or not form.password.data.isalpha():
+            return render_template('register.html', title='Register',
+                                   form=form,
+                                   message="Password must contain letters and digits")
         db = db_session.create_session()
         if db.query(User).filter(User.email == form.email.data).first():
             return render_template('register.html', title='Register',
@@ -516,6 +528,14 @@ def change_password():
         if form.new_password.data != form.new_password_again.data:
             return render_template('change_password.html', form=form, message='Passwords do not match',
                                    title='Change password')
+        if len(form.new_password.data) < 6:
+            return render_template('change_password.html', title='Change password',
+                                   form=form,
+                                   message="Password is too short")
+        if not form.new_password.data.isdigit() or not form.new_password.data.isalpha():
+            return render_template('change_password.html', title='Change password',
+                                   form=form,
+                                   message="Password must contain letters and digits")
         user_now.set_password(form.new_password.data)
         db.commit()
         return redirect('/account_info')
