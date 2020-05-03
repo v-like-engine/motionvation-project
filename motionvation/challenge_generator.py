@@ -1,5 +1,6 @@
 import random
 
+
 def choose_challenge_plot():
     n = random.randint(0, 99)
     if n < 59:
@@ -7,9 +8,11 @@ def choose_challenge_plot():
     elif n < 80:
         plot = random.choice([VARIANTS[:2], VARIANTS[2:4], VARIANTS[4:6]])
     elif n < 95:
-        plot = [random.choice(VARIANTS[-2:])]
-    else:
+        plot = [VARIANTS[-2]]
+    elif n <= 99:
         plot = VARIANTS[:7]
+    else:
+        plot = [VARIANTS[-1]]
     return plot
 
 
@@ -27,19 +30,19 @@ def count_plot(plot):
         elif plot[0] < 7:
             c = random.randint(1, 3)
             step2, step1 = 2, 1
-        elif plot[0] < 8:
-            c = random.randint(1, 5)
-            step2, step1 = 3, 1
-        elif plot[0] == 8:
+        elif plot[0] == 7:
             c = random.randint(4, 40) * 5
             step2, step1 = 320, 200
+        elif plot[0] == 8:
+            c = random.randint(1, 5)
+            step2, step1 = 3, 1
     elif len(plot) == 2:
         if 3 not in plot:
             c = random.randint(2, 25)
-            step2, step1 = 20, 12
+            step2, step1 = 17, 12
         else:
-            c = random.randint(2, 16)
-            step2, step1 = 15, 9
+            c = random.randint(2, 18)
+            step2, step1 = 17, 10
     else:
         c = random.randint(5, 60)
         step2, step1 = 50, 25
@@ -82,9 +85,9 @@ delete_task = 3
 delete_note = 4
 do_task = 5
 do_challenge = 6
-get_level = 7
-get_xp = 8
+get_xp = 7
+get_level = 8
 
-VARIANTS = [add_task, add_note, delete_task, delete_note, do_task, do_challenge, get_level, get_xp]
+VARIANTS = [add_task, add_note, delete_task, delete_note, do_task, do_challenge, get_xp, get_level]
 TEXTS = ['Add tasks: ', 'Add notes: ', 'Delete tasks: ', 'Delete notes: ', 'Do tasks: ',
-         'Win challenges: ', 'Get levels: ', 'Get experience: ']
+         'Win challenges: ', 'Get experience: ', 'Get levels: ']

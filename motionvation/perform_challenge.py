@@ -1,3 +1,3 @@
-def performing_challenge(challenges):
+def performing_challenge(challenges, bonus):
     for challenge in challenges:
-        challenge.current += 1
+        challenge.current += bonus
