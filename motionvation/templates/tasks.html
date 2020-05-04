@@ -30,6 +30,7 @@
         {% elif t_page_id == 2 %}
             <button class="button-note"><a href="/select_category" class="button-note-text">Add new relevant task</a></button>
         {% endif %}
+        <button class="btn btn-danger"><a href="/delete_all_tasks" class="button-note-text">Delete all tasks</a></button>
         <ul class="list-group">
             {% for task in tasks %}
             <li>

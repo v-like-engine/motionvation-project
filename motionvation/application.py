@@ -97,6 +97,17 @@ def notes_info(id):
                            title='Notes info')
 
 
+@app.route('/mynotes/delete_all')
+@login_required
+def delete_all_notes():
+    db = db_session.create_session()
+    all_notes = db.query(Note).filter(Note.user == current_user).all()
+    for note in all_notes:
+        db.delete(note)
+    db.commit()
+    return redirect('/mynotes')
+
+
 @app.route('/mynotes/delete/<int:id>')
 @login_required
 def delete_note(id):
@@ -117,6 +128,17 @@ def delete_task(id):
     db.delete(tasks)
     challenges = db.query(Challenge).filter(Challenge.user == current_user, Challenge.delete_task == True).all()
     performing_challenge(challenges, 1)
+    db.commit()
+    return redirect('/tasks')
+
+
+@app.route('/delete_all_tasks')
+@login_required
+def delete_all_tasks():
+    db = db_session.create_session()
+    all_tasks = db.query(Task).filter(Task.user == current_user).all()
+    for task in all_tasks:
+        db.delete(task)
     db.commit()
     return redirect('/tasks')
 
@@ -609,6 +631,17 @@ def delete_news(id):
     db = db_session.create_session()
     news = db.query(News).filter(News.user == current_user, News.id == id).first()
     db.delete(news)
+    db.commit()
+    return redirect('/news')
+
+
+@app.route('/delete_all_news')
+@login_required
+def delete_all_news():
+    db = db_session.create_session()
+    all_news = db.query(News).filter(News.user == current_user).all()
+    for news in all_news:
+        db.delete(news)
     db.commit()
     return redirect('/news')
 
