@@ -199,18 +199,16 @@ def change_note(id):
 def add_category():
     if current_user.id != admin_id:
         return redirect('/')
-    category_form = CategoryForm()
-    if category_form.validate_on_submit():
+    titles = ['Sport', 'Programming', 'Studying', 'Work', 'Creativity', 'Household chores', 'Outdoor activities',
+              'Friends and family', 'Physical labor', 'Reading', 'Music']
+    for title in titles:
         db = db_session.create_session()
         category = Category()
-        category.title = category_form.title.data
+        category.title = title
         current_user.categories.append(category)
         db.merge(current_user)
         db.commit()
-        return redirect('/categories')
-    return render_template('add_category.html', form=category_form,
-                           useracc=(current_user.name + ' ' + current_user.surname),
-                           title='Add category')
+    return redirect('/categories')
 
 
 @app.route('/select_category')
@@ -458,7 +456,7 @@ def reqister():
             return render_template('register.html', title='Register',
                                    form=form,
                                    message="Password is too short")
-        if not form.password.data.isdigit() or not form.password.data.isalpha():
+        if form.password.data.isdigit() or form.password.data.isalpha():
             return render_template('register.html', title='Register',
                                    form=form,
                                    message="Password must contain letters and digits")
@@ -532,7 +530,7 @@ def change_password():
             return render_template('change_password.html', title='Change password',
                                    form=form,
                                    message="Password is too short")
-        if not form.new_password.data.isdigit() or not form.new_password.data.isalpha():
+        if form.new_password.data.isdigit() or form.new_password.data.isalpha():
             return render_template('change_password.html', title='Change password',
                                    form=form,
                                    message="Password must contain letters and digits")
