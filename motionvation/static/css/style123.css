@@ -30,10 +30,6 @@ body {
     color: #fff;
 }
 
-.card {
-    background: url(../img/3.jpg);
-}
-
 .challenge {
     margin-left: 50px;
     text-decoration: none;
@@ -79,10 +75,6 @@ a:hover {
     text-decoration: none;
 }
 
-.list-group-color {
-    background: url(../img/1.jpg);
-}
-
 .button-note-text {
     color: #fff;
     font-size: 14pt;
@@ -116,12 +108,6 @@ a:hover {
     text-decoration: none;
 }
 
-.button-note {
-    color: #fff;
-    background: url(../img/1.jpg);
-    border: none;
-}
-
 .delete-text {
     color: #fdd;
     font-size: 14pt;
@@ -136,15 +122,6 @@ a:hover {
 
 nav.navbar .dropdown:hover > .dropdown-menu {
     display: block;
-}
-
-.dropdown-menu {
-    background: url(../img/3.jpg);
-    border: none;
-}
-
-.dropdown-item:hover {
-    background: url(../img/3.jpg);
 }
 
 .dropdown-nav-text {
@@ -223,12 +200,6 @@ nav.navbar .dropdown:hover > .dropdown-menu {
     margin-right: 40px;
 }
 
-.cosmodal {
-    background-image: url(../img/3.jpg);
-    border: 10px;
-    border-image: url(../img/4.jpg);
-}
-
 .tooltip {
     background-color: #003;
     color: #ccf;
@@ -243,7 +214,6 @@ nav.navbar .dropdown:hover > .dropdown-menu {
     margin-left: 100px;
 }
 
-audio::-webkit-media-controls-panel,
 audio::-webkit-media-controls-time-remaining-display,
 audio::-webkit-media-controls-current-time-display {
   color: #99f;

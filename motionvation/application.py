@@ -492,7 +492,8 @@ def reqister():
             name=form.name.data,
             country=form.country.data,
             city=form.city.data,
-            email=form.email.data
+            email=form.email.data,
+            number_of_style=1
         )
         user.set_password(form.password.data)
         db.add(user)

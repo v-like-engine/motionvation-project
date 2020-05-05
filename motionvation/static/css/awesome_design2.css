@@ -1,0 +1,37 @@
+body {
+    background: url(../img/cosmos.png);
+    color: #fff;
+}
+
+.bar-in {
+    background: url(../img/greenviroment.png);
+}
+
+.card {
+    background: url(../img/3.jpg);
+}
+
+.list-group-color {
+    background: url(../img/1.jpg);
+}
+
+.button-note {
+    color: #fff;
+    background: url(../img/1.jpg);
+    border: none;
+}
+
+.dropdown-menu {
+    background: url(../img/3.jpg);
+    border: none;
+}
+
+.dropdown-item:hover {
+    background: url(../img/3.jpg);
+}
+
+.cosmodal {
+    background-image: url(../img/3.jpg);
+    border: solid 10px;
+    border-image: url(../img/4.jpg);
+}
