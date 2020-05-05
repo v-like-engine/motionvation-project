@@ -6,9 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style126.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style124.css') }}">
     {% if current_user.is_authenticated and current_user.number_of_style == 1 %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/red_beast_design1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/red_beast_design2.css') }}">
     {% else %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/classique_design2.css') }}">
     {% endif %}
@@ -79,16 +79,16 @@
     <br>
     <br>
     <div style="height:20px; border-top:1px solid #9EC1D4; padding-left:10px; border-color: #77b;"></div>
-    <p class='button-note-text' style="font-size: 14px;">
+    <p class='button-note-text' style="font-size: 15px;">
         © Copyright: Vladislav Urzhumov, Denis Mikhailov, 2020
     </p>
-    <section class='simple-line'>
-        <p class='button-note-text' style="font-size: 14px;">
+    <section>
+        <p class='button-note-text simple-line' style="font-size: 16px;">
             Contact us: 
         </p>
-        <a href="/contact" class='button-note-text' style="font-size: 14px; color: #aaf;"> 
+        <a href="/contact" class='button-note-text' style="font-size: 16px; color: #aaf;">
             Support team page 
-        </a>
+        </a><br>
     </section><br>
 </footer>
 

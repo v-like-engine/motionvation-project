@@ -1,0 +1,37 @@
+body {
+    background: url(../img/cosmos.png);
+    color: #fff;
+}
+
+.bar-in {
+    background: url(../img/nitro_top.png);
+    height: 140px;
+}
+
+.card {
+    background: url(../img/dark_blue.png);
+}
+
+.tascard {
+    background: url(../img/nitro_top.png);
+}
+
+.list-group-color {
+    background: url(../img/dark_blue.png);
+}
+
+.button-note {
+    color: #fff;
+    background: url(../img/magma_top.png);
+    border: none;
+}
+
+.dropdown-menu {
+    background: url(../img/dark_blue.png);
+    border: none;
+}
+
+.cosmodal {
+    background-image: url(../img/modal_window.png);
+    background-size: 400px 400px;
+}

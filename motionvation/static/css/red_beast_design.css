@@ -1,0 +1,41 @@
+body {
+    background: url(../img/red_pulse.png);
+    color: #fff;
+}
+
+.bar-in {
+    background: url(../img/magma_top.png);
+    height: 140px;
+}
+
+.card {
+    background: url(../img/yellow_sunlight.png);
+}
+
+.list-group-color {
+    background: url(../img/nitro_top.png);
+}
+
+.tascard {
+    background: url(../img/magma_top.png);
+}
+
+.button-note {
+    color: #fff;
+    background: url(../img/magma_top.png);
+    border: none;
+}
+
+.dropdown-menu {
+    background: url(../img/yellow_sunlight.png);
+    border: none;
+}
+
+.dropdown-item:hover {
+    background: url(../img/yellow_sunlight.png);
+}
+
+.cosmodal {
+    background-image: url(../img/modal_window.png);
+    background-size: 400px 400px;
+}
