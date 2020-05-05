@@ -214,6 +214,7 @@ nav.navbar .dropdown:hover > .dropdown-menu {
     margin-left: 100px;
 }
 
+audio::-webkit-media-controls-panel,
 audio::-webkit-media-controls-time-remaining-display,
 audio::-webkit-media-controls-current-time-display {
   color: #99f;
@@ -242,7 +243,7 @@ audio::-webkit-media-controls-timeline {
 }
 
 audio::-webkit-media-controls-volume-slider {
-    background: url(../img/4.jpg);
+    background: url(../img/3.jpg);
 }
 
 audio {

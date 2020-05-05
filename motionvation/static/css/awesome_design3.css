@@ -4,7 +4,8 @@ body {
 }
 
 .bar-in {
-    background: url(../img/greenviroment.png);
+    background: url(../img/red_pulse.png);
+    height: 140px;
 }
 
 .card {
