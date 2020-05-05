@@ -23,24 +23,45 @@
     </ol>
     {% endif %}
     </nav>
-    <h2>Tasks</h2>
+    <h2>Tasks</h2><br>
     <div class="container">
         {% if t_page_id == 0 %}
             <button class="button-note"><a href="/select_category" class="button-note-text">Add new task</a></button>
         {% elif t_page_id == 2 %}
             <button class="button-note"><a href="/select_category" class="button-note-text">Add new relevant task</a></button>
         {% endif %}
-        <button class="btn btn-danger"><a href="/delete_all_tasks" class="button-note-text">Delete all tasks</a></button>
+        <br><a href="#" class="delete-text" data-toggle="modal" data-target="#deleteModal" style="font-size:16px">Delete all tasks <i class="fas fa-trash"></i></a>
+        <br>
+        <div class="modal" id="deleteModal" data-backdrop="static" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content cosmodal">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Delete all</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete all tasks? It can't be cancelled.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="button btn-danger"><a href="/delete_all_tasks" class='delete-text'>Delete</a></button>
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <br>
         <ul class="list-group">
             {% for task in tasks %}
             <li>
                 <div class="card tascard" style="width: 1080px; height: 140px; border: none;">
                     <div class="card-body">
-                        <section class='simple-inline'>
+                        <section>
                             <p>{{ task.title }}</p>
-                            <a href="tasks/{{ task.id }}" class="btn btn-note button-note-text card-link" data-toggle="tooltip" data-placement="bottom" data-delay: '{ "show": 0, "hide": 0 }' title="View task"><i class="fas fa-eye" style="color: #ccf"></i></a>
+                            <a href="tasks/{{ task.id }}" class="btn btn-note button-note-text card-link simple-line" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 0, "hide": 0 }' title="View task"><i class="fas fa-eye" style="color: #ccf"></i></a>
                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Settings">
-                                <a href="#" class="btn btn-note" data-toggle="modal" data-target="#taskSettings-{{task.id}}" style='color: #ccf;'><i class="fas fa-cog" style="color: #ccf"></i></a>
+                                <a href="#" class="btn btn-note simple-line" data-toggle="modal" data-target="#taskSettings-{{task.id}}" style='color: #ccf;'><i class="fas fa-cog" style="color: #ccf"></i></a>
                             </span>
                             {% if task.is_performed %}
                             <a class="btn btn-note" href="/undone_task/{{ task.id }}" style='color: #ccf;' data-toggle="tooltip" title="Undone"><i class="fas fa-times" style="color: #d22"></i></a>

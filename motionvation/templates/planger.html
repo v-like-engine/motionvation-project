@@ -7,13 +7,51 @@
     <div class="container">
         <ul class="list-group text-center">
             {% for task in tasks %}
-            <li class="list-group-item list-group-flush position-relative list-group-color">
-                <a href="tasks/{{ task.id }}" class="button-note-text stretched-link d-block">{{ task.title }}</a>
+            <li>
+                <div class="card tascard" style="width: 1080px; height: 120px; border: none;">
+                    <div class="card-body" style="padding-left: 20px;">
+                        <section>
+                            <p class='simple-line text-left' style="font-size: 20px; margin-right: 600px; white-space: pre-wrap;">{{ task.title.ljust(30, ' ')[:30] }}</p>
+                            <a href="tasks/{{ task.id }}" class="btn btn-note button-note-text card-link simple-line text-right" data-toggle="tooltip" data-placement="bottom" data-delay: '{ "show": 0, "hide": 0 }' title="View task"><i class="fas fa-eye" style="color: #ccf"></i></a>
+                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Settings">
+                                <a href="#" class="btn btn-note text-right" data-toggle="modal" data-target="#taskSettings-{{task.id}}" style='color: #ccf;'><i class="fas fa-cog" style="color: #ccf"></i></a>
+                            </span>
+                            {% if task.is_performed %}
+                            <a class="btn btn-note" href="/undone_task/{{ task.id }}" style='color: #ccf;' data-toggle="tooltip" title="Undone"><i class="fas fa-times" style="color: #d22"></i></a>
+                            {% else %}
+                            <a class="btn btn-note" href="/done_task/{{ task.id }}" data-toggle="tooltip" title="Done" style='color: #ccf;'><i class="fas fa-check" style="color: #9f9"></i></a>
+                            {% endif %}
+                        </section>
+                    </div>
+                </div>
             </li>
+            <div class="modal" id="taskSettings-{{task.id}}" data-backdrop="static" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content cosmodal">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Task settings</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>You can choose the action to perform</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="button btn-secondary"><a href="/change_task_category/{{ task.id }}" class='button-note-text'>Change category</a></button>
+                            <button type="button" class="button btn-danger"><a href="/tasks/delete/{{ task.id }}" class='delete-text'>Delete the task</a></button>
+                            <button type="button" class="button btn-info"><a href="/change_task/{{ task.id }}" class='button-note-text'>Change task</a></button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             {% endfor %}
         </ul>
         <br>
-        <button type="button" class="button button-note"><a href="/tasks" class='button-note-text'>All tasks</a></button>
+        <div class="text-center">
+            <button type="button" class="button button-note text-center"><a href="/tasks" class='button-note-text'>All tasks</a></button>
+        </div>
     </div>
 </main>
 
