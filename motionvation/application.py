@@ -707,6 +707,15 @@ def unauth(error):
     text=er_txt)
 
 
+@app.route('/contact')
+def contactus():
+    if current_user.is_authenticated:
+        info = (current_user.name + ' ' + current_user.surname)
+    else:
+        info = 'Anonymous'
+    return render_template('contactus.html', useracc=info)
+
+
 from os import path
 db_session.global_init(path.join(path.dirname(__file__), './db/motionvation.db'))
 
