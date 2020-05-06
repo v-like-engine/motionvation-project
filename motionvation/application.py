@@ -679,6 +679,26 @@ def hide_email(hide_or_show):
     return redirect('/account_info')
 
 
+@app.route('/change_style/<style>', methods=['GET', 'POST'])
+@login_required
+def change_style(style):
+    db = db_session.create_session()
+    user_now = db.query(User).filter(User.id == current_user.id).first()
+    print(user_now.number_of_style)
+    if style == 'a':
+        user_now.number_of_style = int(1)
+        print('1 -', user_now.number_of_style)
+    elif style == 'r':
+        user_now.number_of_style = int(2)
+        print('2 -', user_now.number_of_style)
+    else:
+        user_now.number_of_style = int(0)
+        print('0 -', user_now.number_of_style)
+    print(user_now.number_of_style)
+    db.commit()
+    return redirect('/settings')
+
+
 @app.route('/nothing')
 def nothing():
     return render_template('nothing.html', title='Nothing!', useracc='Account')

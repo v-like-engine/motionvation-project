@@ -5,21 +5,42 @@
 <main class='container'>
     <h1 class='text-center'>Settings</h1>
     <div style="height:20px; border-top:1px solid #9EC1D4; padding-left:10px; border-color:#aaf;"></div>
-    <h3 class='text-center'>Account settings</h3>
+    <h3 class='text-center' style="margin-bottom: 20px;">Account settings</h3>
+    <div style="height:20px; border-top:1px solid #9EC1D4; padding-left:10px; border-color:#aaf;"></div>
     <br>
-    <p><a href='/change_info' class='button-note-text'>Change account information</a></p>
+    <p class="text-center"><a href='/change_info' class='button-note-text' style="font-size: 24px;">Change account information</a></p>
     <br>
     {% if current_user.hide_email %}
-    <h5 class='acc-head-rank'><a href="/hide_email/show">Show my email for other users</a></h5>
+    <p class='text-center'>
+        <a href="/hide_email/show" class='button-note-text' style="font-size: 24px; margin: 0px;">
+            Show my email for other users
+        </a>
+    </p>
     {% else %}
-    <h5 class='acc-head-rank'><a href="/hide_email/hide">Hide my email for other users</a></h5>
+    <p class='text-center'>
+        <a href="/hide_email/hide" class='button-note-text' style="font-size: 24px; margin: 0px;">
+            Hide my email for other users
+        </a>
+    </p>
     {% endif %}
     <br>
-    <p><a href='/change_password' class='button-note-text'>Change password</a></p>
+    <p class="text-center"><a href='/change_password' class='button-note-text text-center' style="font-size: 24px;">Change password</a></p>
+    <br>
     <div style="height:20px; border-top:1px solid #9EC1D4; padding-left:10px; border-color:#aaf;"></div>
-    <h3 class='text-center'>Appearance settings</h4>
-    <a href='/change_style' class='button-note-text'>Change design of site</a>
-    <div style="height:20px; border-top:2px solid #9EC1D4; padding-left:10px; border-color:#aaf;"></div>
+    <h3 class='text-center' style="margin-bottom: 20px;">Appearance settings</h3>
+    <div style="height:20px; border-top:1px solid #9EC1D4; padding-left:10px; border-color:#aaf;"></div>
+    <div class="dropdown text-center style-item">
+        <br>
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+            Change style
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="/change_style/a">Awesome first part</a>
+            <a class="dropdown-item" href="/change_style/r">Red pulse style</a>
+            <a class="dropdown-item" href="/change_style/c">Old design</a>
+        </div>
+    </div>
+    <br>
 </main>
 
 {% endblock %}
