@@ -32,7 +32,12 @@ body {
 }
 
 .dropdown-item:hover {
-    background: url(../img/yellow_sunlight.png);
+    background: url(../img/lava_top.png);
+}
+
+.style-btn {
+    background: url(../img/light_magma_top.png);
+    color: #ccf;
 }
 
 .cosmodal {

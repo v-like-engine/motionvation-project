@@ -8,10 +8,6 @@ body {
     height: 140px;
 }
 
-.style-item {
-    
-}
-
 .card {
     background: url(../img/dark_blue.png);
 }
@@ -33,6 +29,11 @@ body {
 .dropdown-menu {
     background: url(../img/dark_blue.png);
     border: none;
+}
+
+.style-btn {
+    background: url(../img/purple_magma.png);
+    color: #ccf;
 }
 
 .cosmodal {

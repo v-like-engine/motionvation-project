@@ -35,6 +35,11 @@ body {
     background: url(../img/3.jpg);
 }
 
+.style-btn {
+    background: url(../img/3.jpg);
+    color: #ccf;
+}
+
 .cosmodal {
     background-image: url(../img/3.jpg);
     border: solid 10px;
