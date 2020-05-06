@@ -45,3 +45,43 @@ body {
     border: solid 10px;
     border-image: url(../img/4.jpg);
 }
+
+.prio-10 {
+    background-image: url(../img/4.jpg);
+}
+
+.prio-9 {
+    background-image: url(../img/4.jpg);
+}
+
+.prio-8 {
+    background-image: url(../img/4.jpg);
+}
+
+.prio-7 {
+    background-image: url(../img/1.jpg);
+}
+
+.prio-6 {
+    background-image: url(../img/1.jpg);
+}
+
+.prio-5 {
+    background-image: url(../img/1.jpg);
+}
+
+.prio-4 {
+    background-image: url(../img/3.jpg);
+}
+
+.prio-3 {
+    background-image: url(../img/3.jpg);
+}
+
+.prio-2 {
+    background-image: url(../img/3.jpg);
+}
+
+.prio-1 {
+    background-image: url(../img/7.jpg);
+}

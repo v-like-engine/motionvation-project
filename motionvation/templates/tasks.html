@@ -56,7 +56,7 @@
             {% for task in tasks %}
             <li>
                 <div class="card tascard" style="width: 1080px; height: 140px; border: none;">
-                    <div class="card-body">
+                    <div class="card-body prio-{{ task.priority }}">
                         <section>
                             <p>{{ task.title }}</p>
                             <a href="tasks/{{ task.id }}" class="btn btn-note button-note-text card-link simple-line" data-toggle="tooltip" data-placement="bottom" data-delay='{ "show": 0, "hide": 0 }' title="View task"><i class="fas fa-eye" style="color: #ccf"></i></a>

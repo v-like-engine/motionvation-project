@@ -44,3 +44,53 @@ body {
     background-image: url(../img/modal_window.png);
     background-size: 400px 400px;
 }
+
+.prio-10 {
+    background-image: url(../img/W10.png);
+    background-size: 1080px;
+}
+
+.prio-9 {
+    background-image: url(../img/W9.png);
+    background-size: 1080px;
+}
+
+.prio-8 {
+    background-image: url(../img/W8.png);
+    background-size: 1080px;
+}
+
+.prio-7 {
+    background-image: url(../img/W7.png);
+    background-size: 1080px;
+}
+
+.prio-6 {
+    background-image: url(../img/W6.png);
+    background-size: 1080px;
+}
+
+.prio-5 {
+    background-image: url(../img/W5.png);
+    background-size: 1080px;
+}
+
+.prio-4 {
+    background-image: url(../img/W4.png);
+    background-size: 1080px;
+}
+
+.prio-3 {
+    background-image: url(../img/W3.png);
+    background-size: 1080px;
+}
+
+.prio-2 {
+    background-image: url(../img/W2.png);
+    background-size: 1080px;
+}
+
+.prio-1 {
+    background-image: url(../img/W1.png);
+    background-size: 1080px;
+}
