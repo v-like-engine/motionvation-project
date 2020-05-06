@@ -690,10 +690,10 @@ def change_style(style):
     elif style == 'r':
         user_now.number_of_style = int(2)
         print('2 -', user_now.number_of_style)
+    elif style == 'm':
+        user_now.number_of_style = int(3)
     else:
         user_now.number_of_style = int(0)
-        print('0 -', user_now.number_of_style)
-    print(user_now.number_of_style)
     db.commit()
     return redirect('/settings')
 
