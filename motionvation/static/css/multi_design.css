@@ -1,0 +1,42 @@
+body {
+    background: url(../img/space_planets.png);
+    color: #fff;
+}
+
+.bar-in {
+    background: url(../img/purple_magma.png);
+    height: 140px;
+}
+
+.card {
+    background: url(../img/purple_waves.png);
+}
+
+.tascard {
+    background: url(../img/purple_magma.png);
+}
+
+.list-group-color {
+    background: url(../img/purple_waves.png);
+}
+
+.button-note {
+    color: #fff;
+    background: url(../img/magma_top.png);
+    border: none;
+}
+
+.dropdown-menu {
+    background: url(../img/purple_waves.png);
+    border: none;
+}
+
+.style-btn {
+    background: url(../img/purple_magma.png);
+    color: #ccf;
+}
+
+.cosmodal {
+    background-image: url(../img/modal_window.png);
+    background-size: 400px 400px;
+}
