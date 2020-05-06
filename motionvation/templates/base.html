@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style124.css') }}">
     {% if current_user.is_authenticated and current_user.number_of_style == 1 %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/red_beast_design2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/red_beast_design.css') }}">
     {% else %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/classique_design2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/classique_design.css') }}">
     {% endif %}
     <script src="https://kit.fontawesome.com/a4abeefcac.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
