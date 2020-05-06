@@ -48,16 +48,9 @@ def index():
 @login_required
 def tasks():
     db = db_session.create_session()
-    tasks = db.query(Task).filter(Task.user == current_user, Task.is_performed == False).all().copy()
-    new_tasks = []
-    priority_now = 10
-    while priority_now != -1:
-        for task in tasks:
-            if task.priority == priority_now:
-                new_tasks.append(task)
-        priority_now -= 1
-    return render_template('tasks.html', tasks=new_tasks, t_page_id=0, 
-    useracc=(current_user.name + ' ' + current_user.surname), title='Tasks')
+    done = db.query(Task).filter(Task.user == current_user, Task.is_performed == False).order_by(Task.priority.desc()).all().copy()
+    return render_template('tasks.html', tasks=done, t_page_id=0,
+                            useracc=(current_user.name + ' ' + current_user.surname), title='Tasks')
 
 
 @app.route('/done_tasks')
