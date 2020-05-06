@@ -10,7 +10,7 @@ class Task(SqlAlchemyBase, SerializerMixin):
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String)
     description = Column(String)
-    priority = Column(String)
+    priority = Column(Integer)
     is_performed = Column(Boolean, default=False)
     category_id = Column(Integer, ForeignKey('categories.id'))
     user_id = Column(Integer, ForeignKey('users.id'))

@@ -53,7 +53,7 @@ def tasks():
     priority_now = 10
     while priority_now != -1:
         for task in tasks:
-            if task.priority == str(priority_now):
+            if task.priority == priority_now:
                 new_tasks.append(task)
         priority_now -= 1
     return render_template('tasks.html', tasks=new_tasks, t_page_id=0, 
@@ -166,7 +166,7 @@ def change_task(id):
     if form.validate_on_submit():
         task.title = form.title.data
         task.description = form.description.data
-        task.priority = form.priority.data
+        task.priority = int(form.priority.data)
         db.commit()
         return redirect('/tasks')
     return render_template('change_task.html', form=form, title='Change task')
@@ -220,16 +220,23 @@ def change_note(id):
 def add_category():
     if current_user.id != admin_id:
         return redirect('/')
+    db = db_session.create_session()
+    categories = db.query(Category).all()
+    if categories:
+        return redirect('/')
     titles = ['Sport', 'Programming', 'Studying', 'Work', 'Creativity', 'Household chores', 'Outdoor activities',
-              'Friends and family', 'Physical labor', 'Reading', 'Music']
+              'Friends and family', 'Physical labor', 'Reading', 'Music', 'Other']
+    print('кря')
     for title in titles:
+        print(title)
         db = db_session.create_session()
         category = Category()
         category.title = title
         current_user.categories.append(category)
         db.merge(current_user)
-        db.commit()
-    return redirect('/categories')
+    db.commit()
+    titles = []
+    return redirect('/')
 
 
 @app.route('/select_category')
@@ -251,7 +258,7 @@ def add_task(id):
         task = Task()
         task.title = task_form.title.data
         task.description = task_form.description.data
-        task.priority = task_form.priority.data
+        task.priority = int(task_form.priority.data)
         current_category = db.query(Category).filter(Category.user_id == admin_id, Category.id == id).first()
         task.category = current_category
         task.user = current_user
