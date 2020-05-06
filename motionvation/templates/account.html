@@ -4,7 +4,27 @@
 
 <main class='container'>
     <div style="height:20px; border-top:2px solid #9EC1D4; padding-left:10px; border-color:grey;"></div>
-    <a href='/challenges'><img src="{{ url_for('static', filename='img/king.jpg') }}" width="200" height="210" alt="Image not found" class='acc-avatar'></a>
+    {% if rank == 'Novice' %}
+    <a href='/challenges'><img src="{{ url_for('static', filename='img/Cyan-face.png') }}" width="200" height="210" alt="Image not found" class='acc-avatar'></a>
+    {% elif rank == 'Private' %}
+    <a href='/challenges'><img src="{{ url_for('static', filename='img/Green-face.png') }}" width="200" height="210" alt="Image not found" class='acc-avatar'></a>
+    {% elif rank == 'Interested' %}
+    <a href='/challenges'><img src="{{ url_for('static', filename='img/Lime-face.png') }}" width="200" height="210" alt="Image not found" class='acc-avatar'></a>
+    {% elif rank == 'Motivated' %}
+    <a href='/challenges'><img src="{{ url_for('static', filename='img/Light-face.png') }}" width="200" height="210" alt="Image not found" class='acc-avatar'></a>
+    {% elif rank == 'Motioned' %}
+    <a href='/challenges'><img src="{{ url_for('static', filename='img/Heat-face.png') }}" width="200" height="210" alt="Image not found" class='acc-avatar'></a>
+    {% elif rank == 'Inspired' %}
+    <a href='/challenges'><img src="{{ url_for('static', filename='img/Orange-face.png') }}" width="200" height="210" alt="Image not found" class='acc-avatar'></a>
+    {% elif rank == 'Experienced' %}
+    <a href='/challenges'><img src="{{ url_for('static', filename='img/Red-face.png') }}" width="200" height="210" alt="Image not found" class='acc-avatar'></a>
+    {% elif rank == 'Enlightened' %}
+    <a href='/challenges'><img src="{{ url_for('static', filename='img/Pink-face.png') }}" width="200" height="210" alt="Image not found" class='acc-avatar'></a>
+    {% elif rank == 'Master' %}
+    <a href='/challenges'><img src="{{ url_for('static', filename='img/Purple-face.png') }}" width="200" height="210" alt="Image not found" class='acc-avatar'></a>
+    {% else %}
+    <a href='/challenges'><img src="{{ url_for('static', filename='img/DarkBlue-face.png') }}" width="200" height="210" alt="Image not found" class='acc-avatar'></a>
+    {% endif %}
     <h1 class='acc-head-name'>{{useracc}}</h1>
     <h3 class='acc-head-rank'>Rank: {{rank}}</h3>
     <h4 class='acc-head-exp'>Experience: {{currexp}} / {{maxp}}</h4>
