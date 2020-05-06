@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style124.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     {% if current_user.is_authenticated and current_user.number_of_style == 1 %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/awesome_design.css') }}">
     {% elif current_user.is_authenticated and current_user.number_of_style == 2 %}
