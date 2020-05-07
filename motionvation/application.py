@@ -13,6 +13,7 @@ from motionvation.forms import RegisterForm, NotesForm, CategoryForm, TaskForm, 
     ChangeTaskForm, NewsForm, ChangeNewsForm
 from motionvation.forms.change_note_form import ChangeNoteForm
 from motionvation.forms.login_form import LoginForm
+from motionvation.get_xp_calculation import get_xp
 from motionvation.perform_challenge import performing_challenge
 
 from motionvation.xp import *
@@ -189,14 +190,10 @@ def add_note():
         note.title = notes_form.title.data
         note.text = notes_form.text.data
         current_user.notes.append(note)
-        current_user.xp += adding_note_xp
         db.merge(current_user)
         challenges = db.query(Challenge).filter(Challenge.user == current_user, Challenge.add_note == True).all()
         performing_challenge(challenges, 1)
-        challenges_to_get_xp = db.query(Challenge).filter(Challenge.user == current_user,
-                                                          Challenge.get_xp == True,
-                                                          Challenge.is_won == False).all().copy()
-        performing_challenge(challenges_to_get_xp, adding_note_xp)
+        get_xp(current_user, adding_note_xp, db)
         db.commit()
         return redirect('mynotes')
     return render_template('add_note.html', form=notes_form, useracc=(current_user.name + ' ' + current_user.surname),
@@ -269,14 +266,10 @@ def add_task(id):
         current_category = db.query(Category).filter(Category.user_id == admin_id, Category.id == id).first()
         task.category = current_category
         task.user = current_user
-        current_user.xp += adding_task_xp
         db.merge(task)
         challenges = db.query(Challenge).filter(Challenge.user == current_user, Challenge.add_task == True).all()
         performing_challenge(challenges, 1)
-        challenges_to_get_xp = db.query(Challenge).filter(Challenge.user == current_user,
-                                                          Challenge.get_xp == True,
-                                                          Challenge.is_won == False).all().copy()
-        performing_challenge(challenges_to_get_xp, adding_task_xp)
+        get_xp(current_user, adding_task_xp, db)
         db.commit()
         return redirect('/tasks')
     return render_template('add_task.html', form=task_form, useracc=(current_user.name + ' ' + current_user.surname),
@@ -317,14 +310,9 @@ def done_task(id):
     task = db.query(Task).filter(Task.user == current_user, Task.id == id).first()
     if task and task.user == current_user:
         task.is_performed = True
-        user_now = db.query(User).filter(User.id == current_user.id).first()
         challenges = db.query(Challenge).filter(Challenge.user == current_user, Challenge.do_task == True).all()
         performing_challenge(challenges, 1)
-        challenges_to_get_xp = db.query(Challenge).filter(Challenge.user == current_user,
-                                                          Challenge.get_xp == True,
-                                                          Challenge.is_won == False).all().copy()
-        performing_challenge(challenges_to_get_xp, done_task_xp)
-        user_now.xp += done_task_xp
+        get_xp(current_user, done_task_xp, db)
         db.commit()
     return redirect('/tasks')
 
@@ -394,12 +382,7 @@ def challenge():
         challenges_to_won_challenges = db.query(Challenge).filter(Challenge.user == current_user,
                                                                   Challenge.do_challenge == True,
                                                                   Challenge.is_won == False).all().copy()
-        challenges_to_get_xp = db.query(Challenge).filter(Challenge.user == current_user,
-                                                          Challenge.get_xp == True,
-                                                          Challenge.is_won == False).all().copy()
-        current_user.xp += expbonus
-        for challenge in challenges_to_get_xp:
-            challenge.current += expbonus
+        get_xp(current_user, expbonus, db)
         for challenge in challenges_to_won_challenges:
             challenge.current += 1
     db.commit()
