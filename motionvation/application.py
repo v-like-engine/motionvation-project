@@ -612,7 +612,7 @@ def news_info(id):
     id = int(id)
     db = db_session.create_session()
     news = db.query(News).filter(News.id == id).first()
-    if news and news.user == current_user:
+    if news:
         return render_template('news_info.html', current_user=current_user, news=news, useracc=(current_user.name + ' ' + current_user.surname),
                                title='News info')
     else:
