@@ -80,6 +80,23 @@ def generate_challenge():
     return {'plot': plot, 'required': required, 'difficulty': difficulty, 'text': text}
 
 
+def challenge_to_db(current_user, challenge, challenge_dict):
+    challenge.title = challenge_dict['text']
+    challenge.current = 0
+    challenge.user = current_user
+    challenge.required = challenge_dict['required']
+    challenge.add_task = add_task in challenge_dict['plot']
+    challenge.add_note = add_note in challenge_dict['plot']
+    challenge.delete_task = delete_task in challenge_dict['plot']
+    challenge.delete_note = delete_note in challenge_dict['plot']
+    challenge.do_task = do_task in challenge_dict['plot']
+    challenge.do_challenge = do_challenge in challenge_dict['plot']
+    challenge.get_xp = get_xp in challenge_dict['plot']
+    challenge.get_level = get_level in challenge_dict['plot']
+    challenge.difficulty = challenge_dict['difficulty']
+    challenge.is_won = False
+
+
 add_task = 1
 add_note = 2
 delete_task = 3

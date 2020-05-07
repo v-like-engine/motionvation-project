@@ -5,7 +5,7 @@ from datetime import timedelta
 from flask import Flask, render_template, redirect, url_for, make_response, jsonify, session
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
-from motionvation.challenge_generator import generate_challenge
+from motionvation.challenge_generator import generate_challenge, challenge_to_db
 from motionvation.data import db_session
 from motionvation.data.models import Note, Category, Task, News, Challenge
 from motionvation.data.models.users import User
@@ -13,7 +13,7 @@ from motionvation.forms import RegisterForm, NotesForm, CategoryForm, TaskForm, 
     ChangeTaskForm, NewsForm, ChangeNewsForm
 from motionvation.forms.change_note_form import ChangeNoteForm
 from motionvation.forms.login_form import LoginForm
-from motionvation.get_xp_calculation import get_xp
+from motionvation.get_xp_calculation import accrue_xp
 from motionvation.perform_challenge import performing_challenge
 
 from motionvation.xp import *
@@ -193,7 +193,7 @@ def add_note():
         db.merge(current_user)
         challenges = db.query(Challenge).filter(Challenge.user == current_user, Challenge.add_note == True).all()
         performing_challenge(challenges, 1)
-        get_xp(current_user, adding_note_xp, db)
+        accrue_xp(current_user, adding_note_xp, db)
         db.commit()
         return redirect('mynotes')
     return render_template('add_note.html', form=notes_form, useracc=(current_user.name + ' ' + current_user.surname),
@@ -269,7 +269,7 @@ def add_task(id):
         db.merge(task)
         challenges = db.query(Challenge).filter(Challenge.user == current_user, Challenge.add_task == True).all()
         performing_challenge(challenges, 1)
-        get_xp(current_user, adding_task_xp, db)
+        accrue_xp(current_user, adding_task_xp, db)
         db.commit()
         return redirect('/tasks')
     return render_template('add_task.html', form=task_form, useracc=(current_user.name + ' ' + current_user.surname),
@@ -312,7 +312,7 @@ def done_task(id):
         task.is_performed = True
         challenges = db.query(Challenge).filter(Challenge.user == current_user, Challenge.do_task == True).all()
         performing_challenge(challenges, 1)
-        get_xp(current_user, done_task_xp, db)
+        accrue_xp(current_user, done_task_xp, db)
         db.commit()
     return redirect('/tasks')
 
@@ -382,7 +382,7 @@ def challenge():
         challenges_to_won_challenges = db.query(Challenge).filter(Challenge.user == current_user,
                                                                   Challenge.do_challenge == True,
                                                                   Challenge.is_won == False).all().copy()
-        get_xp(current_user, expbonus, db)
+        accrue_xp(current_user, expbonus, db)
         for challenge in challenges_to_won_challenges:
             challenge.current += 1
     db.commit()
@@ -409,20 +409,7 @@ def refresh():
     for i in range(5):
         challenge_dict = generate_challenge()
         chall = Challenge()
-        chall.title = challenge_dict['text']
-        chall.current = 0
-        chall.user = current_user
-        chall.required = challenge_dict['required']
-        chall.add_task = 1 in challenge_dict['plot']
-        chall.add_note = 2 in challenge_dict['plot']
-        chall.delete_task = 3 in challenge_dict['plot']
-        chall.delete_note = 4 in challenge_dict['plot']
-        chall.do_task = 5 in challenge_dict['plot']
-        chall.do_challenge = 6 in challenge_dict['plot']
-        chall.get_xp = 7 in challenge_dict['plot']
-        chall.get_level = 8 in challenge_dict['plot']
-        chall.difficulty = challenge_dict['difficulty']
-        chall.is_won = False
+        challenge_to_db(current_user, chall, challenge_dict)
         db.merge(chall)
         db.commit()
     return redirect('/challenges')
