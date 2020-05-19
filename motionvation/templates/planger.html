@@ -11,7 +11,7 @@
                 <div class="card tascard prio-{{ task.priority }}" style="width: 1080px; height: 120px; border: none;">
                     <div class="card-body" style="padding-left: 20px;">
                         <section>
-                            <p class='simple-line text-left' style="font-size: 20px; margin-right: 600px; white-space: pre-wrap;">{{ task.title.ljust(30, ' ')[:30] }}</p>
+                            <p class='simple-line text-left' style="font-size: 20px; margin-right: 600px; white-space: pre-wrap;"><tt>{{ task.title.ljust(30, ' ')[:30] }}</tt></p>
                             <a href="tasks/{{ task.id }}" class="btn btn-note button-note-text card-link simple-line text-right" data-toggle="tooltip" data-placement="bottom" data-delay: '{ "show": 0, "hide": 0 }' title="View task"><i class="fas fa-eye" style="color: #ccf"></i></a>
                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Settings">
                                 <a href="#" class="btn btn-note text-right" data-toggle="modal" data-target="#taskSettings-{{task.id}}" style='color: #ccf;'><i class="fas fa-cog" style="color: #ccf"></i></a>
