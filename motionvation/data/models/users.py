@@ -20,8 +20,6 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     xp = Column(Integer, default=0)
     hashed_password = Column(String)
     number_of_style = Column(Integer)
-    is_confirmed = Column(Boolean, default=False)
-
     notes = orm.relation('Note', back_populates='user')
 
     categories = orm.relation('Category', back_populates='user')
