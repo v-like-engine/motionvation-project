@@ -6,31 +6,72 @@
         <h2 class="text-center">What to do?</h2>
         <a href='/challenges'><img src="{{ url_for('static', filename='img/6.png') }}" alt="Image not found"></a>
         {% else %}
+        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" data-interval="6000" style="max-width: 1280px;">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{ url_for('static', filename='img/set_fire.jpg') }}" class="d-block w-100" alt="mars">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Does this picture look familiar?</h5>
+                        <p>Yes? Then, you deal with The Procrastination! But don`t panic: it is not a diagnoses and you don`t even need medicaments!</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='img/catask.jpg') }}" class="d-block w-100" alt="earth">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Remember: you are not alone with it!</h5>
+                        <p>Procrastination is the main cause of lack of time for millions of people around the world. Don`t worry and just try to do something with it!</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='img/reward.jpg') }}" class="d-block w-100" alt="third">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Be sure that you can overcome it!</h5>
+                        <p>There are so many ways to fight the procrastination! MotionVation offers you some instruments that were useful for it`s developers. And we are not the only one website made with that purpose.</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Назад</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Далее</span>
+            </a>
+        </div>
         <a class="btn challenge-button clps" data-toggle="collapse" href="#collapseWhat" role="button" aria-expanded="false" aria-controls="collapseWhat"><h2 class="text-center">What is this project?</h2></a>
         <div class="collapse" id="collapseWhat">
-            <div class="card card-body main-log">
+            <div class="card card-body main-log" style="background-image: None;">
                 <section class="login-main-text"> 
-                    <h5>The simple web-based time designer that can help in organising your own time</h5>
+                    <p>The simple web-based time designer that can help in organising your own time</p>
+                    <hr>
                     <p>There everyone will be able to:</p>
-                    <p><ul> Defeat procrastination:
-                        <li> Read some tips about time allocation </li>
-                        <li>Create a timetable
-                        Make a to-do list
-                        Take part in some exciting challenges
-                        Start respecting yourself:
-
-                        Register your own account
-                        See the statistic about things that you have done
-                        Beat your own records
-                        Earn some beautiful titles
-                        Relax and enjoy the work:
-
-                        Turn on the music
-                        Write the notes
-                        Arrange your job as comfortable as possible
-                        Enjoy the self-development!</li>
-                    </ul>
-                    </p>
+                    <p>Defeat procrastination:</p>
+                        <ul>
+                            <li> Read some tips about time allocation </li>
+                            <li>Create a timetable</li>
+                            <li>Make a to-do list</li>
+                            <li>Take part in some exciting challenges</li>
+                        </ul>
+                    <p>Start respecting yourself:</p>
+                        <ul>
+                            <li>Register your own account</li>
+                            <li>See the statistic about things that you have done</li>
+                            <li>Beat your own records</li>
+                            <li>Earn some beautiful titles</li>
+                        </ul>
+                    <p>Relax and enjoy the work:</p>
+                        <ul>
+                            <li>Turn on the music</li>
+                            <li>Write the notes</li>
+                            <li>Arrange your job as comfortable as possible</li>
+                            <li>Enjoy the self-development!</li>
+                        </ul>
                 </section>
             </div>
         </div>
