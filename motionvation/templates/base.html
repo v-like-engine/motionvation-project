@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/red_beast_design.css') }}">
     {% elif current_user.is_authenticated and current_user.number_of_style == 3 %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/multi_design.css') }}">
+    {% elif current_user.is_authenticated and current_user.number_of_style == 4 %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/simple_blue_design.css') }}">
     {% elif not current_user.is_authenticated %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/simple_blue_design.css') }}">
     {% endif %}

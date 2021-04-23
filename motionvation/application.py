@@ -692,6 +692,8 @@ def change_style(style):
         print('2 -', user_now.number_of_style)
     elif style == 'm':
         user_now.number_of_style = int(3)
+    elif style == 'l':
+        user_now.number_of_style = int(4)
     else:
         user_now.number_of_style = int(0)
     db.commit()

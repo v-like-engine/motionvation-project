@@ -7,6 +7,26 @@ body {
     background: url(../img/blupan.jpg);
 }
 
+.button-note-text {
+    color: #038;
+}
+
+.acc-head-name {
+    color: #038;
+}
+
+.acc-head-rank {
+    color: #038;
+}
+
+.acc-head-exp {
+    color: #038;
+}
+
+.text-center {
+    color: #038;
+}
+
 .button-login-main {
     color: #038;
     font-size: 14.5pt;
