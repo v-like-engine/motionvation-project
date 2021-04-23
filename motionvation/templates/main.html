@@ -6,14 +6,22 @@
         <h2 class="text-center">What to do?</h2>
         <a href='/challenges'><img src="{{ url_for('static', filename='img/6.png') }}" alt="Image not found"></a>
         {% else %}
-        <h5 class="text-center">Once upon a time... Wait! Do you really want to read something like that instead of doing significant things right now?</h5>
-        <h5 class="text-center">Oh, let me guess... You just need a little more motivation? Well, you've come to the right place.</h5>
-        <h5 class="text-center">The MotionVation is made for people who want to change their own lives forever by killing the laziness and tendency toward procrastination. Just follow the further instructions!</h5>
-        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" data-interval="9000" style="max-width: 1000px; margin: 0 auto;">
+        <br>
+        <div class="spacer-line" style="height:20px; border-top:2px solid #9EC1D4; padding-left:10px;"></div>
+        <br>
+        <h5 align="justify" class="description-p">Once upon a time... Wait! Do you really want to read something like that instead of doing significant things right now?</h5>
+        <h5 align="justify" class="description-p">Oh, let me guess... You just need a little more motivation? Well, you've come to the right place.</h5>
+        <h5 align="justify" class="description-p">MotionVation is made for people who want to change their own lives forever by killing the laziness and tendency toward procrastination.</h5>
+        <h5 align="justify" class="description-p"> Just follow the further instructions!</h5>
+        <br>
+        <div class="spacer-line" style="height:20px; border-top:2px solid #9EC1D4; padding-left:10px;"></div>
+        <br>
+        <div id="carouselExampleCaptions" class="carousel slide container" data-ride="carousel" data-interval="9000" style="max-width: 1000px; margin: 0 auto;">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
                 <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -34,7 +42,14 @@
                     <img src="{{ url_for('static', filename='img/reward.jpg') }}" class="d-block w-100" alt="third">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Be sure that you can overcome it!</h5>
-                        <p>There are so many ways to fight the procrastination! MotionVation offers you some instruments that were useful for it`s developers. And we are not the only one website made with that purpose.</p>
+                        <p>There are so many ways to fight the procrastination! MotionVation offers you some instruments that were useful for it`s developers. Just try it out!</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='img/noted.jpg') }}" class="d-block w-100" alt="forth">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Today is time to start!</h5>
+                        <p>Just <a href='/register' class="button-login-main">Register</a> an account and begin your self-improvement!</p>
                     </div>
                 </div>
             </div>
@@ -47,28 +62,48 @@
                 <span class="sr-only">Далее</span>
             </a>
         </div>
-        <a class="btn challenge-button clps" data-toggle="collapse" href="#collapseWhat" role="button" aria-expanded="false" aria-controls="collapseWhat"><h2 class="text-center">What is this project?</h2></a>
+        <br>
+        <div class="spacer-line" style="height:20px; border-top:2px solid #9EC1D4; padding-left:10px;"></div>
+        <br>
+        <h5 class="description-p" style="font-size: 15pt;">Don`t wait until tomorrow! <a href='/login' class="button-login-main" style="font-size: 16pt;">Login</a> or <a href='/register' style="font-size: 16pt;" class="button-login-main">Register</a></h5> and try out our system with all the new developments!
+        <br>
+        <div class="spacer-line" style="height:20px; border-top:2px solid #9EC1D4; padding-left:10px;"></div>
+        <br>
+        <h5 class="description-p" style="font-size: 18pt;">Any questions left? Check it out in our cards!</h5>
+        <a class="btn challenge-button clps" data-toggle="collapse" href="#collapseWhat" role="button" aria-expanded="false" aria-controls="collapseWhat"><h2 class="text-center">What instruments can help me with fighting procrastination?</h2></a>
         <div class="collapse" id="collapseWhat">
-            <div class="card card-body main-log" style="background-image: None;">
-                <section class="login-main-text"> 
-                    <p>The simple web-based time designer that can help in organising your own time</p>
-                    <hr>
-                    <p>There everyone will be able to:</p>
-                    <p>Defeat procrastination:</p>
+            <div class="card card-body main-log">
+                <section class="login-main-text">
+                    <p>You will be able to:</p>
                         <ul>
-                            <li> Read some tips about time allocation </li>
+                            <li>Read some tips about time allocation</li>
                             <li>Create a timetable</li>
                             <li>Make a to-do list</li>
                             <li>Take part in some exciting challenges</li>
+                            <li>And much more!</li>
                         </ul>
-                    <p>Start respecting yourself:</p>
+                </section>
+            </div>
+        </div>
+        <a class="btn challenge-button clps" data-toggle="collapse" href="#collapseWhen" role="button" aria-expanded="false" aria-controls="collapseWhat"><h2 class="text-center">What will motivate me there?</h2></a>
+        <div class="collapse" id="collapseWhen">
+            <div class="card card-body main-log">
+                <section class="login-main-text">
+                    <p>Just start respecting yourself:</p>
                         <ul>
                             <li>Register your own account</li>
                             <li>See the statistic about things that you have done</li>
                             <li>Beat your own records</li>
                             <li>Earn some beautiful titles</li>
                         </ul>
-                    <p>Relax and enjoy the work:</p>
+                </section>
+            </div>
+        </div>
+        <a class="btn challenge-button clps" data-toggle="collapse" href="#collapseWhere" role="button" aria-expanded="false" aria-controls="collapseWhat"><h2 class="text-center">Are there any ways to enjoy the process?</h2></a>
+        <div class="collapse" id="collapseWhere">
+            <div class="card card-body main-log">
+                <section class="login-main-text">
+                    <p>To keep calm and relax you can:</p>
                         <ul>
                             <li>Turn on the music</li>
                             <li>Write the notes</li>
@@ -81,16 +116,9 @@
         <a class="btn challenge-button clps" data-toggle="collapse" href="#collapseDashik" role="button" aria-expanded="false" aria-controls="collapseExample"><h2 class="text-center">Who we are?</h2></a>
         <div class="collapse" id="collapseDashik">
             <div class="card card-body main-log">
-                <p class="login-main-text">We are young team</p>
+                <p class="login-main-text">We are a team of inspired students from Perm who have challenged themselves to carry out an important task. We want to create a system for helping people to fight laziness and procrastination effectively. We came up with this idea after we had stepped out of our comfort zone. We coped with a stack of school tasks and began to be extremely involved in programming and collecting useful information. Therefore, now we do understand the difficulty in fighting procrastination like nobody else. So we are here to support you!</p>
             </div>
         </div>
-        <a class="btn challenge-button clps" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><h2 class="text-center">How to start?</h2></a>
-        <div class="collapse" id="collapseExample">
-            <div class="card card-body main-log">
-                <p class="login-main-text">You need to <a href='/login' class="button-login-main">Login</a> or <a href='/register' class="button-login-main">Register</a> to see the content!</p>
-            </div>
-        </div>
-        <a href='/login'><img src="{{ url_for('static', filename='img/6.png') }}" alt="Image not found"></a>
         {% endif %}
     </main>
 

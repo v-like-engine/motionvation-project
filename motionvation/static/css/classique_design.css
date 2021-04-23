@@ -45,6 +45,14 @@ body {
     border-image: url(../img/4.jpg);
 }
 
+.fight-t {
+    color: #bbb;
+}
+
+.description-p {
+    color: #ccf;
+}
+
 .prio-10 {
     background-image: url(../img/4.jpg);
 }
