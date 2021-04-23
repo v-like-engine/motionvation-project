@@ -5,11 +5,10 @@ body {
 
 .bar-in {
     background: url(../img/blupan.jpg);
-    height: 140px;
 }
 
 .card {
-    background: url(../img/whi.jpg);
+    background: url(../img/darkblupan.jpg);
 }
 
 .tascard {
@@ -44,6 +43,10 @@ body {
     background-image: url(../img/whi.jpg);
     border: solid 10px;
     border-image: url(../img/blupan.jpg);
+}
+
+.fight-t {
+    color: #15a;
 }
 
 .prio-10 {

@@ -27,54 +27,61 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark sticky-top navbar-expand-lg bar-in">
-        <a class="navbar-brand ssilka" href="/">motiONvation</a>
-        <div class="collapse navbar-collapse">
-            {% if current_user.is_authenticated %}
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href='/news'>News</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href='/planger'>My PLANger</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href='/mynotes'>My notebook</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href='/music' target="_blank">Music</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href='/challenges'>Challenges</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item nav-item-acc dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                        {{ useracc }}
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item dropdown-nav-text" href="/account_info">My account</a>
-                        <a class="dropdown-item dropdown-nav-text" href="/settings">Settings</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item dropdown-nav-text" href="/logout">LogOut</a>
-                    </div>
-                </li>
-            </ul>
-            {% else %}
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href='/login'>Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href='/register'>Register</a>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark bar-in">
+            <a class="navbar-brand ssilka" href="/">moti<b>ON</b>vation</a>
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarCollapse" style="">
+                {% if current_user.is_authenticated %}
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href='/news'>News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href='/planger'>My PLANger</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href='/mynotes'>My notebook</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href='/music' target="_blank">Music</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href='/challenges'>Challenges</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item nav-item-acc dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            {{ useracc }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item dropdown-nav-text" href="/account_info">My account</a>
+                            <a class="dropdown-item dropdown-nav-text" href="/settings">Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item dropdown-nav-text" href="/logout">LogOut</a>
+                        </div>
+                    </li>
+                </ul>
+                {% else %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href='/login'>Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href='/register'>Register</a>
+                    </li>
+                </ul>
                 {% endif %}
-            </ul>
-        </div>
-    </nav>
-
-    <h2 class="p-3 text-muted">Fight your procrastination!</h2>
-
+            </div>
+        </nav>
+        <br>
+        <br>
+        <br>
+        <h2 class="p-3 fight-t">Fight your procrastination!</h2>
+    </header>
     <main class="container-fluid">
         {% block content %}
         {% endblock %}
