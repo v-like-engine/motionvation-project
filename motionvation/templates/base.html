@@ -7,14 +7,16 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    {% if current_user.is_authenticated and current_user.number_of_style == 1 %}
+    {% if current_user.is_authenticated and current_user.number_of_style == 0 %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/classique_design.css') }}">
+    {% elif current_user.is_authenticated and current_user.number_of_style == 1 %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/awesome_design.css') }}">
     {% elif current_user.is_authenticated and current_user.number_of_style == 2 %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/red_beast_design.css') }}">
     {% elif current_user.is_authenticated and current_user.number_of_style == 3 %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/multi_design.css') }}">
-    {% else %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/classique_design.css') }}">
+    {% elif not current_user.is_authenticated %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/simple_blue_design.css') }}">
     {% endif %}
     <script src="https://kit.fontawesome.com/a4abeefcac.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -25,7 +27,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark navbar-expand-lg bar-in">
+    <nav class="navbar navbar-dark sticky-top navbar-expand-lg bar-in">
         <a class="navbar-brand ssilka" href="/">motiONvation</a>
         <div class="collapse navbar-collapse">
             {% if current_user.is_authenticated %}

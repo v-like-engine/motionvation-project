@@ -1,0 +1,87 @@
+body {
+    background: url(../img/wh.jpg);
+    color: #fff;
+}
+
+.bar-in {
+    background: url(../img/blupan.jpg);
+    height: 140px;
+}
+
+.card {
+    background: url(../img/whi.jpg);
+}
+
+.tascard {
+    background: url(../img/whi.jpg);
+}
+
+.list-group-color {
+    background: url(../img/orange_panel.jpg);
+}
+
+.button-note {
+    color: #fff;
+    background: url(../img/orange_panel.jpg);
+    border: none;
+}
+
+.dropdown-menu {
+    background: url(../img/whi.jpg);
+    border: none;
+}
+
+.dropdown-item:hover {
+    background: url(../img/whi.jpg);
+}
+
+.style-btn {
+    background: url(../img/whi.jpg);
+    color: #ccf;
+}
+
+.cosmodal {
+    background-image: url(../img/whi.jpg);
+    border: solid 10px;
+    border-image: url(../img/blupan.jpg);
+}
+
+.prio-10 {
+    background-image: url(../img/darkblupan.jpg);
+}
+
+.prio-9 {
+    background-image: url(../img/blupan.jpg);
+}
+
+.prio-8 {
+    background-image: url(../img/blupan.jpg);
+}
+
+.prio-7 {
+    background-image: url(../img/darkcyan.jpg);
+}
+
+.prio-6 {
+    background-image: url(../img/cyan_bg.jpg);
+}
+
+.prio-5 {
+    background-image: url(../img/cyan_bg.jpg);
+}
+
+.prio-4 {
+    background-image: url(../img/whi.jpg);
+}
+
+.prio-3 {
+    background-image: url(../img/whi.jpg);
+}
+
+.prio-2 {
+    background-image: url(../img/wh.jpg);
+}
+
+.prio-1 {
+    background-image: url(../img/bezh.jpg);
+}
